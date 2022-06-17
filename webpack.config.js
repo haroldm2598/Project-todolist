@@ -39,6 +39,13 @@ module.exports = {
 			{
 				test: /\.(png|svg|jpg|jpeg|gif)$/i,
 				type: 'asset/resource'
+			},
+			{
+				test: /\.(svg|eot|woff|woff2|ttf)$/,
+				type: 'asset/inline',
+				generator: {
+					filename: 'compiled/fonts/[hash][ext][query]'
+				}
 			}
 		]
 	}

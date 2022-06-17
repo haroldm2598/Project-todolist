@@ -2,6 +2,10 @@
 @import './colors';
 @import './mixins';
 
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+
 * {
 	padding: 0;
 	margin: 0;
