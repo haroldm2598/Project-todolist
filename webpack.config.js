@@ -42,7 +42,7 @@ module.exports = {
 			},
 			{
 				test: /\.(svg|eot|woff|woff2|ttf)$/,
-				type: 'asset/inline',
+				type: 'asset/resource',
 				generator: {
 					filename: 'compiled/fonts/[hash][ext][query]'
 				}

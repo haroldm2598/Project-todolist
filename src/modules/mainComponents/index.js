@@ -1,5 +1,7 @@
-import { contentComponents } from './contentComponents';
+import { headerComponents } from './headerComponents';
+import { sidebarComponents } from './sidebarComponents';
 
 export const mainComponents = () => {
-	document.body.appendChild(contentComponents());
+	document.body.appendChild(headerComponents());
+	document.body.appendChild(sidebarComponents());
 };
