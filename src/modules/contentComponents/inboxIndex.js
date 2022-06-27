@@ -3,7 +3,7 @@ import '../../styles/main.scss';
 export const inboxComponents = () => {
 	const element = document.createElement('div');
 
-	element.textContent = 'Testing lang naman ito';
+	element.innerHTML = 'Inbox';
 
 	return element;
 };
