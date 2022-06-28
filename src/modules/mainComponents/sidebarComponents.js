@@ -14,7 +14,7 @@ export const sidebarComponents = () => {
 		const createList = document.createElement('li');
 
 		createList.innerHTML = `
-			<i class="fas ${objItem[i].icon}"></i><a class='sideBarContainer__list--item__link' > ${objItem[i].title}</a>
+			<i class="fas ${objItem[i].icon}"></i><p class='sideBarContainer__list--item__link' > ${objItem[i].title}</p>
 		`;
 		createList.classList.add('sideBarContainer__list--item');
 

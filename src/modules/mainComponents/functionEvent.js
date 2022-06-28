@@ -5,9 +5,9 @@ export const funcEvent = () => {
 		'.sideBarContainer__list--item__link'
 	);
 
-	linkItem.setAttribute('href', `${inboxComponents().innerHTML}`);
+	linkItem.addEventListener('click', () => {
+		inboxComponents();
+	});
 
 	return linkItem;
-
-	// linkItem.setAttribute('href', `${inboxComponents().innerHTML}`);
 };

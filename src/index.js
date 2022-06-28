@@ -1,3 +1,3 @@
-import { mainComponents } from './modules/mainComponents/index';
+import { mainComponents } from './modules/index';
 
 mainComponents();
