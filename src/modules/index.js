@@ -5,5 +5,5 @@ import { funcEvent } from '../modules/mainComponents/functionEvent';
 export const mainComponents = () => {
 	document.body.appendChild(headerComponents());
 	document.body.appendChild(sidebarComponents());
-	// document.body.appendChild(funcEvent());
+	// funcEvent();
 };

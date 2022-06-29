@@ -53,10 +53,12 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 			margin: 0.5em;
 			font-size: 1.25rem;
 
-			&__link {
-				margin-left: 0.2em;
-				display: inline-block;
+			button {
+				margin-left: 0.5em;
+				background-color: transparent;
 				color: black;
+				border: none;
+				font-size: 1.25rem;
 				text-decoration: none;
 				transition: all 0.25s ease;
 				cursor: pointer;
