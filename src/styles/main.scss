@@ -15,6 +15,10 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	font-family: $MainFont;
 }
 
+.wrapper {
+	display: flex;
+}
+
 // ------------------------ HEADER ------------------------
 
 .header {
@@ -67,6 +71,35 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 					color: $highLight1;
 				}
 			}
+		}
+	}
+}
+
+// ------------------------ CONTENT ------------------------
+
+.contentContainer {
+	height: 100vh;
+	width: 100%;
+	padding: 3em 6em;
+
+	&__header {
+		font-family: $MainFont;
+	}
+
+	&__input {
+		width: 100%;
+		padding: 0.2em 0.3em;
+		display: flex;
+		align-items: center;
+		border: 1px solid $mainBG1;
+		border-radius: 0.3em;
+
+		&--checkBox {
+			margin-right: 0.5em;
+		}
+
+		&--date {
+			margin-left: 34em;
 		}
 	}
 }

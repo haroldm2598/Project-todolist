@@ -1,5 +1,5 @@
 import '../../styles/main.scss';
-import { inboxComponents } from '../contentComponents/inboxIndex';
+// import { inboxComponents } from '../contentComponents/inboxIndex';
 
 const objItem = [
 	{ icon: 'fa-inbox', title: 'Inbox' },
@@ -20,11 +20,11 @@ export const sidebarComponents = () => {
 
 		createList.classList.add('sideBarContainer__list--item');
 
-		createButton.addEventListener('click', () => {
-			inboxComponents();
-			console.log('clicked');
-			console.log(inboxComponents);
-		});
+		// createButton.addEventListener('click', () => {
+		// 	inboxComponents();
+		// 	console.log('clicked');
+		// 	console.log(inboxComponents);
+		// });
 
 		createList.appendChild(createButton);
 		listItem.appendChild(createList);
