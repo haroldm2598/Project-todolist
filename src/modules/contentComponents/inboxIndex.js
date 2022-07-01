@@ -1,6 +1,26 @@
 import '../../styles/main.scss';
+import { format } from 'date-fns';
 
-/* <i class="fas fa-trash"></i> */
+const dataArr = [
+	{
+		inputId: 'testing',
+		inputName: 'testing',
+		inputContent: 'first paragraph',
+		inputDate: '30/06/2022'
+	},
+	{
+		inputId: 'testing2',
+		inputName: 'testing2',
+		inputContent: 'second paragraph',
+		inputDate: '01/07/2022'
+	},
+	{
+		inputId: 'testing3',
+		inputName: 'testing3',
+		inputContent: 'Third paragraph',
+		inputDate: '01/07/2022'
+	}
+];
 
 const setAttributes = (elem, attr) => {
 	for (const key in attr) {
@@ -10,26 +30,37 @@ const setAttributes = (elem, attr) => {
 
 const radioButtons = () => {
 	const element = document.createElement('div');
-	const input = document.createElement('input');
-	const forInput = document.createElement('for');
-	const datePara = document.createElement('p');
-	const icon = document.createElement('i');
 
-	setAttributes(input, { type: 'checkbox', id: 'testing', name: 'testing' });
-	forInput.textContent = 'testing lorem ipsum';
-	datePara.textContent = '30/06/2022';
-	setAttributes(icon, { class: 'fas fa-trash' });
+	for (const data of dataArr) {
+		const elementWrapper = document.createElement('div');
+		const input = document.createElement('input');
+		const forInput = document.createElement('label');
+		const datePara = document.createElement('p');
+		const icon = document.createElement('i');
 
-	element.classList.add('contentContainer__input');
-	input.classList.add('contentContainer__input--checkBox');
-	forInput.classList.add('contentContainer__input--title');
-	datePara.classList.add('contentContainer__input--date');
-	icon.classList.add('contentContainer__input--icon');
+		forInput.textContent = data.inputContent;
+		datePara.textContent = data.inputDate;
+		setAttributes(input, {
+			type: 'checkbox',
+			id: data.inputId,
+			name: data.inputName
+		});
+		setAttributes(icon, { class: 'fas fa-trash' });
 
-	element.appendChild(input);
-	element.appendChild(forInput);
-	element.appendChild(datePara);
-	element.appendChild(icon);
+		elementWrapper.classList.add('contentContainer__input');
+		input.classList.add('contentContainer__input--checkBox');
+		forInput.classList.add('contentContainer__input--title');
+		datePara.classList.add('contentContainer__input--date');
+		icon.classList.add('contentContainer__input--icon');
+
+		elementWrapper.appendChild(input);
+		elementWrapper.appendChild(forInput);
+		elementWrapper.appendChild(datePara);
+		elementWrapper.appendChild(icon);
+		element.appendChild(elementWrapper);
+	}
+
+	console.log(format(new Date().getFullYear(), 'MM/dd/yyyy'));
 	return element;
 };
 
