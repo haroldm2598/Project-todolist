@@ -1,24 +1,26 @@
 import '../../styles/main.scss';
-import { format } from 'date-fns';
+import { format, endOfDay } from 'date-fns';
+
+const todayDate = format(endOfDay(new Date()), 'MM/dd/yyyy');
 
 const dataArr = [
 	{
 		inputId: 'testing',
 		inputName: 'testing',
 		inputContent: 'first paragraph',
-		inputDate: '30/06/2022'
+		inputDate: todayDate
 	},
 	{
 		inputId: 'testing2',
 		inputName: 'testing2',
 		inputContent: 'second paragraph',
-		inputDate: '01/07/2022'
+		inputDate: todayDate
 	},
 	{
 		inputId: 'testing3',
 		inputName: 'testing3',
 		inputContent: 'Third paragraph',
-		inputDate: '01/07/2022'
+		inputDate: todayDate
 	}
 ];
 
@@ -57,23 +59,37 @@ const radioButtons = () => {
 		elementWrapper.appendChild(forInput);
 		elementWrapper.appendChild(datePara);
 		elementWrapper.appendChild(icon);
+
 		element.appendChild(elementWrapper);
 	}
 
-	console.log(format(new Date().getFullYear(), 'MM/dd/yyyy'));
 	return element;
 };
 
 export const inboxComponents = () => {
 	const element = document.createElement('div');
+	const buttonWrapper = document.createElement('div');
 	const h1 = document.createElement('h1');
+	const buttonTask = document.createElement('button');
+	const icon = document.createElement('i');
 
 	h1.textContent = 'inbox';
+	buttonTask.textContent = 'Add Task';
+	buttonTask.addEventListener('click', () => {
+		console.log('Clicked buttonTask ');
+	});
 
 	element.classList.add('contentContainer');
 	h1.classList.add('contentContainer__header');
+	buttonWrapper.classList.add('contentContainer__addButton');
+	icon.classList.add('contentContainer__addButton--icon');
+	buttonTask.classList.add('contentContainer__addButton--button');
+	icon.setAttribute('class', `fas fa-plus-square`);
 
 	element.appendChild(h1);
 	element.appendChild(radioButtons());
+	buttonWrapper.appendChild(icon);
+	buttonWrapper.appendChild(buttonTask);
+	element.appendChild(buttonWrapper);
 	return element;
 };

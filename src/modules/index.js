@@ -12,5 +12,4 @@ export const mainComponents = () => {
 
 	document.body.appendChild(headerComponents());
 	document.body.appendChild(divWrapper);
-	// document.body.appendChild(inboxComponents());
 };

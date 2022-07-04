@@ -97,4 +97,18 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 		border: 1px solid $mainBG1;
 		border-radius: 0.3em;
 	}
+
+	&__addButton {
+		font-size: 1.25rem;
+		cursor: pointer;
+
+		&--button {
+			margin-left: 0.5em;
+			border: none;
+			background: none;
+			font-size: 1.25rem;
+			font-weight: 500;
+			cursor: pointer;
+		}
+	}
 }
