@@ -111,4 +111,31 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 			cursor: pointer;
 		}
 	}
+
+	&__task {
+		&--input {
+			width: 100%;
+			padding: 0.5em 0.2em;
+			border: 1px solid $mainBG1;
+			border-radius: 0.3em;
+		}
+
+		&--confirm,
+		&--cancel {
+			margin: 1em 1em 1em 0;
+			padding: 0.8em 3em;
+			border: 1px solid $mainBG1;
+			border-radius: 0.5em;
+			font-size: 1rem;
+			cursor: pointer;
+		}
+
+		&--confirm {
+			background-color: #99e2b4;
+		}
+
+		&--cancel {
+			background-color: #f08080;
+		}
+	}
 }

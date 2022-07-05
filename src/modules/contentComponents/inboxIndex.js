@@ -66,6 +66,38 @@ const radioButtons = () => {
 	return element;
 };
 
+const modalTask = () => {
+	const element = document.createElement('div');
+	const inputTask = document.createElement('input');
+	const confirmBtn = document.createElement('button');
+	const cancelBtn = document.createElement('button');
+
+	setAttributes(element, { class: 'contentContainer__task', id: 'modalTask' });
+	setAttributes(inputTask, {
+		type: 'text',
+		id: 'inputTast',
+		name: 'Input Task',
+		class: 'contentContainer__task--input'
+	});
+	setAttributes(confirmBtn, { class: 'contentContainer__task--confirm' });
+	setAttributes(cancelBtn, { class: 'contentContainer__task--cancel' });
+
+	confirmBtn.textContent = 'Confirm';
+	cancelBtn.textContent = 'Cancel';
+
+	cancelBtn.addEventListener('click', () => {
+		const targetElement = document.querySelector('#modalTask');
+
+		targetElement.parentElement.removeChild(targetElement);
+	});
+
+	element.appendChild(inputTask);
+	element.appendChild(confirmBtn);
+	element.appendChild(cancelBtn);
+
+	return element;
+};
+
 export const inboxComponents = () => {
 	const element = document.createElement('div');
 	const buttonWrapper = document.createElement('div');
@@ -76,7 +108,7 @@ export const inboxComponents = () => {
 	h1.textContent = 'inbox';
 	buttonTask.textContent = 'Add Task';
 	buttonTask.addEventListener('click', () => {
-		console.log('Clicked buttonTask ');
+		element.appendChild(modalTask());
 	});
 
 	element.classList.add('contentContainer');
