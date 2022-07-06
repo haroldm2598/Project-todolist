@@ -75,7 +75,7 @@ const modalTask = () => {
 	setAttributes(element, { class: 'contentContainer__task', id: 'modalTask' });
 	setAttributes(inputTask, {
 		type: 'text',
-		id: 'inputTast',
+		id: 'inputTask',
 		name: 'Input Task',
 		class: 'contentContainer__task--input'
 	});
@@ -84,6 +84,21 @@ const modalTask = () => {
 
 	confirmBtn.textContent = 'Confirm';
 	cancelBtn.textContent = 'Cancel';
+
+	confirmBtn.addEventListener('click', () => {
+		const inputVal = document.querySelector('#inputTask').value;
+
+		const dataVal = dataArr.push({
+			inputId: Math.floor(Math.random() * 999),
+			inputName: 'testing',
+			inputContent: inputVal,
+			inputDate: todayDate
+		});
+
+		console.log(dataArr);
+
+		return dataVal;
+	});
 
 	cancelBtn.addEventListener('click', () => {
 		const targetElement = document.querySelector('#modalTask');
