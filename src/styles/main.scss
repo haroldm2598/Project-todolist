@@ -97,6 +97,11 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 		border: 1px solid $mainBG1;
 		border-radius: 0.3em;
 
+		&--lineThrough {
+			text-decoration: line-through;
+		}
+
+		&--checkBox,
 		&--icon {
 			cursor: pointer;
 		}

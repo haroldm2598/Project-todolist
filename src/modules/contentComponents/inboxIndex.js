@@ -62,6 +62,10 @@ const radioButtons = () => {
 		forInput.textContent = data.inputContent;
 		datePara.textContent = data.inputDate;
 
+		input.addEventListener('click', () => {
+			forInput.classList.toggle('contentContainer__input--lineThrough');
+		});
+
 		icon.addEventListener('click', () => {
 			const currentTask = getStore();
 			const newTask = currentTask.filter(
@@ -83,60 +87,6 @@ const radioButtons = () => {
 	return element;
 };
 
-const modalTask = () => {
-	const element = document.createElement('div');
-	const inputTask = document.createElement('input');
-	const confirmBtn = document.createElement('button');
-	const cancelBtn = document.createElement('button');
-
-	setAttributes(element, { class: 'contentContainer__task', id: 'modalTask' });
-	setAttributes(inputTask, {
-		type: 'text',
-		id: 'inputTask',
-		name: 'Input Task',
-		class: 'contentContainer__task--input'
-	});
-	setAttributes(confirmBtn, { class: 'contentContainer__task--confirm' });
-	setAttributes(cancelBtn, { class: 'contentContainer__task--cancel' });
-
-	confirmBtn.textContent = 'Confirm';
-	cancelBtn.textContent = 'Cancel';
-
-	confirmBtn.addEventListener('click', () => {
-		const inputVal = document.querySelector('#inputTask').value;
-		const currentTask = getStore();
-
-		dataArr.push({
-			inputId: Math.floor(Math.random() * 999),
-			inputName: 'testing',
-			inputContent: inputVal,
-			inputDate: todayDate
-		});
-
-		const lastArr = [dataArr.slice(-1).pop()];
-
-		localStorage.setItem(
-			'storeTask',
-			JSON.stringify(currentTask.concat(lastArr))
-		);
-		location.reload();
-
-		return dataVal;
-	});
-
-	cancelBtn.addEventListener('click', () => {
-		const targetElement = document.querySelector('#modalTask');
-
-		targetElement.parentElement.removeChild(targetElement);
-	});
-
-	element.appendChild(inputTask);
-	element.appendChild(confirmBtn);
-	element.appendChild(cancelBtn);
-
-	return element;
-};
-
 export const inboxComponents = () => {
 	const element = document.createElement('div');
 	const buttonWrapper = document.createElement('div');
@@ -147,20 +97,87 @@ export const inboxComponents = () => {
 	h1.textContent = 'inbox';
 	buttonTask.textContent = 'Add Task';
 	buttonTask.addEventListener('click', () => {
+		const targetElement = document.querySelector('#addBtnWrapper');
+
 		element.appendChild(modalTask());
+		targetElement.parentElement.removeChild(targetElement);
 	});
 
 	element.classList.add('contentContainer');
 	h1.classList.add('contentContainer__header');
-	buttonWrapper.classList.add('contentContainer__addButton');
-	icon.classList.add('contentContainer__addButton--icon');
 	buttonTask.classList.add('contentContainer__addButton--button');
-	icon.setAttribute('class', `fas fa-plus-square`);
+	setAttributes(icon, {
+		class: 'contentContainer__addButton--icon fas fa-plus-square'
+	});
+	setAttributes(buttonWrapper, {
+		class: 'contentContainer__addButton',
+		id: 'addBtnWrapper'
+	});
+
+	const modalTask = () => {
+		const element = document.createElement('div');
+		const inputTask = document.createElement('input');
+		const confirmBtn = document.createElement('button');
+		const cancelBtn = document.createElement('button');
+
+		setAttributes(element, {
+			class: 'contentContainer__task',
+			id: 'modalTask'
+		});
+		setAttributes(inputTask, {
+			type: 'text',
+			id: 'inputTask',
+			name: 'Input Task',
+			class: 'contentContainer__task--input'
+		});
+		setAttributes(confirmBtn, { class: 'contentContainer__task--confirm' });
+		setAttributes(cancelBtn, { class: 'contentContainer__task--cancel' });
+
+		confirmBtn.textContent = 'Confirm';
+		cancelBtn.textContent = 'Cancel';
+
+		confirmBtn.addEventListener('click', () => {
+			const inputVal = document.querySelector('#inputTask').value;
+			const currentTask = getStore();
+
+			dataArr.push({
+				inputId: Math.floor(Math.random() * 999),
+				inputName: 'testing',
+				inputContent: inputVal,
+				inputDate: todayDate
+			});
+
+			const lastArr = [dataArr.slice(-1).pop()];
+
+			localStorage.setItem(
+				'storeTask',
+				JSON.stringify(currentTask.concat(lastArr))
+			);
+			element.appendChild(buttonWrapper);
+			location.reload();
+
+			return dataVal;
+		});
+
+		cancelBtn.addEventListener('click', () => {
+			const targetElement = document.querySelector('#modalTask');
+
+			targetElement.parentElement.removeChild(targetElement);
+			element.appendChild(buttonWrapper);
+		});
+
+		element.appendChild(inputTask);
+		element.appendChild(confirmBtn);
+		element.appendChild(cancelBtn);
+
+		return element;
+	};
 
 	element.appendChild(h1);
 	element.appendChild(radioButtons());
 	buttonWrapper.appendChild(icon);
 	buttonWrapper.appendChild(buttonTask);
 	element.appendChild(buttonWrapper);
+
 	return element;
 };
