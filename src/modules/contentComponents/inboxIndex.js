@@ -164,6 +164,8 @@ export const inboxComponents = () => {
 
 			targetElement.parentElement.removeChild(targetElement);
 			element.appendChild(buttonWrapper);
+
+			location.reload();
 		});
 
 		element.appendChild(inputTask);
