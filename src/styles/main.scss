@@ -89,21 +89,41 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	&__input {
 		width: 100%;
 		margin: 0.5em 0;
-		padding: 0.2em 0.3em;
+		padding: 0.2em 0.5em;
 		display: flex;
 		flex-direction: row;
-		justify-content: space-around;
+		justify-content: space-between;
 		align-items: center;
 		border: 1px solid $mainBG1;
 		border-radius: 0.3em;
 
-		&--lineThrough {
-			text-decoration: line-through;
+		&--first {
+			&__checkBox {
+				cursor: pointer;
+			}
+			&__title {
+				padding-left: 0.5em;
+			}
 		}
 
-		&--checkBox,
-		&--icon {
-			cursor: pointer;
+		&--second {
+			display: flex;
+			align-items: center;
+			/*
+			PLEASE TAKE NOTE OF FLEX METHOD
+			and try to implement that and less
+			display flex
+			*/
+			&__date {
+				padding-right: 0.5em;
+			}
+			&__icon {
+				cursor: pointer;
+			}
+		}
+
+		&--lineThrough {
+			text-decoration: line-through;
 		}
 	}
 

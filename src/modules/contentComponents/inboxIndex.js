@@ -36,30 +36,53 @@ const getStore = () => {
 	return getStoreTask;
 };
 
+const truncateResult = (data, size) => {
+	return data.length > size ? `${data.slice(0, size - 1)} ...` : data;
+};
+
 const radioButtons = () => {
 	const element = document.createElement('div');
 
 	for (const data of getStore()) {
 		const elementWrapper = document.createElement('div');
+		const firstDiv = document.createElement('div');
+		const secondDiv = document.createElement('div');
 		const input = document.createElement('input');
 		const forInput = document.createElement('label');
 		const datePara = document.createElement('p');
 		const icon = document.createElement('i');
 
-		elementWrapper.classList.add('contentContainer__input');
-		input.classList.add('contentContainer__input--checkBox');
-		forInput.classList.add('contentContainer__input--title');
-		datePara.classList.add('contentContainer__input--date');
+		setAttributes(elementWrapper, {
+			class: 'contentContainer__input'
+		});
+		setAttributes(firstDiv, {
+			class: 'contentContainer__input--first'
+		});
+		setAttributes(secondDiv, {
+			class: 'contentContainer__input--second'
+		});
 
 		setAttributes(input, {
+			class: ' contentContainer__input--first__checkBox',
 			type: 'checkbox',
 			id: data.inputId,
 			name: data.inputName
 		});
-		setAttributes(icon, {
-			class: 'contentContainer__input--icon fas fa-trash'
+		setAttributes(forInput, {
+			class: 'contentContainer__input--first__title'
 		});
-		forInput.textContent = data.inputContent;
+
+		setAttributes(datePara, {
+			class: ' contentContainer__input--second__date'
+		});
+		setAttributes(icon, {
+			class: 'contentContainer__input--second__icon fas fa-trash'
+		});
+
+		let dataInputContent = data.inputContent;
+		let dataResult = truncateResult(dataInputContent, 20);
+
+		forInput.textContent = dataResult;
 		datePara.textContent = data.inputDate;
 
 		input.addEventListener('click', () => {
@@ -76,10 +99,12 @@ const radioButtons = () => {
 			location.reload();
 		});
 
-		elementWrapper.appendChild(input);
-		elementWrapper.appendChild(forInput);
-		elementWrapper.appendChild(datePara);
-		elementWrapper.appendChild(icon);
+		elementWrapper.appendChild(firstDiv);
+		elementWrapper.appendChild(secondDiv);
+		firstDiv.appendChild(input);
+		firstDiv.appendChild(forInput);
+		secondDiv.appendChild(datePara);
+		secondDiv.appendChild(icon);
 
 		element.appendChild(elementWrapper);
 	}
@@ -103,9 +128,15 @@ export const inboxComponents = () => {
 		targetElement.parentElement.removeChild(targetElement);
 	});
 
-	element.classList.add('contentContainer');
-	h1.classList.add('contentContainer__header');
-	buttonTask.classList.add('contentContainer__addButton--button');
+	setAttributes(element, {
+		class: 'contentContainer'
+	});
+	setAttributes(h1, {
+		class: 'contentContainer__header'
+	});
+	setAttributes(buttonTask, {
+		class: 'contentContainer__addButton--button'
+	});
 	setAttributes(icon, {
 		class: 'contentContainer__addButton--icon fas fa-plus-square'
 	});
