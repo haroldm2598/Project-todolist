@@ -3,26 +3,7 @@ import { format, endOfDay } from 'date-fns';
 
 const todayDate = format(endOfDay(new Date()), 'MM/dd/yyyy');
 
-const dataArr = [
-	// {
-	// 	inputId: Math.floor(Math.random() * 999),
-	// 	inputName: 'testing',
-	// 	inputContent: 'first paragraph',
-	// 	inputDate: todayDate
-	// },
-	// {
-	// 	inputId: Math.floor(Math.random() * 999),
-	// 	inputName: 'testing2',
-	// 	inputContent: 'second paragraph',
-	// 	inputDate: todayDate
-	// },
-	// {
-	// 	inputId: Math.floor(Math.random() * 999),
-	// 	inputName: 'testing3',
-	// 	inputContent: 'Third paragraph',
-	// 	inputDate: todayDate
-	// }
-];
+const dataArr = [];
 
 const setAttributes = (elem, attr) => {
 	for (const key in attr) {
@@ -80,7 +61,7 @@ const radioButtons = () => {
 		});
 
 		let dataInputContent = data.inputContent;
-		let dataResult = truncateResult(dataInputContent, 20);
+		let dataResult = truncateResult(dataInputContent, 50);
 
 		forInput.textContent = dataResult;
 		datePara.textContent = data.inputDate;
@@ -184,10 +165,9 @@ export const inboxComponents = () => {
 				'storeTask',
 				JSON.stringify(currentTask.concat(lastArr))
 			);
+
 			element.appendChild(buttonWrapper);
 			location.reload();
-
-			return dataVal;
 		});
 
 		cancelBtn.addEventListener('click', () => {
@@ -196,7 +176,7 @@ export const inboxComponents = () => {
 			targetElement.parentElement.removeChild(targetElement);
 			element.appendChild(buttonWrapper);
 
-			location.reload();
+			// location.reload();
 		});
 
 		element.appendChild(inputTask);
