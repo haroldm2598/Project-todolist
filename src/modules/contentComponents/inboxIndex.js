@@ -161,13 +161,17 @@ export const inboxComponents = () => {
 
 			const lastArr = [dataArr.slice(-1).pop()];
 
-			localStorage.setItem(
-				'storeTask',
-				JSON.stringify(currentTask.concat(lastArr))
-			);
+			if (inputVal === null || inputVal === '') {
+				alert('input some text');
+			} else {
+				localStorage.setItem(
+					'storeTask',
+					JSON.stringify(currentTask.concat(lastArr))
+				);
 
-			element.appendChild(buttonWrapper);
-			location.reload();
+				element.appendChild(buttonWrapper);
+				location.reload();
+			}
 		});
 
 		cancelBtn.addEventListener('click', () => {
@@ -176,7 +180,7 @@ export const inboxComponents = () => {
 			targetElement.parentElement.removeChild(targetElement);
 			element.appendChild(buttonWrapper);
 
-			// location.reload();
+			location.reload();
 		});
 
 		element.appendChild(inputTask);

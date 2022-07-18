@@ -1,10 +1,16 @@
 import '../../styles/main.scss';
 // import { inboxComponents } from '../contentComponents/inboxIndex';
 
+const setAttributes = (elem, attr) => {
+	for (const key in attr) {
+		elem.setAttribute(key, attr[key]);
+	}
+};
+
 const objItem = [
-	{ icon: 'fa-inbox', title: 'Inbox' },
-	{ icon: 'fa-calendar-check', title: 'Today' },
-	{ icon: 'fa-calendar-alt', title: 'This Week' }
+	{ icon: 'fa-inbox', title: 'Inbox', id: 'inboxId' },
+	{ icon: 'fa-calendar-check', title: 'Today', id: 'todayId' },
+	{ icon: 'fa-calendar-alt', title: 'This Week', id: 'weekId' }
 ];
 
 export const sidebarComponents = () => {
@@ -18,8 +24,10 @@ export const sidebarComponents = () => {
 		createList.innerHTML = `<i class="fas ${objItem[i].icon}"></i>`;
 		createButton.textContent = objItem[i].title;
 
-		createList.classList.add('sideBarContainer__list--item');
-
+		setAttributes(createList, {
+			class: 'sideBarContainer__list--item',
+			id: objItem[i].id
+		});
 		// createButton.addEventListener('click', () => {
 		// 	inboxComponents();
 		// 	console.log('clicked');
