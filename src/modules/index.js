@@ -1,19 +1,34 @@
 import { headerComponents } from '../modules/mainComponents/headerComponents';
 import { sidebarComponents } from '../modules/mainComponents/sidebarComponents';
 import { inboxComponents } from './contentComponents/inboxIndex';
+import { todayComponents } from './contentComponents/todayIndex';
+import { weekComponents } from './contentComponents/thisWeekIndex';
 
 export const mainComponents = () => {
 	const divWrapper = document.createElement('div');
-	const inboxBtn = document.querySelector('#inboxId');
-	const todayBtn = document.querySelector('#todayId');
-	const weekBtn = document.querySelector('#weekId');
 
 	divWrapper.classList.add('wrapper');
 
 	divWrapper.appendChild(sidebarComponents());
-	console.log(inboxBtn);
+	// divWrapper.appendChild(weekComponents());
 
-	divWrapper.appendChild(inboxComponents());
+	setTimeout(() => {
+		const inboxBtn = document.querySelector('#inboxId');
+		const todayBtn = document.querySelector('#todayId');
+		const weekBtn = document.querySelector('#weekId');
+
+		inboxBtn.addEventListener('click', () => {
+			divWrapper.appendChild(inboxComponents());
+		});
+
+		todayBtn.addEventListener('click', () => {
+			divWrapper.appendChild(todayComponents());
+		});
+
+		weekBtn.addEventListener('click', () => {
+			divWrapper.appendChild(weekComponents());
+		});
+	}, 1000);
 
 	document.body.appendChild(headerComponents());
 	document.body.appendChild(divWrapper);

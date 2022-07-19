@@ -1,5 +1,5 @@
 import '../../styles/main.scss';
-// import { inboxComponents } from '../contentComponents/inboxIndex';
+import { inboxComponents } from '../contentComponents/inboxIndex';
 
 const setAttributes = (elem, attr) => {
 	for (const key in attr) {
@@ -25,13 +25,14 @@ export const sidebarComponents = () => {
 		createButton.textContent = objItem[i].title;
 
 		setAttributes(createList, {
-			class: 'sideBarContainer__list--item',
-			id: objItem[i].id
+			class: 'sideBarContainer__list--item'
 		});
+
+		setAttributes(createButton, { id: objItem[i].id });
+
 		// createButton.addEventListener('click', () => {
-		// 	inboxComponents();
+		// 	document.body.append(inboxComponents());
 		// 	console.log('clicked');
-		// 	console.log(inboxComponents);
 		// });
 
 		createList.appendChild(createButton);
