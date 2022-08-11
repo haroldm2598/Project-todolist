@@ -110,7 +110,8 @@ export const weekComponents = () => {
 	});
 
 	setAttributes(element, {
-		class: 'contentContainer'
+		class: 'contentContainer',
+		id: 'weekIndex'
 	});
 	setAttributes(h1, {
 		class: 'contentContainer__header'

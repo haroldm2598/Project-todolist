@@ -110,7 +110,8 @@ export const inboxComponents = () => {
 	});
 
 	setAttributes(element, {
-		class: 'contentContainer'
+		class: 'contentContainer',
+		id: 'inboxIndex'
 	});
 	setAttributes(h1, {
 		class: 'contentContainer__header'

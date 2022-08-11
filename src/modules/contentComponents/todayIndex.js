@@ -110,7 +110,8 @@ export const todayComponents = () => {
 	});
 
 	setAttributes(element, {
-		class: 'contentContainer'
+		class: 'contentContainer',
+		id: 'todayIndex'
 	});
 	setAttributes(h1, {
 		class: 'contentContainer__header'
