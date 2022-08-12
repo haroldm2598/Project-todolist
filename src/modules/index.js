@@ -17,6 +17,7 @@ export const mainComponents = () => {
 				- insert in AddEventListener the if/else method.
 			- Problem is the refresh every it refresh it is remove the eventlisterner.
 			- Remove the first Element then insert the new
+			- Try to use async await method in event listener in order to not use reload method
 		*/
 		const inboxBtn = document.querySelector('#inboxId');
 		const todayBtn = document.querySelector('#todayId');
@@ -26,10 +27,13 @@ export const mainComponents = () => {
 			divWrapper.appendChild(inboxComponents());
 		});
 
-		todayBtn.addEventListener('click', () => {
-			removeAllElement();
-			divWrapper.appendChild(todayComponents());
-			location.reload();
+		todayBtn.addEventListener('click', (event) => {
+			document.location.reload();
+			event.preventDefault();
+
+			setTimeout(() => {
+				divWrapper.appendChild(todayComponents());
+			}, 3000);
 		});
 
 		weekBtn.addEventListener('click', () => {
@@ -38,9 +42,9 @@ export const mainComponents = () => {
 	}, 1000);
 
 	const removeAllElement = () => {
-		document
-			.querySelector('#inboxIndex')
-			.removeChild(document.querySelector('#inboxIndex').lastElementChild);
+		const selectElement = document.querySelector('#inboxIndex');
+
+		return selectElement.removeChild(selectElement.lastElementChild);
 	};
 
 	document.body.appendChild(headerComponents());
