@@ -39,8 +39,13 @@ export const sidebarComponents = () => {
 		listItem.appendChild(createList);
 	}
 
-	sidebarContainer.classList.add('sideBarContainer');
-	listItem.classList.add('sideBarContainer__list');
+	setAttributes(sidebarContainer, {
+		class: 'sideBarContainer'
+	});
+	setAttributes(listItem, {
+		class: 'sideBarContainer__list',
+		id: 'sideBarContainer'
+	});
 	sidebarContainer.appendChild(listItem);
 
 	return sidebarContainer;

@@ -10,7 +10,7 @@ export const mainComponents = () => {
 	divWrapper.classList.add('wrapper');
 
 	divWrapper.appendChild(sidebarComponents());
-	// divWrapper.appendChild(inboxComponents());
+	divWrapper.appendChild(inboxComponents());
 
 	// setTimeout(() => {
 	// 	/*
@@ -48,35 +48,44 @@ export const mainComponents = () => {
 	// 	return selectElement.removeChild(selectElement.lastElementChild);
 	// };
 
-	// IS NOT WORKING FIX THE PARAMS AREA WHERE SEARCH THE SPECIFIC ID AND INSERT IT INTO PAGES
+	/* 
+		-IS NOT WORKING FIX THE PARAMS AREA WHERE SEARCH THE SPECIFIC ID AND INSERT IT INTO PAGES
+		-PARAMS MUST BE TARGET DYNAMICALLY
+		https://www.quackit.com/html/html_editors/scratchpad/?example=/javascript/examples/javascript_switch_statement
+		https://stackoverflow.com/questions/48239/getting-the-id-of-the-element-that-fired-an-event
+	*/
 	setTimeout(() => {
 		const inboxBtn = document.querySelector('#inboxId');
 		const todayBtn = document.querySelector('#todayId');
 		const weekBtn = document.querySelector('#weekId');
-		const params = document.querySelector('#inboxId');
+		// const params = prompt('insert here');
 
-		switch (params) {
-			case '#inboxId':
-				inboxBtn.addEventListener(() => {
-					removeAllElement(inboxComponents());
-				});
-				break;
+		document.addEventListener('DOMContentLoaded', (event) => {
+			const body = document.querySelector('#sideBarContainer');
 
-			case '#todayId':
-				todayBtn.addEventListener(() => {
-					removeAllElement(todayComponents());
-				});
-				break;
+			body.addEventListener('click', (e) => {
+				let params = e.target.id;
 
-			case '#weekId':
-				weekBtn.addEventListener(() => {
-					removeAllElement(weekComponents());
-				});
-				break;
+				switch (params) {
+					case '#inboxId':
+						divWrapper.appendChild(inboxComponents());
+						break;
 
-			default:
-				divWrapper.appendChild(inboxComponents());
-		}
+					case '#todayId':
+						divWrapper.appendChild(todayComponents());
+						break;
+
+					case '#weekId':
+						divWrapper.appendChild(weekComponents());
+						break;
+
+					default:
+						divWrapper.appendChild(inboxComponents());
+				}
+
+				console.log(params);
+			});
+		});
 	}, 10);
 
 	const removeAllElement = (paramsComponents) => {
