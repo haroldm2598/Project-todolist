@@ -54,16 +54,13 @@ export const mainComponents = () => {
 		https://www.quackit.com/html/html_editors/scratchpad/?example=/javascript/examples/javascript_switch_statement
 		https://stackoverflow.com/questions/48239/getting-the-id-of-the-element-that-fired-an-event
 	*/
-	setTimeout(() => {
-		const inboxBtn = document.querySelector('#inboxId');
-		const todayBtn = document.querySelector('#todayId');
-		const weekBtn = document.querySelector('#weekId');
-		// const params = prompt('insert here');
 
-		document.addEventListener('DOMContentLoaded', (event) => {
-			const body = document.querySelector('#sideBarContainer');
+	document.addEventListener('DOMContentLoaded', (event) => {
+		const body = document.querySelector('#sideBarContainer');
 
-			body.addEventListener('click', (e) => {
+		body.addEventListener(
+			'change',
+			(e) => {
 				let params = e.target.id;
 
 				switch (params) {
@@ -82,11 +79,43 @@ export const mainComponents = () => {
 					default:
 						divWrapper.appendChild(inboxComponents());
 				}
+			},
+			false
+		);
+		console.log(body);
+	});
 
-				console.log(params);
-			});
-		});
-	}, 10);
+	// setTimeout(() => {
+	// 	const inboxBtn = document.querySelector('#inboxId');
+	// 	const todayBtn = document.querySelector('#todayId');
+	// 	const weekBtn = document.querySelector('#weekId');
+
+	// 	document.addEventListener('DOMContentLoaded', (event) => {
+	// 		const body = document.querySelector('#sideBarContainer');
+
+	// 		body.addEventListener('change', (e) => {
+	// 			let params = e.target.id;
+	// 			// const params = prompt('insert here');
+
+	// 			switch (params) {
+	// 				case '#inboxId':
+	// 					divWrapper.appendChild(inboxComponents());
+	// 					break;
+
+	// 				case '#todayId':
+	// 					divWrapper.appendChild(todayComponents());
+	// 					break;
+
+	// 				case '#weekId':
+	// 					divWrapper.appendChild(weekComponents());
+	// 					break;
+
+	// 				default:
+	// 					divWrapper.appendChild(inboxComponents());
+	// 			}
+	// 		});
+	// 	});
+	// }, 10);
 
 	const removeAllElement = (paramsComponents) => {
 		const selectElement = document.querySelector('#inboxIndex');

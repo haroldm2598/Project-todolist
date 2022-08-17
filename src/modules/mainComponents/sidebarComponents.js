@@ -26,6 +26,7 @@ export const sidebarComponents = () => {
 
 		setAttributes(createList, {
 			class: 'sideBarContainer__list--item'
+			// id: 'sideBarContainer'
 		});
 
 		setAttributes(createButton, { id: objItem[i].id });
@@ -46,6 +47,7 @@ export const sidebarComponents = () => {
 		class: 'sideBarContainer__list',
 		id: 'sideBarContainer'
 	});
+
 	sidebarContainer.appendChild(listItem);
 
 	return sidebarContainer;
