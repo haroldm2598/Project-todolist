@@ -49,73 +49,43 @@ export const mainComponents = () => {
 	// };
 
 	/* 
-		-IS NOT WORKING FIX THE PARAMS AREA WHERE SEARCH THE SPECIFIC ID AND INSERT IT INTO PAGES
-		-PARAMS MUST BE TARGET DYNAMICALLY
-		https://www.quackit.com/html/html_editors/scratchpad/?example=/javascript/examples/javascript_switch_statement
-		https://stackoverflow.com/questions/48239/getting-the-id-of-the-element-that-fired-an-event
+		SOURCES
+		- https://www.quackit.com/html/html_editors/scratchpad/?example=/javascript/examples/javascript_switch_statement
+		- https://stackoverflow.com/questions/48239/getting-the-id-of-the-element-that-fired-an-event
+		
+		PROBLEMS
+		- IS NOT WORKING FIX THE PARAMS AREA WHERE SEARCH THE SPECIFIC ID AND INSERT IT INTO PAGES (SOLVED)
+		- PARAMS MUST BE TARGET DYNAMICALLY (SOLVED)
+		- if submitted and refresh will be remove the current event
 	*/
 
 	document.addEventListener('DOMContentLoaded', (event) => {
-		const body = document.querySelector('#sideBarContainer');
+		const body = document.getElementById('sideBarContainer');
 
 		body.addEventListener(
-			'change',
+			'click',
 			(e) => {
 				let params = e.target.id;
 
 				switch (params) {
-					case '#inboxId':
+					case 'inboxId':
 						divWrapper.appendChild(inboxComponents());
 						break;
 
-					case '#todayId':
+					case 'todayId':
 						divWrapper.appendChild(todayComponents());
 						break;
 
-					case '#weekId':
+					case 'weekId':
 						divWrapper.appendChild(weekComponents());
 						break;
-
-					default:
-						divWrapper.appendChild(inboxComponents());
 				}
+
+				console.log(params);
 			},
 			false
 		);
-		console.log(body);
 	});
-
-	// setTimeout(() => {
-	// 	const inboxBtn = document.querySelector('#inboxId');
-	// 	const todayBtn = document.querySelector('#todayId');
-	// 	const weekBtn = document.querySelector('#weekId');
-
-	// 	document.addEventListener('DOMContentLoaded', (event) => {
-	// 		const body = document.querySelector('#sideBarContainer');
-
-	// 		body.addEventListener('change', (e) => {
-	// 			let params = e.target.id;
-	// 			// const params = prompt('insert here');
-
-	// 			switch (params) {
-	// 				case '#inboxId':
-	// 					divWrapper.appendChild(inboxComponents());
-	// 					break;
-
-	// 				case '#todayId':
-	// 					divWrapper.appendChild(todayComponents());
-	// 					break;
-
-	// 				case '#weekId':
-	// 					divWrapper.appendChild(weekComponents());
-	// 					break;
-
-	// 				default:
-	// 					divWrapper.appendChild(inboxComponents());
-	// 			}
-	// 		});
-	// 	});
-	// }, 10);
 
 	const removeAllElement = (paramsComponents) => {
 		const selectElement = document.querySelector('#inboxIndex');
