@@ -149,7 +149,11 @@ export const inboxComponents = () => {
 		confirmBtn.textContent = 'Confirm';
 		cancelBtn.textContent = 'Cancel';
 
-		confirmBtn.addEventListener('click', () => {
+		const testingFunc = () => {
+			/*
+				- Change onload event turn without onload
+
+			*/
 			const inputVal = document.querySelector('#inputTask').value;
 			const currentTask = getStore();
 
@@ -169,11 +173,14 @@ export const inboxComponents = () => {
 					'storeTask',
 					JSON.stringify(currentTask.concat(lastArr))
 				);
+				buttonWrapper;
+				// element.appendChild(buttonWrapper);
 
-				element.appendChild(buttonWrapper);
-				location.reload();
+				// location.reload();
 			}
-		});
+		};
+
+		confirmBtn.addEventListener('click', testingFunc);
 
 		cancelBtn.addEventListener('click', () => {
 			const targetElement = document.querySelector('#modalTask');

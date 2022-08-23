@@ -80,8 +80,6 @@ export const mainComponents = () => {
 						divWrapper.appendChild(weekComponents());
 						break;
 				}
-
-				console.log(params);
 			},
 			false
 		);
