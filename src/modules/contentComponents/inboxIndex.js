@@ -77,7 +77,8 @@ const radioButtons = () => {
 			);
 
 			localStorage.setItem('storeTask', JSON.stringify(newTask));
-			location.reload();
+
+			// location.reload();
 		});
 
 		elementWrapper.appendChild(firstDiv);
@@ -149,10 +150,13 @@ export const inboxComponents = () => {
 		confirmBtn.textContent = 'Confirm';
 		cancelBtn.textContent = 'Cancel';
 
-		const testingFunc = () => {
-			/*
-				- Change onload event turn without onload
-
+		confirmBtn.addEventListener('click', () => {
+			/*	
+				PROBLEM:
+					- Change onload event turn without onload.
+				SOLUTION:
+					- Change the way reload itself by inserting inside the function of 
+					any event or methods the appendChild where you will post it.
 			*/
 			const inputVal = document.querySelector('#inputTask').value;
 			const currentTask = getStore();
@@ -173,14 +177,11 @@ export const inboxComponents = () => {
 					'storeTask',
 					JSON.stringify(currentTask.concat(lastArr))
 				);
-				buttonWrapper;
-				// element.appendChild(buttonWrapper);
+				element.appendChild(buttonWrapper);
 
 				// location.reload();
 			}
-		};
-
-		confirmBtn.addEventListener('click', testingFunc);
+		});
 
 		cancelBtn.addEventListener('click', () => {
 			const targetElement = document.querySelector('#modalTask');
