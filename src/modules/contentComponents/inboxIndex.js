@@ -24,6 +24,10 @@ const truncateResult = (data, size) => {
 const radioButtons = () => {
 	const element = document.createElement('div');
 
+	setAttributes(element, {
+		id: 'contentContainer__main'
+	});
+
 	for (const data of getStore()) {
 		const elementWrapper = document.createElement('div');
 		const firstDiv = document.createElement('div');
@@ -78,7 +82,7 @@ const radioButtons = () => {
 
 			localStorage.setItem('storeTask', JSON.stringify(newTask));
 
-			// location.reload();
+			location.reload();
 		});
 
 		elementWrapper.appendChild(firstDiv);
@@ -177,7 +181,8 @@ export const inboxComponents = () => {
 					'storeTask',
 					JSON.stringify(currentTask.concat(lastArr))
 				);
-				element.appendChild(buttonWrapper);
+				element.appendChild(radioButtons());
+				// element.appendChild(buttonWrapper);
 
 				// location.reload();
 			}
