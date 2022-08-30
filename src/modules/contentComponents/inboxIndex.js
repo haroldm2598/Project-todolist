@@ -154,47 +154,55 @@ export const inboxComponents = () => {
 		confirmBtn.textContent = 'Confirm';
 		cancelBtn.textContent = 'Cancel';
 
+		const removeAddTask = () => {
+			const targetElement = document.querySelector('#modalTask');
+
+			targetElement.parentElement.removeChild(targetElement);
+			element.appendChild(buttonWrapper);
+		};
+
 		confirmBtn.addEventListener('click', () => {
 			/*	
-				PROBLEM:
-					- Change onload event turn without onload.
-				SOLUTION:
-					- Change the way reload itself by inserting inside the function of 
-					any event or methods the appendChild where you will post it.
-			*/
+						PROBLEM:
+							- Change onload event turn without onload.
+						SOLUTION:
+							- Change the way reload itself by inserting inside the function of 
+							any event or methods the appendChild where you will post it.
+						PROBLEMS(2):
+							- Should post only the last insert and not all the data itself.
+					*/
 			const inputVal = document.querySelector('#inputTask').value;
 			const currentTask = getStore();
-
-			dataArr.push({
-				inputId: Math.floor(Math.random() * 999),
-				inputName: 'testing',
-				inputContent: inputVal,
-				inputDate: todayDate
-			});
-
-			const lastArr = [dataArr.slice(-1).pop()];
 
 			if (inputVal === null || inputVal === '') {
 				alert('input some text');
 			} else {
+				dataArr.push({
+					inputId: Math.floor(Math.random() * 999),
+					inputName: 'testing',
+					inputContent: inputVal,
+					inputDate: todayDate
+				});
+
+				const lastArr = [dataArr.slice(-1).pop()];
+
 				localStorage.setItem(
 					'storeTask',
 					JSON.stringify(currentTask.concat(lastArr))
 				);
-				element.appendChild(radioButtons());
-				// element.appendChild(buttonWrapper);
 
+				// element.appendChild(radioButtons());
+				element.appendChild(buttonWrapper);
+				// removeAddTask();
 				// location.reload();
 			}
 		});
 
 		cancelBtn.addEventListener('click', () => {
-			const targetElement = document.querySelector('#modalTask');
-
-			targetElement.parentElement.removeChild(targetElement);
 			element.appendChild(buttonWrapper);
+			removeAddTask();
 
-			location.reload();
+			// location.reload();
 		});
 
 		element.appendChild(inputTask);
