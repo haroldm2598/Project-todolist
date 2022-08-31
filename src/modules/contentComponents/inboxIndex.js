@@ -2,7 +2,7 @@ import '../../styles/main.scss';
 import { format, endOfDay } from 'date-fns';
 import { getStore } from '../inboxComponents/getTask';
 import { setAttributes } from '../helperComponents/setAttributes';
-import { radioButtons } from '../inboxComponents/radioButtons';
+import { radioButtons, getLastItem } from '../inboxComponents/radioButtons';
 
 const todayDate = format(endOfDay(new Date()), 'MM/dd/yyyy');
 
@@ -100,10 +100,10 @@ export const inboxComponents = () => {
 					JSON.stringify(currentTask.concat(lastArr))
 				);
 
-				// element.appendChild(radioButtons());
+				getLastItem();
 				element.appendChild(buttonWrapper);
 				// removeAddTask();
-				location.reload();
+				// location.reload();
 			}
 		});
 
