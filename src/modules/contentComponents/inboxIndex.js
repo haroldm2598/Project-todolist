@@ -83,35 +83,36 @@ export const inboxComponents = () => {
 			const inputVal = document.querySelector('#inputTask').value;
 			const currentTask = getStore('storeTask');
 
-			if (inputVal === null || inputVal === '') {
-				alert('input some text');
-			} else {
-				dataArr.push({
-					inputId: Math.floor(Math.random() * 999),
-					inputName: 'testing',
-					inputContent: inputVal,
-					inputDate: todayDate
-				});
+			// if (inputVal === null || inputVal === '') {
+			// 	alert('input some text');
+			// } else {
+			dataArr.push({
+				inputId: Math.floor(Math.random() * 999),
+				inputName: 'testing',
+				inputContent: inputVal,
+				inputDate: todayDate
+			});
 
-				const lastArr = [dataArr.slice(-1).pop()];
+			const lastArr = [dataArr.slice(-1).pop()];
 
-				localStorage.setItem(
-					'storeTask',
-					JSON.stringify(currentTask.concat(lastArr))
-				);
+			localStorage.setItem(
+				'storeTask',
+				JSON.stringify(currentTask.concat(lastArr))
+			);
+			element.appendChild(buttonWrapper);
+			console.log(getLastItem());
 
-				getLastItem();
-				element.appendChild(buttonWrapper);
-				// removeAddTask();
-				// location.reload();
-			}
+			// removeAddTask();
+
+			// location.reload();
+			// }
 		});
 
 		cancelBtn.addEventListener('click', () => {
 			removeAddTask();
 			element.appendChild(buttonWrapper);
 
-			// location.reload();
+			location.reload();
 		});
 
 		element.appendChild(inputTask);
