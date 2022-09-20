@@ -4,11 +4,10 @@ import { getStore } from '../inboxComponents/getTask';
 import { setAttributes } from '../helperComponents/setAttributes';
 import { radioButtons, getLastItem } from '../inboxComponents/radioButtons';
 
-const todayDate = format(endOfDay(new Date()), 'MM/dd/yyyy');
-
-const dataArr = [];
-
 export const inboxComponents = () => {
+	const dataArr = [];
+	const todayDate = format(endOfDay(new Date()), 'MM/dd/yyyy');
+
 	const element = document.createElement('div');
 	const buttonWrapper = document.createElement('div');
 	const h1 = document.createElement('h1');
@@ -42,6 +41,19 @@ export const inboxComponents = () => {
 		targetElement.parentElement.removeChild(targetElement);
 	});
 
+	const removeAddTask = (target) => {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				const targetNode = document.querySelector(target);
+				const result = targetNode.parentNode.removeChild(targetNode);
+				resolve(result);
+			}, 1000);
+		});
+
+		// OLD REFERRENCE
+		// element.appendChild(buttonWrapper);
+	};
+
 	const modalTask = () => {
 		const element = document.createElement('div');
 		const inputTask = document.createElement('input');
@@ -64,48 +76,30 @@ export const inboxComponents = () => {
 		confirmBtn.textContent = 'Confirm';
 		cancelBtn.textContent = 'Cancel';
 
-		const removeAddTask = () => {
-			const targetElement = document.querySelector('#modalTask');
-
-			targetElement.parentElement.removeChild(targetElement);
-			// element.appendChild(buttonWrapper);
-		};
-		/*	
-			PROBLEM:
-				- Change onload event turn without onload.
-			SOLUTION:
-				- Change the way reload itself by inserting inside the function of 
-				any event or methods the appendChild where you will post it.
-			PROBLEMS(2):
-				- Should post only the last insert and not all the data itself.
-		*/
-		confirmBtn.addEventListener('click', () => {
+		confirmBtn.addEventListener('click', async () => {
 			const inputVal = document.querySelector('#inputTask').value;
 			const currentTask = getStore('storeTask');
 
-			// if (inputVal === null || inputVal === '') {
-			// 	alert('input some text');
-			// } else {
-			dataArr.push({
-				inputId: Math.floor(Math.random() * 999),
-				inputName: 'testing',
-				inputContent: inputVal,
-				inputDate: todayDate
-			});
+			if (inputVal === null || inputVal === '') {
+				alert('input some text');
+			} else {
+				dataArr.push({
+					inputId: Math.floor(Math.random() * 999),
+					inputName: 'testing',
+					inputContent: inputVal,
+					inputDate: todayDate
+				});
 
-			const lastArr = [dataArr.slice(-1).pop()];
+				const lastArr = [dataArr.slice(-1).pop()];
 
-			localStorage.setItem(
-				'storeTask',
-				JSON.stringify(currentTask.concat(lastArr))
-			);
-			element.appendChild(buttonWrapper);
-			console.log(getLastItem());
-
-			// removeAddTask();
-
-			// location.reload();
-			// }
+				localStorage.setItem(
+					'storeTask',
+					JSON.stringify(currentTask.concat(lastArr))
+				);
+				await removeAddTask('#modalTask');
+				console.log(getLastItem());
+				element.appendChild(buttonWrapper);
+			}
 		});
 
 		cancelBtn.addEventListener('click', () => {
