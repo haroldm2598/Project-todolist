@@ -4,20 +4,15 @@ import { getStore } from '../inboxComponents/getTask';
 import { setAttributes } from '../helperComponents/setAttributes';
 import { radioButtons, getLastItem } from '../inboxComponents/radioButtons';
 
-export const inboxComponents = () => {
+const mainInboxComponents = (paramsTarget) => {
 	const dataArr = [];
 	const todayDate = format(endOfDay(new Date()), 'MM/dd/yyyy');
 
-	const element = document.createElement('div');
 	const buttonWrapper = document.createElement('div');
 	const h1 = document.createElement('h1');
 	const buttonTask = document.createElement('button');
 	const icon = document.createElement('i');
 
-	setAttributes(element, {
-		class: 'contentContainer',
-		id: 'inboxIndex'
-	});
 	setAttributes(h1, {
 		class: 'contentContainer__header'
 	});
@@ -37,7 +32,7 @@ export const inboxComponents = () => {
 	buttonTask.addEventListener('click', () => {
 		const targetElement = document.querySelector('#addBtnWrapper');
 
-		element.appendChild(modalTask());
+		paramsTarget.appendChild(modalTask());
 		targetElement.parentElement.removeChild(targetElement);
 	});
 
@@ -47,20 +42,17 @@ export const inboxComponents = () => {
 				const targetNode = document.querySelector(target);
 				const result = targetNode.parentNode.removeChild(targetNode);
 				resolve(result);
-			}, 1000);
+			}, 500);
 		});
-
-		// OLD REFERRENCE
-		// element.appendChild(buttonWrapper);
 	};
 
 	const modalTask = () => {
-		const element = document.createElement('div');
+		const elementTask = document.createElement('div');
 		const inputTask = document.createElement('input');
 		const confirmBtn = document.createElement('button');
 		const cancelBtn = document.createElement('button');
 
-		setAttributes(element, {
+		setAttributes(elementTask, {
 			class: 'contentContainer__task',
 			id: 'modalTask'
 		});
@@ -97,30 +89,39 @@ export const inboxComponents = () => {
 					JSON.stringify(currentTask.concat(lastArr))
 				);
 				await removeAddTask('#modalTask');
-				console.log(getLastItem());
-				element.appendChild(buttonWrapper);
+				paramsTarget.appendChild(getLastItem());
+				paramsTarget.appendChild(buttonWrapper);
 			}
 		});
 
-		cancelBtn.addEventListener('click', () => {
-			removeAddTask();
-			element.appendChild(buttonWrapper);
-
-			location.reload();
+		cancelBtn.addEventListener('click', async () => {
+			await removeAddTask('#modalTask');
+			paramsTarget.appendChild(buttonWrapper);
 		});
 
-		element.appendChild(inputTask);
-		element.appendChild(confirmBtn);
-		element.appendChild(cancelBtn);
+		elementTask.appendChild(inputTask);
+		elementTask.appendChild(confirmBtn);
+		elementTask.appendChild(cancelBtn);
 
-		return element;
+		return elementTask;
 	};
 
-	element.appendChild(h1);
-	element.appendChild(radioButtons());
+	paramsTarget.appendChild(h1);
+	paramsTarget.appendChild(radioButtons());
 	buttonWrapper.appendChild(icon);
 	buttonWrapper.appendChild(buttonTask);
-	element.appendChild(buttonWrapper);
+	paramsTarget.appendChild(buttonWrapper);
+};
+
+export const inboxComponents = () => {
+	const element = document.createElement('div');
+
+	setAttributes(element, {
+		class: 'contentContainer',
+		id: 'inboxIndex'
+	});
+
+	mainInboxComponents(element);
 
 	return element;
 };
