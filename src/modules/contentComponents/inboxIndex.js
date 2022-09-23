@@ -19,6 +19,8 @@ PROBLEM ::
 POSIBLE SOLUTION ::
 	- Check the await method if working it should remove the contentContainer 
 	and replace by new appendchild.
+	- Check the containermain if their both children but if there is two parent
+	and separate child means it will double the error! 
 */
 
 const mainInboxComponents = (paramsTarget) => {
@@ -145,7 +147,6 @@ const mainInboxComponents = (paramsTarget) => {
 		setAttributes(secondDiv, {
 			class: 'contentContainer__input--second'
 		});
-
 		setAttributes(input, {
 			class: ' contentContainer__input--first__checkBox',
 			type: 'checkbox',
@@ -155,7 +156,6 @@ const mainInboxComponents = (paramsTarget) => {
 		setAttributes(forInput, {
 			class: 'contentContainer__input--first__title'
 		});
-
 		setAttributes(datePara, {
 			class: ' contentContainer__input--second__date'
 		});
