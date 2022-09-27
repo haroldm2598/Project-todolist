@@ -21,6 +21,8 @@ POSIBLE SOLUTION ::
 	and replace by new appendchild.
 	- Check the containermain if their both children but if there is two parent
 	and separate child means it will double the error! 
+
+	- Try to return elementWrapper only in getElement
 */
 
 const mainInboxComponents = (paramsTarget) => {
@@ -112,8 +114,8 @@ const mainInboxComponents = (paramsTarget) => {
 					JSON.stringify(currentTask.concat(lastArr))
 				);
 				await removeAddTask('#modalTask');
-				// paramsTarget.appendChild(getLastItem());
-				paramsTarget.appendChild(showAllItem()[1]);
+				paramsTarget.appendChild(getLastItem());
+				// paramsTarget.appendChild(showAllItem());
 				paramsTarget.appendChild(buttonWrapper);
 			}
 		});
@@ -189,7 +191,7 @@ const mainInboxComponents = (paramsTarget) => {
 			localStorage.setItem('storeTask', JSON.stringify(newTask));
 
 			await removeAddTask('#contentContainer__main');
-			paramsTarget.appendChild(showAllItem()[0]);
+			paramsTarget.appendChild(showAllItem());
 			paramsTarget.appendChild(buttonWrapper);
 		});
 
@@ -203,55 +205,45 @@ const mainInboxComponents = (paramsTarget) => {
 		params2.appendChild(elementWrapper);
 	};
 
-	const showAllItem = () => {
-		const dataArr = getStore('storeTask');
+	const testingHelper = () => {
+		const element = document.createElement('div');
+		setAttributes(element, {
+			id: 'contentContainer__main'
+		});
 
-		const func1 = () => {
-			const element = document.createElement('div');
-			setAttributes(element, {
-				id: 'contentContainer__main'
-			});
-
-			for (const data of dataArr) {
-				getElement(data, element);
-			}
-
-			return element;
-		};
-
-		const func2 = () => {
-			const element = document.createElement('div');
-			const getLastItemArr = dataArr[dataArr.length - 1];
-			setAttributes(element, {
-				id: 'contentContainer__main'
-			});
-
-			getElement(getLastItemArr, element);
-
-			return element;
-		};
-
-		console.log(func1());
-		console.log(func2());
-
-		return [func1, func2];
+		return element;
 	};
 
-	// const getLastItem = () => {
-	// 	const element = document.createElement('div');
-	// 	const dataArr = getStore('storeTask');
-	// 	const getLastItemArr = dataArr[dataArr.length - 1];
+	const showAllItem = () => {
+		const element = document.createElement('div');
+		const dataArr = getStore('storeTask');
+		setAttributes(element, {
+			id: 'contentContainer__main'
+		});
 
-	// 	setAttributes(element, {
-	// 		id: 'contentContainer__main'
-	// 	});
-	// 	getElement(getLastItemArr, element);
+		for (const data of dataArr) {
+			getElement(data, element);
+		}
 
-	// 	return element;
-	// };
+		return element;
+	};
+
+	const getLastItem = () => {
+		const element = document.createElement('div');
+		const dataArr = getStore('storeTask');
+		const getLastItemArr = dataArr[dataArr.length - 1];
+
+		setAttributes(element, {
+			id: 'contentContainer__main'
+		});
+		element.appendChild(getElement(getLastItemArr, element));
+		console.log(element);
+
+		return element;
+	};
 
 	paramsTarget.appendChild(h1);
-	paramsTarget.appendChild(showAllItem()[0]);
+	paramsTarget.appendChild(showAllItem());
 	buttonWrapper.appendChild(icon);
 	buttonWrapper.appendChild(buttonTask);
 	paramsTarget.appendChild(buttonWrapper);
