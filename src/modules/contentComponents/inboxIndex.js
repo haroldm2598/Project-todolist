@@ -112,7 +112,8 @@ const mainInboxComponents = (paramsTarget) => {
 					JSON.stringify(currentTask.concat(lastArr))
 				);
 				await removeAddTask('#modalTask');
-				paramsTarget.appendChild(getLastItem());
+				// paramsTarget.appendChild(getLastItem());
+				paramsTarget.appendChild(showAllItem()[1]);
 				paramsTarget.appendChild(buttonWrapper);
 			}
 		});
@@ -130,6 +131,8 @@ const mainInboxComponents = (paramsTarget) => {
 	};
 
 	const getElement = (params1, params2) => {
+		const element = document.createElement('div');
+
 		const elementWrapper = document.createElement('div');
 		const firstDiv = document.createElement('div');
 		const secondDiv = document.createElement('div');
@@ -137,6 +140,10 @@ const mainInboxComponents = (paramsTarget) => {
 		const forInput = document.createElement('label');
 		const datePara = document.createElement('p');
 		const icon = document.createElement('i');
+
+		setAttributes(element, {
+			id: 'contentContainer__main'
+		});
 
 		setAttributes(elementWrapper, {
 			class: 'contentContainer__input'
@@ -182,7 +189,7 @@ const mainInboxComponents = (paramsTarget) => {
 			localStorage.setItem('storeTask', JSON.stringify(newTask));
 
 			await removeAddTask('#contentContainer__main');
-			paramsTarget.appendChild(radioButtons());
+			paramsTarget.appendChild(showAllItem()[0]);
 			paramsTarget.appendChild(buttonWrapper);
 		});
 
@@ -196,35 +203,55 @@ const mainInboxComponents = (paramsTarget) => {
 		params2.appendChild(elementWrapper);
 	};
 
-	const radioButtons = () => {
-		const element = document.createElement('div');
-
-		setAttributes(element, {
-			id: 'contentContainer__main'
-		});
-
-		for (const data of getStore('storeTask')) {
-			getElement(data, element);
-		}
-
-		return element;
-	};
-
-	const getLastItem = () => {
-		const element = document.createElement('div');
+	const showAllItem = () => {
 		const dataArr = getStore('storeTask');
-		const getLastItemArr = dataArr[dataArr.length - 1];
 
-		setAttributes(element, {
-			id: 'contentContainer__main'
-		});
-		getElement(getLastItemArr, element);
+		const func1 = () => {
+			const element = document.createElement('div');
+			setAttributes(element, {
+				id: 'contentContainer__main'
+			});
 
-		return element;
+			for (const data of dataArr) {
+				getElement(data, element);
+			}
+
+			return element;
+		};
+
+		const func2 = () => {
+			const element = document.createElement('div');
+			const getLastItemArr = dataArr[dataArr.length - 1];
+			setAttributes(element, {
+				id: 'contentContainer__main'
+			});
+
+			getElement(getLastItemArr, element);
+
+			return element;
+		};
+
+		console.log(func1());
+		console.log(func2());
+
+		return [func1, func2];
 	};
+
+	// const getLastItem = () => {
+	// 	const element = document.createElement('div');
+	// 	const dataArr = getStore('storeTask');
+	// 	const getLastItemArr = dataArr[dataArr.length - 1];
+
+	// 	setAttributes(element, {
+	// 		id: 'contentContainer__main'
+	// 	});
+	// 	getElement(getLastItemArr, element);
+
+	// 	return element;
+	// };
 
 	paramsTarget.appendChild(h1);
-	paramsTarget.appendChild(radioButtons());
+	paramsTarget.appendChild(showAllItem()[0]);
 	buttonWrapper.appendChild(icon);
 	buttonWrapper.appendChild(buttonTask);
 	paramsTarget.appendChild(buttonWrapper);
