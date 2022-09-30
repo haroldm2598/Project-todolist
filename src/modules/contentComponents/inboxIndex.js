@@ -133,7 +133,7 @@ const mainInboxComponents = (paramsTarget) => {
 	};
 
 	const getElement = (params1, params2) => {
-		const element = document.createElement('div');
+		// const element = document.createElement('div');
 
 		const elementWrapper = document.createElement('div');
 		const firstDiv = document.createElement('div');
@@ -143,9 +143,9 @@ const mainInboxComponents = (paramsTarget) => {
 		const datePara = document.createElement('p');
 		const icon = document.createElement('i');
 
-		setAttributes(element, {
-			id: 'contentContainer__main'
-		});
+		// setAttributes(element, {
+		// 	id: 'contentContainer__main'
+		// });
 
 		setAttributes(elementWrapper, {
 			class: 'contentContainer__input'
@@ -205,26 +205,17 @@ const mainInboxComponents = (paramsTarget) => {
 		params2.appendChild(elementWrapper);
 	};
 
-	const testingHelper = () => {
-		const element = document.createElement('div');
-		setAttributes(element, {
-			id: 'contentContainer__main'
-		});
-
-		return element;
-	};
-
 	const showAllItem = () => {
 		const element = document.createElement('div');
-		const dataArr = getStore('storeTask');
 		setAttributes(element, {
 			id: 'contentContainer__main'
 		});
 
-		for (const data of dataArr) {
+		for (const data of getStore('storeTask')) {
 			getElement(data, element);
 		}
 
+		console.log(element);
 		return element;
 	};
 
@@ -236,7 +227,7 @@ const mainInboxComponents = (paramsTarget) => {
 		setAttributes(element, {
 			id: 'contentContainer__main'
 		});
-		element.appendChild(getElement(getLastItemArr, element));
+		getElement(getLastItemArr, element);
 		console.log(element);
 
 		return element;
