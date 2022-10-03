@@ -21,8 +21,10 @@ POSIBLE SOLUTION ::
 	and replace by new appendchild.
 	- Check the containermain if their both children but if there is two parent
 	and separate child means it will double the error! 
-
 	- Try to return elementWrapper only in getElement
+
+SOLUTION :: 
+	- by removing it's contain and insert new contain duplication element will be eliminated
 */
 
 const mainInboxComponents = (paramsTarget) => {
@@ -114,8 +116,9 @@ const mainInboxComponents = (paramsTarget) => {
 					JSON.stringify(currentTask.concat(lastArr))
 				);
 				await removeAddTask('#modalTask');
-				paramsTarget.appendChild(getLastItem());
-				// paramsTarget.appendChild(showAllItem());
+				await removeAddTask('#contentContainer__main');
+				// paramsTarget.appendChild(getLastItem());
+				paramsTarget.appendChild(showAllItem());
 				paramsTarget.appendChild(buttonWrapper);
 			}
 		});
@@ -133,8 +136,6 @@ const mainInboxComponents = (paramsTarget) => {
 	};
 
 	const getElement = (params1, params2) => {
-		// const element = document.createElement('div');
-
 		const elementWrapper = document.createElement('div');
 		const firstDiv = document.createElement('div');
 		const secondDiv = document.createElement('div');
@@ -142,10 +143,6 @@ const mainInboxComponents = (paramsTarget) => {
 		const forInput = document.createElement('label');
 		const datePara = document.createElement('p');
 		const icon = document.createElement('i');
-
-		// setAttributes(element, {
-		// 	id: 'contentContainer__main'
-		// });
 
 		setAttributes(elementWrapper, {
 			class: 'contentContainer__input'
@@ -219,6 +216,8 @@ const mainInboxComponents = (paramsTarget) => {
 		return element;
 	};
 
+	// Not using anymore but for reference
+	/*
 	const getLastItem = () => {
 		const element = document.createElement('div');
 		const dataArr = getStore('storeTask');
@@ -232,7 +231,7 @@ const mainInboxComponents = (paramsTarget) => {
 
 		return element;
 	};
-
+	*/
 	paramsTarget.appendChild(h1);
 	paramsTarget.appendChild(showAllItem());
 	buttonWrapper.appendChild(icon);

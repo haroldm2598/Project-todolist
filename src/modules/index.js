@@ -57,6 +57,9 @@ export const mainComponents = () => {
 		- IS NOT WORKING FIX THE PARAMS AREA WHERE SEARCH THE SPECIFIC ID AND INSERT IT INTO PAGES (SOLVED)
 		- PARAMS MUST BE TARGET DYNAMICALLY (SOLVED)
 		- if submitted and refresh will be remove the current event
+
+		SOLUTIONS
+		- Implement the method the way i remove the task with async await
 	*/
 
 	document.addEventListener('DOMContentLoaded', (event) => {
@@ -64,19 +67,22 @@ export const mainComponents = () => {
 
 		body.addEventListener(
 			'click',
-			(e) => {
+			async (e) => {
 				let params = e.target.id;
 
 				switch (params) {
 					case 'inboxId':
+						await removeAddElement('.contentContainer');
 						divWrapper.appendChild(inboxComponents());
 						break;
 
 					case 'todayId':
+						await removeAddElement('.contentContainer');
 						divWrapper.appendChild(todayComponents());
 						break;
 
 					case 'weekId':
+						await removeAddElement('.contentContainer');
 						divWrapper.appendChild(weekComponents());
 						break;
 				}
@@ -85,13 +91,23 @@ export const mainComponents = () => {
 		);
 	});
 
-	const removeAllElement = (paramsComponents) => {
-		const selectElement = document.querySelector('#inboxIndex');
+	// const removeAllElement = (paramsComponents) => {
+	// 	const selectElement = document.querySelector('#inboxIndex');
 
-		selectElement.parentElement.removeChild(selectElement);
-		divWrapper.appendChild(paramsComponents);
+	// 	selectElement.parentElement.removeChild(selectElement);
+	// 	divWrapper.appendChild(paramsComponents);
 
-		location.reload();
+	// 	location.reload();
+	// };
+
+	const removeAddElement = (target) => {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				const targetNode = document.querySelector(target);
+				const result = targetNode.parentNode.removeChild(targetNode);
+				resolve(result);
+			}, 500);
+		});
 	};
 
 	document.body.appendChild(headerComponents());
