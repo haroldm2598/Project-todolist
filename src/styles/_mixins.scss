@@ -1,5 +1,5 @@
 @mixin mobile-allSize {
-	@media (min-width: 20em) and (max-width: 26.5625em) {
+	@media (min-width: 20em) and (max-width: 27em) {
 		@content;
 	}
 }
