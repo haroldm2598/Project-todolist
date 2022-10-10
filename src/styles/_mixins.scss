@@ -1,3 +1,18 @@
+$breakpoints: (
+	mobile: 0em,
+	smallTablet: 42.5em,
+	largeTablet: 48em,
+	desktop: 60em
+);
+
+@mixin media($keys...) {
+	@each $key in $keys {
+		@media (max-width: map-get($breakpoints, $key)) {
+			@content;
+		}
+	}
+}
+
 @mixin mobile-allSize {
 	@media (min-width: 20em) and (max-width: 27em) {
 		@content;
@@ -35,7 +50,7 @@
 }
 
 @mixin laptop-small {
-	@media (min-width: 48em) and (max-width: 64em) {
+	@media screen and (min-width: 48em) and (max-width: 64em) {
 		@content;
 	}
 }

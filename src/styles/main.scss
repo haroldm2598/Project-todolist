@@ -56,7 +56,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	align-items: center;
 	background-color: $mainBG2;
 
-	@include mobile-allSize {
+	@include media(mobile, smallTablet, largeTablet) {
 		display: none;
 	}
 
@@ -72,8 +72,13 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 			margin: 0.5em;
 			font-size: 1.25rem;
 
-			@include tablet {
-				margin: 0.5em 0;
+			// @include tablet {
+			// 	margin: 0.5em 0;
+			// }
+
+			@include media(tablet, desktop) {
+				margin: 0;
+				font-size: 1rem;
 			}
 
 			button {
@@ -86,9 +91,9 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 				transition: all 0.25s ease;
 				cursor: pointer;
 
-				// @include tablet {
-				// 	font-size: 1rem;
-				// }
+				@include media(smallTablet, desktop) {
+					margin-left: 0.2rem;
+				}
 
 				&:hover {
 					color: $highLight1;
@@ -109,8 +114,8 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 		padding: 1.5em 2em;
 	}
 
-	@include tablet {
-		padding: 1em 1.5em;
+	@include media(smallTablet, desktop) {
+		padding: 1em;
 	}
 
 	&__header {
