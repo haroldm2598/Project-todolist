@@ -72,10 +72,6 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 			margin: 0.5em;
 			font-size: 1.25rem;
 
-			// @include tablet {
-			// 	margin: 0.5em 0;
-			// }
-
 			@include media(tablet, desktop) {
 				margin: 0;
 				font-size: 1rem;
@@ -103,17 +99,24 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	}
 
 	&__Wrapper {
+		margin-top: 1em;
+
 		&--icon {
 			cursor: pointer;
 		}
 
 		&--btn {
+			margin-left: 0.5em;
 			border: none;
 			background: none;
 			font-size: 1.1rem;
-			font-weight: 600;
+			font-weight: 200;
 			cursor: pointer;
 		}
+	}
+
+	&__projectList {
+		list-style: none;
 	}
 }
 

@@ -12,32 +12,46 @@ const objItem = [
 	{ icon: 'fa-calendar-alt', title: 'This Week', id: 'weekId' }
 ];
 
+const objProject = [];
+
 const addProject = (paramTarget) => {
 	const subHeadWrapper = document.createElement('div');
 	const titleSubHead = document.createElement('h1');
 	const icon = document.createElement('i');
 	const addBtn = document.createElement('button');
+	const projList = document.createElement('ul');
+	const projListItem = document.createElement('li');
 
 	setAttributes(titleSubHead, {
 		class: 'sideBarContainer__subHeading'
 	});
-	setAttributes(subHeadWrapper, { class: 'sidebarContainer__Wrapper' });
+	setAttributes(subHeadWrapper, { class: 'sideBarContainer__Wrapper' });
 	setAttributes(icon, {
 		class: 'sideBarContainer__Wrapper--icon fas fa-plus-square'
 	});
 	setAttributes(addBtn, {
 		class: 'sideBarContainer__Wrapper--btn'
 	});
-
-	titleSubHead.textContent = 'Project';
-	addBtn.textContent = 'Add Project Test';
-
-	subHeadWrapper.addEventListener('click', () => {
-		console.log(`just clicked`);
+	setAttributes(projList, {
+		class: 'sideBarContainer__projectList'
+	});
+	setAttributes(projListItem, {
+		class: 'sideBarContainer__projectList--item'
 	});
 
+	titleSubHead.textContent = 'Project';
+	addBtn.textContent = 'Add Project';
+
+	subHeadWrapper.addEventListener('click', () => {
+		objProject.push({ test: 'testing only !' });
+		projListItem.textContent = objProject[0].test;
+		console.log(objProject[0].test);
+	});
+
+	subHeadWrapper.appendChild(projList);
 	subHeadWrapper.appendChild(icon);
 	subHeadWrapper.appendChild(addBtn);
+	projList.appendChild(projListItem);
 
 	return (
 		paramTarget.appendChild(titleSubHead) &&

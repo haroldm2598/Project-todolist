@@ -212,7 +212,6 @@ const mainInboxComponents = (paramsTarget) => {
 			getElement(data, element);
 		}
 
-		console.log(element);
 		return element;
 	};
 
