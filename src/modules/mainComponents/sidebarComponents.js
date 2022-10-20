@@ -45,7 +45,13 @@ const addProject = (paramTarget) => {
 	subHeadWrapper.addEventListener('click', () => {
 		objProject.push({ test: 'testing only !' });
 		projListItem.textContent = objProject[0].test;
-		console.log(objProject[0].test);
+		console.log(objProject);
+
+		if (objProject[1].test !== objProject.length) {
+			console.log(objProject[1].test);
+		} else {
+			console.log(`gago kaba`);
+		}
 	});
 
 	subHeadWrapper.appendChild(projList);
