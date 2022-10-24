@@ -43,15 +43,24 @@ const addProject = (paramTarget) => {
 	addBtn.textContent = 'Add Project';
 
 	subHeadWrapper.addEventListener('click', () => {
-		objProject.push({ test: 'testing only !' });
-		projListItem.textContent = objProject[0].test;
-		console.log(objProject);
+		const promptTest = prompt('Insert new Sidebar');
 
-		if (objProject[1].test !== objProject.length) {
-			console.log(objProject[1].test);
-		} else {
-			console.log(`gago kaba`);
-		}
+		objProject.push({ test: promptTest });
+
+		const testingOnly = objProject.find((itemArr) => {
+			return itemArr.test === 'testing';
+		});
+
+		projListItem.textContent = testingOnly;
+		console.log(testingOnly);
+
+		// for (let i = 0; i < objProject.length; i++) {
+		// 	if (objProject.test !== 'testing only !') {
+		// 		console.log('falsy baby');
+		// 	} else {
+		// 		console.log('TRUEEEEEEE');
+		// 	}
+		// }
 	});
 
 	subHeadWrapper.appendChild(projList);
