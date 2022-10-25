@@ -1,4 +1,6 @@
 import '../../styles/main.scss';
+import '../helperComponents/setElement';
+import { createElem } from '../helperComponents/setElement';
 
 const setAttributes = (elem, attr) => {
 	for (const key in attr) {
@@ -43,24 +45,26 @@ const addProject = (paramTarget) => {
 	addBtn.textContent = 'Add Project';
 
 	subHeadWrapper.addEventListener('click', () => {
-		const promptTest = prompt('Insert new Sidebar');
+		const projWrapper = createElem('div');
+		const btnInput = createElem('input');
+		const btnConfirm = createElem('button');
+		const btnCancel = createElem('button');
 
-		objProject.push({ test: promptTest });
-
-		const testingOnly = objProject.find((itemArr) => {
-			return itemArr.test === 'testing';
+		setAttributes(projWrapper, { class: 'projWrapper' });
+		setAttributes(btnInput, { class: 'projWrapper__input', id: 'addProjID' });
+		setAttributes(btnConfirm, {
+			class: 'projWrapper__confirm fas fa-plus-square'
+		});
+		setAttributes(btnCancel, {
+			class: 'projWrapper__cancel fas fa-times-circle'
 		});
 
-		projListItem.textContent = testingOnly;
-		console.log(testingOnly);
-
-		// for (let i = 0; i < objProject.length; i++) {
-		// 	if (objProject.test !== 'testing only !') {
-		// 		console.log('falsy baby');
-		// 	} else {
-		// 		console.log('TRUEEEEEEE');
-		// 	}
-		// }
+		// TESTING PURPOSES
+		// const promptTest = prompt('Insert new Sidebar');
+		// objProject.push({ test: promptTest });
+		// const lastArr = [objProject.slice(-1).pop()];
+		// console.log(objProject);
+		// console.log(lastArr);
 	});
 
 	subHeadWrapper.appendChild(projList);
