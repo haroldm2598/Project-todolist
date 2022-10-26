@@ -16,6 +16,33 @@ const objItem = [
 
 const objProject = [];
 
+const addProjList = (paramTarget) => {
+	const projWrapper = createElem('div');
+	const btnInput = createElem('input');
+	const btnConfirm = createElem('button');
+	const btnCancel = createElem('button');
+
+	setAttributes(btnInput, { class: 'projWrapper__input', id: 'addProjID' });
+	setAttributes(btnConfirm, {
+		class: 'projWrapper__confirm fas fa-plus-square'
+	});
+	setAttributes(btnCancel, {
+		class: 'projWrapper__cancel fas fa-times-circle'
+	});
+
+	// TESTING PURPOSES
+	// const promptTest = prompt('Insert new Sidebar');
+	// objProject.push({ test: promptTest });
+	// const lastArr = [objProject.slice(-1).pop()];
+	// console.log(objProject);
+	// console.log(lastArr);
+	projWrapper.appendChild(btnInput);
+	projWrapper.appendChild(btnConfirm);
+	projWrapper.appendChild(btnCancel);
+
+	return paramTarget.appendChild(projWrapper);
+};
+
 const addProject = (paramTarget) => {
 	const subHeadWrapper = document.createElement('div');
 	const titleSubHead = document.createElement('h1');
@@ -40,34 +67,17 @@ const addProject = (paramTarget) => {
 	setAttributes(projListItem, {
 		class: 'sideBarContainer__projectList--item'
 	});
+	// setAttributes(projWrapper, { class: 'projWrapper' });
 
 	titleSubHead.textContent = 'Project';
 	addBtn.textContent = 'Add Project';
 
 	subHeadWrapper.addEventListener('click', () => {
-		const projWrapper = createElem('div');
-		const btnInput = createElem('input');
-		const btnConfirm = createElem('button');
-		const btnCancel = createElem('button');
-
-		setAttributes(projWrapper, { class: 'projWrapper' });
-		setAttributes(btnInput, { class: 'projWrapper__input', id: 'addProjID' });
-		setAttributes(btnConfirm, {
-			class: 'projWrapper__confirm fas fa-plus-square'
-		});
-		setAttributes(btnCancel, {
-			class: 'projWrapper__cancel fas fa-times-circle'
-		});
-
-		// TESTING PURPOSES
-		// const promptTest = prompt('Insert new Sidebar');
-		// objProject.push({ test: promptTest });
-		// const lastArr = [objProject.slice(-1).pop()];
-		// console.log(objProject);
-		// console.log(lastArr);
+		addProjList(subHeadWrapper);
 	});
 
 	subHeadWrapper.appendChild(projList);
+	// subHeadWrapper.appendChild(addProjList(subHeadWrapper));
 	subHeadWrapper.appendChild(icon);
 	subHeadWrapper.appendChild(addBtn);
 	projList.appendChild(projListItem);
