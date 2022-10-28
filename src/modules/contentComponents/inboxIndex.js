@@ -3,30 +3,6 @@ import { format, endOfDay } from 'date-fns';
 import { getStore } from '../data/getTask';
 import { setAttributes } from '../helperComponents/setAttributes';
 
-/*	
-PROBLEM ::
-	If we delete it should double the delete data example
-	1. apple (if i clicked this one and deleted)
-	2. orange
-	3. banana
-	RESULT WILL :: 
-	1. apple (deleted)
-	2. orange
-	3. banana
-	2. orange 
-	3. banana
-	
-POSIBLE SOLUTION ::
-	- Check the await method if working it should remove the contentContainer 
-	and replace by new appendchild.
-	- Check the containermain if their both children but if there is two parent
-	and separate child means it will double the error! 
-	- Try to return elementWrapper only in getElement
-
-SOLUTION :: 
-	- by removing it's contain and insert new contain duplication element will be eliminated
-*/
-
 const mainInboxComponents = (paramsTarget) => {
 	const dataArr = [];
 	const todayDate = format(endOfDay(new Date()), 'MM/dd/yyyy');

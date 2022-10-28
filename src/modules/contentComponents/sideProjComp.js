@@ -38,8 +38,6 @@ const addProjList = async (paramTarget) => {
 	projWrapper.appendChild(btnConfirm);
 	projWrapper.appendChild(btnCancel);
 
-	await removeAddTask('#project__addBtn');
-
 	return paramTarget.appendChild(projWrapper);
 };
 
@@ -56,7 +54,7 @@ export const addProject = (paramTarget) => {
 	});
 	setAttributes(subHeadWrapper, {
 		class: 'sideBarContainer__Wrapper',
-		id: 'project__addBtn'
+		id: 'projectAddBtn'
 	});
 	setAttributes(icon, {
 		class: 'sideBarContainer__Wrapper--icon fas fa-plus-square'
@@ -75,7 +73,10 @@ export const addProject = (paramTarget) => {
 	addBtn.textContent = 'Add Project';
 
 	subHeadWrapper.addEventListener('click', () => {
-		addProjList(subHeadWrapper);
+		const targetElement = document.querySelector('#projectAddBtn');
+
+		subHeadWrapper.appendChild(addProjList(subHeadWrapper));
+		targetElement.parentElement.removeChild(targetElement);
 	});
 
 	// subHeadWrapper.appendChild(projList);
