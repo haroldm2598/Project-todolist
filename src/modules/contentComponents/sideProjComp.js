@@ -14,13 +14,27 @@ const removeAddTask = (target) => {
 	});
 };
 
-const addProjList = async (paramTarget) => {
+const addProjList = (paramTarget) => {
 	const projWrapper = createElem('div');
 	const btnInput = createElem('input');
 	const btnConfirm = createElem('button');
 	const btnCancel = createElem('button');
 
-	setAttributes(btnInput, { class: 'projWrapper__input', id: 'addProjID' });
+	// const projList = document.createElement('ul');
+	// const projListItem = document.createElement('li');
+
+	// setAttributes(projList, {
+	// 	class: 'sideBarContainer__projectList'
+	// });
+
+	// setAttributes(projListItem, {
+	// 	class: 'sideBarContainer__projectList--item'
+	// });
+
+	// subHeadWrapper.appendChild(projList);
+	// projList.appendChild(projListItem);
+
+	setAttributes(btnInput, { class: 'projWrapper__input', id: 'projValue' });
 	setAttributes(btnConfirm, {
 		class: 'projWrapper__confirm fas fa-plus-square'
 	});
@@ -43,49 +57,31 @@ const addProjList = async (paramTarget) => {
 
 export const addProject = (paramTarget) => {
 	const subHeadWrapper = document.createElement('div');
-	const titleSubHead = document.createElement('h1');
 	const icon = document.createElement('i');
 	const addBtn = document.createElement('button');
-	// const projList = document.createElement('ul');
-	const projListItem = document.createElement('li');
 
-	setAttributes(titleSubHead, {
-		class: 'sideBarContainer__subHeading'
-	});
 	setAttributes(subHeadWrapper, {
-		class: 'sideBarContainer__Wrapper',
+		class: 'sideBarContainer__wrapper',
 		id: 'projectAddBtn'
 	});
 	setAttributes(icon, {
-		class: 'sideBarContainer__Wrapper--icon fas fa-plus-square'
+		class: 'sideBarContainer__wrapper--icon fas fa-plus-square'
 	});
 	setAttributes(addBtn, {
-		class: 'sideBarContainer__Wrapper--btn'
-	});
-	// setAttributes(projList, {
-	// 	class: 'sideBarContainer__projectList'
-	// });
-	setAttributes(projListItem, {
-		class: 'sideBarContainer__projectList--item'
+		class: 'sideBarContainer__wrapper--btn'
 	});
 
-	titleSubHead.textContent = 'Project';
 	addBtn.textContent = 'Add Project';
 
 	subHeadWrapper.addEventListener('click', () => {
 		const targetElement = document.querySelector('#projectAddBtn');
 
-		subHeadWrapper.appendChild(addProjList(subHeadWrapper));
+		paramTarget.appendChild(addProjList(paramTarget));
 		targetElement.parentElement.removeChild(targetElement);
 	});
 
-	// subHeadWrapper.appendChild(projList);
 	subHeadWrapper.appendChild(icon);
 	subHeadWrapper.appendChild(addBtn);
-	// projList.appendChild(projListItem);
 
-	return (
-		paramTarget.appendChild(titleSubHead) &&
-		paramTarget.appendChild(subHeadWrapper)
-	);
+	return paramTarget.appendChild(subHeadWrapper);
 };

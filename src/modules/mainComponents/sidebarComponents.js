@@ -11,6 +11,7 @@ const objItem = [
 export const sidebarComponents = () => {
 	const sidebarContainer = document.createElement('div');
 	const listItem = document.createElement('ul');
+	const titleSubHead = document.createElement('h1');
 
 	setAttributes(sidebarContainer, {
 		class: 'sideBarContainer'
@@ -19,6 +20,11 @@ export const sidebarComponents = () => {
 		class: 'sideBarContainer__list',
 		id: 'sideBarContainer'
 	});
+	setAttributes(titleSubHead, {
+		class: 'sideBarContainer__subHeader'
+	});
+
+	titleSubHead.textContent = 'Project';
 
 	for (let i = 0; i < objItem.length; i++) {
 		const createList = document.createElement('li');
@@ -38,6 +44,7 @@ export const sidebarComponents = () => {
 	}
 
 	sidebarContainer.appendChild(listItem);
+	sidebarContainer.appendChild(titleSubHead);
 	sidebarContainer.appendChild(addProject(sidebarContainer));
 
 	return sidebarContainer;
