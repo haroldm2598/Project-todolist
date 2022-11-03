@@ -20,19 +20,8 @@ const addProjList = (paramTarget) => {
 	const btnConfirm = createElem('button');
 	const btnCancel = createElem('button');
 
-	// const projList = document.createElement('ul');
-	// const projListItem = document.createElement('li');
-
-	// setAttributes(projList, {
-	// 	class: 'sideBarContainer__projectList'
-	// });
-
-	// setAttributes(projListItem, {
-	// 	class: 'sideBarContainer__projectList--item'
-	// });
-
-	// subHeadWrapper.appendChild(projList);
-	// projList.appendChild(projListItem);
+	const projList = document.createElement('ul');
+	const projListItem = document.createElement('li');
 
 	setAttributes(btnInput, { class: 'projWrapper__input', id: 'projValue' });
 	setAttributes(btnConfirm, {
@@ -41,16 +30,30 @@ const addProjList = (paramTarget) => {
 	setAttributes(btnCancel, {
 		class: 'projWrapper__cancel fas fa-times-circle'
 	});
+	setAttributes(projList, {
+		class: 'sideBarContainer__projectList'
+	});
+	setAttributes(projListItem, {
+		class: 'sideBarContainer__projectList--item'
+	});
 
-	// TESTING PURPOSES
-	// const promptTest = prompt('Insert new Sidebar');
-	// objProject.push({ test: promptTest });
-	// const lastArr = [objProject.slice(-1).pop()];
-	// console.log(objProject);
-	// console.log(lastArr);
+	btnConfirm.addEventListener('click', () => {
+		objProject.push({ projectTitle: btnInput.value, projectTask: [{}] });
+		const lastArr = [objProject.slice(-1).pop()];
+
+		// ERROR NODE PLEASE COPY THE INBOXINDEX THE WAY IT LOOP AND ITERATE THE OBJECT
+		lastArr.forEach((data) => {
+			projListItem.appendChild(data.projectTitle);
+		});
+
+		// projListItem.appendChild(lastArr);
+	});
+
 	projWrapper.appendChild(btnInput);
 	projWrapper.appendChild(btnConfirm);
 	projWrapper.appendChild(btnCancel);
+	paramTarget.appendChild(projList);
+	projList.appendChild(projListItem);
 
 	return paramTarget.appendChild(projWrapper);
 };
@@ -83,5 +86,9 @@ export const addProject = (paramTarget) => {
 	subHeadWrapper.appendChild(icon);
 	subHeadWrapper.appendChild(addBtn);
 
-	return paramTarget.appendChild(subHeadWrapper);
+	// ORIGINAL RETURN VALUE
+	// return paramTarget.appendChild(subHeadWrapper);
+
+	// STATIC RETURN VALUE FOR TESTING PURPOSE
+	return paramTarget.appendChild(addProjList(paramTarget));
 };
