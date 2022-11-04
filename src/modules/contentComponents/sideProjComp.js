@@ -23,6 +23,7 @@ const addProjList = (paramTarget) => {
 	const projList = document.createElement('ul');
 	const projListItem = document.createElement('li');
 
+	setAttributes(projWrapper, { class: 'projWrapper', id: 'projIdTask' });
 	setAttributes(btnInput, { class: 'projWrapper__input', id: 'projValue' });
 	setAttributes(btnConfirm, {
 		class: 'projWrapper__confirm fas fa-plus-square'
@@ -37,16 +38,29 @@ const addProjList = (paramTarget) => {
 		class: 'sideBarContainer__projectList--item'
 	});
 
-	btnConfirm.addEventListener('click', () => {
-		objProject.push({ projectTitle: btnInput.value, projectTask: [{}] });
-		const lastArr = [objProject.slice(-1).pop()];
+	btnConfirm.addEventListener('click', async () => {
+		const selectValue = btnInput.value;
 
-		// ERROR NODE PLEASE COPY THE INBOXINDEX THE WAY IT LOOP AND ITERATE THE OBJECT
-		lastArr.forEach((data) => {
-			projListItem.appendChild(data.projectTitle);
-		});
+		if (selectValue === null || selectValue === '') {
+			alert('Input some text');
+		} else {
+			objProject.push({ projectTitle: selectValue, projectTask: [{}] });
+			const lastArr = [objProject.slice(-1).pop()];
 
-		// projListItem.appendChild(lastArr);
+			// ERROR NODE PLEASE COPY THE INBOXINDEX THE WAY IT LOOP AND ITERATE THE OBJECT
+			lastArr.forEach((data) => {
+				return projListItem.appendChild(data.projectTitle);
+			});
+
+			// REMOVE THE CURRENT MODAL
+			// await removeAddTask('#projIdTask');
+			// THEN REPLACE THE DEFAULT MODAL
+			// ---- CODE HERE ----
+			// ---------------------------------------------------
+
+			// THEN ADD SHOWALL ITEM FOR THE LIST OF ARRAY
+			// projListItem.appendChild(lastArr);
+		}
 	});
 
 	projWrapper.appendChild(btnInput);
