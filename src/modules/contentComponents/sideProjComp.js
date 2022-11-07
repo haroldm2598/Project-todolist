@@ -2,20 +2,11 @@ import '../../styles/main.scss';
 import { setAttributes } from '../helperComponents/setAttributes';
 import { createElem } from '../helperComponents/setElement';
 /*
-	HOW CAN I USE LIKE localStorage setItem in Vanilla JS
-	and use the showAllItem for append the UI Projects
+	Still having an error try to understand the inboxIndex js flow work
 */
+const getStoreProj = JSON.parse(localStorage.getItem('storeProj') || '[]');
 
 const objProject = [];
-const removeAddTask = (target) => {
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			const targetNode = document.querySelector(target);
-			const result = targetNode.parentNode.removeChild(targetNode);
-			resolve(result);
-		}, 500);
-	});
-};
 
 const addProjList = (paramTarget) => {
 	const projWrapper = createElem('div');
@@ -32,9 +23,19 @@ const addProjList = (paramTarget) => {
 		class: 'projWrapper__cancel fas fa-times-circle'
 	});
 
+	const removeAddTask = (target) => {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				const targetNode = document.querySelector(target);
+				const result = targetNode.parentNode.removeChild(targetNode);
+				resolve(result);
+			}, 500);
+		});
+	};
+
 	btnConfirm.addEventListener('click', async () => {
 		const selectValue = btnInput.value;
-		const getStoreProj = JSON.parse(localStorage.getItem('storeProj') || '[]');
+		// const getStoreProj = JSON.parse(localStorage.getItem('storeProj') || '[]');
 
 		if (selectValue === null || selectValue === '') {
 			alert('Input some text');
@@ -47,17 +48,16 @@ const addProjList = (paramTarget) => {
 				JSON.stringify(getStoreProj.concat(lastArr))
 			);
 
-			// ERROR NODE PLEASE COPY THE INBOXINDEX THE WAY IT LOOP AND ITERATE THE OBJECT
-			// lastArr.forEach((data) => {
-			// 	return projListItem.appendChild(data.projectTitle);
-			// });
-
-			// REMOVE THE CURRENT MODAL
 			await removeAddTask('#projIdTask');
 			await removeAddTask('#sideBarContainer__projectList');
 
 			paramTarget.appendChild(showAllItem(paramTarget));
-			// paramTarget.appendChild(addProjList(paramTarget));
+			paramTarget.appendChild(addProjList(paramTarget));
+
+			// ERROR NODE PLEASE COPY THE INBOXINDEX THE WAY IT LOOP AND ITERATE THE OBJECT
+			// lastArr.forEach((data) => {
+			// 	return projListItem.appendChild(data.projectTitle);
+			// });
 		}
 	});
 
@@ -87,11 +87,13 @@ const showAllItem = (paramTarget) => {
 		id: '#sideBarContainer__projectList'
 	});
 
-	for (const data of objProject) {
+	for (const data of getStoreProj) {
 		getElement(data, projList);
 	}
 
 	paramTarget.appendChild(projList);
+
+	return projList;
 };
 
 export const addProject = (paramTarget) => {
@@ -126,5 +128,6 @@ export const addProject = (paramTarget) => {
 	// return paramTarget.appendChild(subHeadWrapper);
 
 	// STATIC RETURN VALUE FOR TESTING PURPOSE
+	paramTarget.appendChild(showAllItem(paramTarget));
 	return paramTarget.appendChild(addProjList(paramTarget));
 };
