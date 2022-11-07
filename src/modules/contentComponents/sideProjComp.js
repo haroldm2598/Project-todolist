@@ -1,9 +1,12 @@
 import '../../styles/main.scss';
 import { setAttributes } from '../helperComponents/setAttributes';
 import { createElem } from '../helperComponents/setElement';
+/*
+	HOW CAN I USE LIKE localStorage setItem in Vanilla JS
+	and use the showAllItem for append the UI Projects
+*/
 
 const objProject = [];
-
 const removeAddTask = (target) => {
 	return new Promise((resolve) => {
 		setTimeout(() => {
@@ -20,9 +23,6 @@ const addProjList = (paramTarget) => {
 	const btnConfirm = createElem('button');
 	const btnCancel = createElem('button');
 
-	const projList = document.createElement('ul');
-	const projListItem = document.createElement('li');
-
 	setAttributes(projWrapper, { class: 'projWrapper', id: 'projIdTask' });
 	setAttributes(btnInput, { class: 'projWrapper__input', id: 'projValue' });
 	setAttributes(btnConfirm, {
@@ -31,15 +31,10 @@ const addProjList = (paramTarget) => {
 	setAttributes(btnCancel, {
 		class: 'projWrapper__cancel fas fa-times-circle'
 	});
-	setAttributes(projList, {
-		class: 'sideBarContainer__projectList'
-	});
-	setAttributes(projListItem, {
-		class: 'sideBarContainer__projectList--item'
-	});
 
 	btnConfirm.addEventListener('click', async () => {
 		const selectValue = btnInput.value;
+		const getStoreProj = JSON.parse(localStorage.getItem('storeProj') || '[]');
 
 		if (selectValue === null || selectValue === '') {
 			alert('Input some text');
@@ -47,29 +42,56 @@ const addProjList = (paramTarget) => {
 			objProject.push({ projectTitle: selectValue, projectTask: [{}] });
 			const lastArr = [objProject.slice(-1).pop()];
 
+			localStorage.setItem(
+				'storeProj',
+				JSON.stringify(getStoreProj.concat(lastArr))
+			);
+
 			// ERROR NODE PLEASE COPY THE INBOXINDEX THE WAY IT LOOP AND ITERATE THE OBJECT
-			lastArr.forEach((data) => {
-				return projListItem.appendChild(data.projectTitle);
-			});
+			// lastArr.forEach((data) => {
+			// 	return projListItem.appendChild(data.projectTitle);
+			// });
 
 			// REMOVE THE CURRENT MODAL
-			// await removeAddTask('#projIdTask');
-			// THEN REPLACE THE DEFAULT MODAL
-			// ---- CODE HERE ----
-			// ---------------------------------------------------
+			await removeAddTask('#projIdTask');
+			await removeAddTask('#sideBarContainer__projectList');
 
-			// THEN ADD SHOWALL ITEM FOR THE LIST OF ARRAY
-			// projListItem.appendChild(lastArr);
+			paramTarget.appendChild(showAllItem(paramTarget));
+			// paramTarget.appendChild(addProjList(paramTarget));
 		}
 	});
 
 	projWrapper.appendChild(btnInput);
 	projWrapper.appendChild(btnConfirm);
 	projWrapper.appendChild(btnCancel);
-	paramTarget.appendChild(projList);
-	projList.appendChild(projListItem);
 
 	return paramTarget.appendChild(projWrapper);
+};
+
+const getElement = (params1, paramTarget) => {
+	const projListItem = document.createElement('li');
+
+	setAttributes(projListItem, {
+		class: 'sideBarContainer__projectList--item'
+	});
+
+	projListItem.textContent = params1.projectTitle;
+
+	paramTarget.appendChild(projListItem);
+};
+
+const showAllItem = (paramTarget) => {
+	const projList = document.createElement('ul');
+	setAttributes(projList, {
+		class: 'sideBarContainer__projectList',
+		id: '#sideBarContainer__projectList'
+	});
+
+	for (const data of objProject) {
+		getElement(data, projList);
+	}
+
+	paramTarget.appendChild(projList);
 };
 
 export const addProject = (paramTarget) => {
