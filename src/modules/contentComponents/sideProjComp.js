@@ -49,7 +49,7 @@ const addProjList = (paramTarget) => {
 			);
 
 			await removeAddTask('#projIdTask');
-			await removeAddTask('#sideBarContainer__projectList');
+			await removeAddTask('#sbProjectList');
 
 			paramTarget.appendChild(showAllItem(paramTarget));
 			paramTarget.appendChild(addProjList(paramTarget));
@@ -84,7 +84,7 @@ const showAllItem = (paramTarget) => {
 	const projList = document.createElement('ul');
 	setAttributes(projList, {
 		class: 'sideBarContainer__projectList',
-		id: '#sideBarContainer__projectList'
+		id: 'sbProjectList'
 	});
 
 	for (const data of getStoreProj) {
