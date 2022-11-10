@@ -6,9 +6,9 @@ import { createElem } from '../helperComponents/setElement';
 */
 const getStoreProj = JSON.parse(localStorage.getItem('storeProj') || '[]');
 
-const objProject = [];
-
 const addProjList = (paramTarget) => {
+	const objProject = [];
+
 	const projWrapper = createElem('div');
 	const btnInput = createElem('input');
 	const btnConfirm = createElem('button');
@@ -35,7 +35,7 @@ const addProjList = (paramTarget) => {
 
 	btnConfirm.addEventListener('click', async () => {
 		const selectValue = btnInput.value;
-		// const getStoreProj = JSON.parse(localStorage.getItem('storeProj') || '[]');
+		const currentTask = getStoreProj;
 
 		if (selectValue === null || selectValue === '') {
 			alert('Input some text');
@@ -45,14 +45,14 @@ const addProjList = (paramTarget) => {
 
 			localStorage.setItem(
 				'storeProj',
-				JSON.stringify(getStoreProj.concat(lastArr))
+				JSON.stringify(currentTask.concat(lastArr))
 			);
 
 			await removeAddTask('#projIdTask');
 			await removeAddTask('#sbProjectList');
 
 			paramTarget.appendChild(showAllItem(paramTarget));
-			paramTarget.appendChild(addProjList(paramTarget));
+			paramTarget.appendChild(addProject(paramTarget));
 
 			// ERROR NODE PLEASE COPY THE INBOXINDEX THE WAY IT LOOP AND ITERATE THE OBJECT
 			// lastArr.forEach((data) => {
@@ -124,10 +124,9 @@ export const addProject = (paramTarget) => {
 	subHeadWrapper.appendChild(icon);
 	subHeadWrapper.appendChild(addBtn);
 
-	// ORIGINAL RETURN VALUE
-	// return paramTarget.appendChild(subHeadWrapper);
+	paramTarget.appendChild(showAllItem(paramTarget));
+	return paramTarget.appendChild(subHeadWrapper);
 
 	// STATIC RETURN VALUE FOR TESTING PURPOSE
-	paramTarget.appendChild(showAllItem(paramTarget));
-	return paramTarget.appendChild(addProjList(paramTarget));
+	// return paramTarget.appendChild(addProjList(paramTarget));
 };
