@@ -124,8 +124,10 @@ export const addProject = (paramTarget) => {
 	subHeadWrapper.appendChild(icon);
 	subHeadWrapper.appendChild(addBtn);
 
-	paramTarget.appendChild(showAllItem(paramTarget));
-	return paramTarget.appendChild(subHeadWrapper);
+	return (
+		paramTarget.appendChild(showAllItem(paramTarget)) &&
+		paramTarget.appendChild(subHeadWrapper)
+	);
 
 	// STATIC RETURN VALUE FOR TESTING PURPOSE
 	// return paramTarget.appendChild(addProjList(paramTarget));
