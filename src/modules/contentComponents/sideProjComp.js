@@ -3,10 +3,11 @@ import { setAttributes } from '../helperComponents/setAttributes';
 import { createElem } from '../helperComponents/setElement';
 /*
 	Still having an error try to understand the inboxIndex js flow work
+
 */
 const getStoreProj = JSON.parse(localStorage.getItem('storeProj') || '[]');
 
-const addProjList = (paramTarget) => {
+const addProjList = (paramTarget, paramTarget2 = false) => {
 	const objProject = [];
 
 	const projWrapper = createElem('div');
@@ -51,14 +52,21 @@ const addProjList = (paramTarget) => {
 			await removeAddTask('#projIdTask');
 			await removeAddTask('#sbProjectList');
 
+			// SHOW ALL ITEM IS NOT GETTING SAME WITH DEFAULT SHOWALLITEMFIRST
 			paramTarget.appendChild(showAllItem(paramTarget));
-			paramTarget.appendChild(addProject(paramTarget));
+
+			paramTarget.appendChild(paramTarget2);
 
 			// ERROR NODE PLEASE COPY THE INBOXINDEX THE WAY IT LOOP AND ITERATE THE OBJECT
 			// lastArr.forEach((data) => {
 			// 	return projListItem.appendChild(data.projectTitle);
 			// });
 		}
+	});
+
+	btnCancel.addEventListener('click', async () => {
+		await removeAddTask('#projIdTask');
+		paramTarget.appendChild(paramTarget2);
 	});
 
 	projWrapper.appendChild(btnInput);
@@ -117,7 +125,7 @@ export const addProject = (paramTarget) => {
 	subHeadWrapper.addEventListener('click', () => {
 		const targetElement = document.querySelector('#projectAddBtn');
 
-		paramTarget.appendChild(addProjList(paramTarget));
+		paramTarget.appendChild(addProjList(paramTarget, subHeadWrapper));
 		targetElement.parentElement.removeChild(targetElement);
 	});
 
