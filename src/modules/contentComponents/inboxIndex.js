@@ -96,6 +96,7 @@ const mainInboxComponents = (paramsTarget) => {
 				// paramsTarget.appendChild(getLastItem());
 				paramsTarget.appendChild(showAllItem());
 				paramsTarget.appendChild(buttonWrapper);
+				console.log(getStore('storeTask'));
 			}
 		});
 

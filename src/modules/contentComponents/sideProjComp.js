@@ -1,11 +1,7 @@
 import '../../styles/main.scss';
+import { getProj } from '../data/getProj';
 import { setAttributes } from '../helperComponents/setAttributes';
 import { createElem } from '../helperComponents/setElement';
-/*
-	Still having an error try to understand the inboxIndex js flow work
-
-*/
-const getStoreProj = JSON.parse(localStorage.getItem('storeProj') || '[]');
 
 const addProjList = (paramTarget, paramTarget2 = false) => {
 	const objProject = [];
@@ -36,7 +32,7 @@ const addProjList = (paramTarget, paramTarget2 = false) => {
 
 	btnConfirm.addEventListener('click', async () => {
 		const selectValue = btnInput.value;
-		const currentTask = getStoreProj;
+		const currentTask = getProj('storeProj');
 
 		if (selectValue === null || selectValue === '') {
 			alert('Input some text');
@@ -52,11 +48,8 @@ const addProjList = (paramTarget, paramTarget2 = false) => {
 			await removeAddTask('#projIdTask');
 			await removeAddTask('#sbProjectList');
 
-			// SHOW ALL ITEM IS NOT GETTING SAME WITH DEFAULT SHOWALLITEMFIRST
 			paramTarget.appendChild(showAllItem(paramTarget));
-
 			paramTarget.appendChild(paramTarget2);
-
 			// ERROR NODE PLEASE COPY THE INBOXINDEX THE WAY IT LOOP AND ITERATE THE OBJECT
 			// lastArr.forEach((data) => {
 			// 	return projListItem.appendChild(data.projectTitle);
@@ -95,7 +88,7 @@ const showAllItem = (paramTarget) => {
 		id: 'sbProjectList'
 	});
 
-	for (const data of getStoreProj) {
+	for (const data of getProj('storeProj')) {
 		getElement(data, projList);
 	}
 
