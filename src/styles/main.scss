@@ -117,6 +117,14 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 	&__projectList {
 		list-style: none;
+
+		&--item {
+			transition: all 0.2s ease-in-out;
+
+			&:hover {
+				background-color: #f08080;
+			}
+		}
 	}
 }
 

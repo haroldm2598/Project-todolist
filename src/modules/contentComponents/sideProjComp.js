@@ -84,7 +84,10 @@ const getElement = (params1, paramTarget) => {
 	});
 
 	projListItem.textContent = params1.projectTitle;
-	projListItem.addEventListener('click', (event) => {
+	projListItem.addEventListener('mouseover', () => {
+		setAttributes(projListItem, {
+			class: 'sideBarContainer__projectList--item fas fa-times'
+		});
 		console.log(`${params1.projectTitle} already clicked!`);
 	});
 
