@@ -69,6 +69,13 @@ const addProjList = (paramTarget, paramTarget2 = false) => {
 	return paramTarget.appendChild(projWrapper);
 };
 
+// WHERE DELETE MUST INSERT
+/*
+	- Use mouseover in order to show what's pointing.
+	- Therefore 'X' symbol must seen in specific item.
+	- Delete must working in correct way.
+	- Make basis inboxIndex.js 
+*/
 const getElement = (params1, paramTarget) => {
 	const projListItem = document.createElement('li');
 
@@ -77,6 +84,9 @@ const getElement = (params1, paramTarget) => {
 	});
 
 	projListItem.textContent = params1.projectTitle;
+	projListItem.addEventListener('click', (event) => {
+		console.log(`${params1.projectTitle} already clicked!`);
+	});
 
 	paramTarget.appendChild(projListItem);
 };
