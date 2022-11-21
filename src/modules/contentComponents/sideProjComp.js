@@ -72,9 +72,12 @@ const addProjList = (paramTarget, paramTarget2 = false) => {
 // WHERE DELETE MUST INSERT
 /*
 	- Use mouseover in order to show what's pointing.
-	- Therefore 'X' symbol must seen in specific item.
+	- Therefore 'X' symbol must seen in specific item. 
+		SOLUTION: 
+			- Try create 'i' element and insert an class to it.
 	- Delete must working in correct way.
 	- Make basis inboxIndex.js 
+	- display flex inorder to beautify and polish it.
 */
 const getElement = (params1, paramTarget) => {
 	const projListItem = document.createElement('li');
@@ -84,11 +87,18 @@ const getElement = (params1, paramTarget) => {
 	});
 
 	projListItem.textContent = params1.projectTitle;
-	projListItem.addEventListener('mouseover', () => {
-		setAttributes(projListItem, {
-			class: 'sideBarContainer__projectList--item fas fa-times'
-		});
-		console.log(`${params1.projectTitle} already clicked!`);
+	projListItem.addEventListener('mouseover', (event) => {
+		const deleteIcon = document.createElement('i');
+		setAttributes(deleteIcon, { class: 'fas fa-times', id: 'deleteIconId' });
+
+		return projListItem.appendChild(deleteIcon);
+	});
+
+	projListItem.addEventListener('mouseout', (event) => {
+		const targetNode = document.querySelector('#deleteIconId');
+		const result = targetNode.parentNode.removeChild(targetNode);
+
+		return result;
 	});
 
 	paramTarget.appendChild(projListItem);
