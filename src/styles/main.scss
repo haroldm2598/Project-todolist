@@ -119,12 +119,37 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 		list-style: none;
 
 		&--item {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
 			margin: 0.5em 0;
 			cursor: pointer;
 			transition: all 1s ease-in-out;
 
 			&:hover {
 				background-color: #f08080;
+			}
+
+			&__btn {
+				background: none;
+				border: none;
+			}
+
+			&__icon {
+				animation-name: btnFadeOut;
+				animation-timing-function: ease-out;
+				animation-duration: 500ms;
+			}
+
+			// animation for sideProjectItem delete button
+			@keyframes btnFadeOut {
+				0% {
+					opacity: 1;
+				}
+
+				100% {
+					opacity: 0;
+				}
 			}
 		}
 	}

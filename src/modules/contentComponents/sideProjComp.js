@@ -81,26 +81,40 @@ const addProjList = (paramTarget, paramTarget2 = false) => {
 */
 const getElement = (params1, paramTarget) => {
 	const projListItem = document.createElement('li');
+	const projListBtn = document.createElement('button');
 
 	setAttributes(projListItem, {
 		class: 'sideBarContainer__projectList--item'
 	});
+	setAttributes(projListBtn, {
+		class: 'sideBarContainer__projectList--item__btn'
+	});
 
-	projListItem.textContent = params1.projectTitle;
+	projListBtn.textContent = params1.projectTitle;
 	projListItem.addEventListener('mouseover', (event) => {
 		const deleteIcon = document.createElement('i');
-		setAttributes(deleteIcon, { class: 'fas fa-times', id: 'deleteIconId' });
+		setAttributes(deleteIcon, {
+			class: ' fas fa-times',
+			id: 'deleteIconId'
+		});
 
 		return projListItem.appendChild(deleteIcon);
 	});
 
 	projListItem.addEventListener('mouseout', (event) => {
+		// CODE FOR FADEOUT OF DELETEICON
 		const targetNode = document.querySelector('#deleteIconId');
 		const result = targetNode.parentNode.removeChild(targetNode);
+
+		setAttributes(targetNode, {
+			class: 'sideBarContainer__projectList--item__icon fas fa-times',
+			id: 'deleteIconId'
+		});
 
 		return result;
 	});
 
+	projListItem.appendChild(projListBtn);
 	paramTarget.appendChild(projListItem);
 };
 
