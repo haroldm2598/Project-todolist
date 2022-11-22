@@ -142,6 +142,16 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 			}
 
 			// animation for sideProjectItem delete button
+			@keyframes btnFadeIn {
+				0% {
+					opacity: 0;
+				}
+
+				100% {
+					opacity: 1;
+				}
+			}
+
 			@keyframes btnFadeOut {
 				0% {
 					opacity: 1;
