@@ -3,6 +3,16 @@ import { getProj } from '../data/getProj';
 import { setAttributes } from '../helperComponents/setAttributes';
 import { createElem } from '../helperComponents/setElement';
 
+const removeAddTask = (target) => {
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			const targetNode = document.querySelector(target);
+			const result = targetNode.parentNode.removeChild(targetNode);
+			resolve(result);
+		}, 500);
+	});
+};
+
 const addProjList = (paramTarget, paramTarget2 = false) => {
 	const objProject = [];
 
@@ -19,16 +29,6 @@ const addProjList = (paramTarget, paramTarget2 = false) => {
 	setAttributes(btnCancel, {
 		class: 'projWrapper__cancel fas fa-times-circle'
 	});
-
-	const removeAddTask = (target) => {
-		return new Promise((resolve) => {
-			setTimeout(() => {
-				const targetNode = document.querySelector(target);
-				const result = targetNode.parentNode.removeChild(targetNode);
-				resolve(result);
-			}, 500);
-		});
-	};
 
 	btnConfirm.addEventListener('click', async () => {
 		const selectValue = btnInput.value;
@@ -69,16 +69,6 @@ const addProjList = (paramTarget, paramTarget2 = false) => {
 	return paramTarget.appendChild(projWrapper);
 };
 
-// WHERE DELETE MUST INSERT
-/*
-	- Use mouseover in order to show what's pointing.
-	- Therefore 'X' symbol must seen in specific item. 
-		SOLUTION: 
-			- Try create 'i' element and insert an class to it.
-	- Delete must working in correct way.
-	- Make basis inboxIndex.js 
-	- display flex inorder to beautify and polish it.
-*/
 const getElement = (params1, paramTarget) => {
 	const projListItem = document.createElement('li');
 	const projListBtn = document.createElement('button');
@@ -91,12 +81,29 @@ const getElement = (params1, paramTarget) => {
 	});
 
 	projListBtn.textContent = params1.projectTitle;
-	projListItem.addEventListener('mouseover', (event) => {
+
+	projListItem.addEventListener('mouseover', () => {
 		const deleteIcon = document.createElement('i');
 		setAttributes(deleteIcon, {
 			class: ' fas fa-times',
 			id: 'deleteIconId'
 		});
+
+		// EVENT FOR DELETING ARRAY DATA IN LOCALSTORAGE
+		const delFuncEvt = async () => {
+			const currentTask = getProj('storeProj');
+			const newTask = currentTask.filter(
+				(task) => task.projectTitle != params1.projectTitle
+			);
+
+			localStorage.setItem('storeProj', JSON.stringify(newTask));
+
+			await removeAddTask('#sbProjectList');
+			// paramsTarget.appendChild(showAllItem());
+			// paramsTarget.appendChild(buttonWrapper);
+		};
+
+		deleteIcon.addEventListener('click', delFuncEvt());
 
 		return projListItem.appendChild(deleteIcon);
 	});
@@ -106,10 +113,10 @@ const getElement = (params1, paramTarget) => {
 		const targetNode = document.querySelector('#deleteIconId');
 		const result = targetNode.parentNode.removeChild(targetNode);
 
-		setAttributes(targetNode, {
-			class: 'sideBarContainer__projectList--item__icon fas fa-times',
-			id: 'deleteIconId'
-		});
+		// setAttributes(targetNode, {
+		// 	class: 'sideBarContainer__projectList--item__icon fas fa-times',
+		// 	id: 'deleteIconId'
+		// });
 
 		return result;
 	});
