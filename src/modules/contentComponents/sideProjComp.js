@@ -72,6 +72,7 @@ const addProjList = (paramTarget, paramTarget2 = false) => {
 const getElement = (params1, paramTarget) => {
 	const projListItem = document.createElement('li');
 	const projListBtn = document.createElement('button');
+	const deleteIcon = document.createElement('i');
 
 	setAttributes(projListItem, {
 		class: 'sideBarContainer__projectList--item'
@@ -79,49 +80,55 @@ const getElement = (params1, paramTarget) => {
 	setAttributes(projListBtn, {
 		class: 'sideBarContainer__projectList--item__btn'
 	});
+	setAttributes(deleteIcon, {
+		class: 'sideBarContainer__projectList--item__icon fas fa-times',
+		id: 'deleteIconId'
+	});
 
 	projListBtn.textContent = params1.projectTitle;
 
-	projListItem.addEventListener('mouseover', () => {
-		const deleteIcon = document.createElement('i');
-		setAttributes(deleteIcon, {
-			class: ' fas fa-times',
-			id: 'deleteIconId'
-		});
+	// projListItem.addEventListener('mouseover', () => {
+	// 	const deleteIcon = document.createElement('i');
+	// 	setAttributes(deleteIcon, {
+	// 		class: 'sideBarContainer__projectList--item__icon fas fa-times',
+	// 		id: 'deleteIconId'
+	// 	});
 
-		// EVENT FOR DELETING ARRAY DATA IN LOCALSTORAGE
-		const delFuncEvt = async () => {
-			const currentTask = getProj('storeProj');
-			const newTask = currentTask.filter(
-				(task) => task.projectTitle != params1.projectTitle
-			);
+	// 	// EVENT FOR DELETING ARRAY DATA IN LOCALSTORAGE
+	// 	// const delFuncEvt = async () => {
+	// 	// 	// const currentTask = getProj('storeProj');
+	// 	// 	// const newTask = currentTask.filter(
+	// 	// 	// 	(task) => task.projectTitle != params1.projectTitle
+	// 	// 	// );
 
-			localStorage.setItem('storeProj', JSON.stringify(newTask));
+	// 	// 	// localStorage.setItem('storeProj', JSON.stringify(newTask));
 
-			await removeAddTask('#sbProjectList');
-			// paramsTarget.appendChild(showAllItem());
-			// paramsTarget.appendChild(buttonWrapper);
-		};
+	// 	// 	// await removeAddTask('#sbProjectList');
+	// 	// 	// paramsTarget.appendChild(showAllItem());
+	// 	// 	// paramsTarget.appendChild(buttonWrapper);
+	// 	// 	console.log('testing for mouseEvent Trigger');
+	// 	// };
 
-		deleteIcon.addEventListener('click', delFuncEvt());
+	// 	// deleteIcon.addEventListener('click', delFuncEvt());
 
-		return projListItem.appendChild(deleteIcon);
-	});
+	// 	return projListItem.appendChild(deleteIcon);
+	// });
 
-	projListItem.addEventListener('mouseout', (event) => {
-		// CODE FOR FADEOUT OF DELETEICON
-		const targetNode = document.querySelector('#deleteIconId');
-		const result = targetNode.parentNode.removeChild(targetNode);
+	// projListItem.addEventListener('mouseout', (event) => {
+	// 	// CODE FOR FADEOUT OF DELETEICON
+	// 	const targetNode = document.querySelector('#deleteIconId');
+	// 	const result = targetNode.parentNode.removeChild(targetNode);
 
-		// setAttributes(targetNode, {
-		// 	class: 'sideBarContainer__projectList--item__icon fas fa-times',
-		// 	id: 'deleteIconId'
-		// });
+	// 	// setAttributes(targetNode, {
+	// 	// 	class: 'sideBarContainer__projectList--item__icon fas fa-times',
+	// 	// 	id: 'deleteIconId'
+	// 	// });
 
-		return result;
-	});
+	// 	return result === null ? console.log('empty') : result;
+	// });
 
 	projListItem.appendChild(projListBtn);
+	projListItem.appendChild(deleteIcon);
 	paramTarget.appendChild(projListItem);
 };
 
