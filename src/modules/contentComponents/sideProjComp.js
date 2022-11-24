@@ -86,7 +86,12 @@ const getElement = (params1, paramTarget) => {
 	});
 
 	projListBtn.textContent = params1.projectTitle;
-
+	/*
+		POSSIBLE SOLUTION FOR THE DELETE BTN
+		setAttributes must be inside of the mouseover Listener 
+		therefore it only appears when it hover 
+		remove setAttributes after it mouseout
+	*/
 	// projListItem.addEventListener('mouseover', () => {
 	// 	const deleteIcon = document.createElement('i');
 	// 	setAttributes(deleteIcon, {
