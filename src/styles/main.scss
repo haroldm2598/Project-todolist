@@ -129,7 +129,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 			transition: all 1s ease-in-out;
 
 			&:hover {
-				background-color: #f08080;
+				background-color: #878787;
 			}
 
 			&__btn {
@@ -138,15 +138,22 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 			}
 
 			&__icon {
-				opacity: 0;
-				transition: all 1s ease-in-out;
+				animation-name: btnFadeIn;
+				animation-timing-function: ease-out;
+				animation-duration: 500ms;
+				// opacity: 0;
+				// transition: all 1s ease-in-out;
 
-				&:hover {
-					opacity: 1;
-					// animation-name: btnFadeIn;
-					// animation-timing-function: ease-out;
-					// animation-duration: 500ms;
-				}
+				// &:hover {
+				// 	opacity: 1;
+
+				// }
+			}
+
+			&__iconRemove {
+				animation-name: btnFadeOut;
+				animation-timing-function: ease-out;
+				animation-duration: 250ms;
 			}
 
 			// animation for sideProjectItem delete button
