@@ -3,6 +3,17 @@ import { getProj } from '../data/getProj';
 import { setAttributes } from '../helperComponents/setAttributes';
 import { createElem } from '../helperComponents/setElement';
 
+// GLOBAL VAR
+const sidebarContainer = document.createElement('div');
+const subHeadWrapper = document.createElement('div');
+setAttributes(sidebarContainer, {
+	class: 'sideBarContainer'
+});
+setAttributes(subHeadWrapper, {
+	class: 'sideBarContainer__wrapper',
+	id: 'projectAddBtn'
+});
+
 const removeAddTask = (target) => {
 	return new Promise((resolve) => {
 		setTimeout(() => {
@@ -83,32 +94,21 @@ const getElement = (params1, paramTarget) => {
 
 	projListBtn.textContent = params1.projectTitle;
 
-	/*
-		DeleteBtn
-		- function for the btn .
-		- Make basis of michael..... for the localeStorage
-		- Put outside the event listener
-	*/
+	deleteIcon.addEventListener('click', async () => {
+		const currentTask = getProj('storeProj');
+		const newTask = currentTask.filter(
+			(task) => task.projectTitle != params1.projectTitle
+		);
+		localStorage.setItem('storeProj', JSON.stringify(newTask));
 
-	deleteIcon.addEventListener('click', () => {
-		// EVENT FOR DELETING ARRAY DATA IN LOCALSTORAGE
-		// const delFuncEvt = async () => {
-		// 	// const currentTask = getProj('storeProj');
-		// 	// const newTask = currentTask.filter(
-		// 	// 	(task) => task.projectTitle != params1.projectTitle
-		// 	// );
-		// 	// localStorage.setItem('storeProj', JSON.stringify(newTask));
-		// 	// await removeAddTask('#sbProjectList');
-		// 	// paramsTarget.appendChild(showAllItem());
-		// 	// paramsTarget.appendChild(buttonWrapper);
-		// 	console.log('testing for mouseEvent Trigger');
-		// };
-		// deleteIcon.addEventListener('click', delFuncEvt());
-		// return projListItem.appendChild(deleteIcon);
+		await removeAddTask('#sbProjectList');
+		await removeAddTask('#projectAddBtn');
+
+		sidebarContainer.appendChild(showAllItem(sidebarContainer));
+		sidebarContainer.appendChild(subHeadWrapper);
 	});
 
 	projListItem.addEventListener('mouseover', () => {
-		// const deleteIcon = document.createElement('i');
 		setAttributes(deleteIcon, {
 			class: 'sideBarContainer__projectList--item__icon fas fa-times',
 			id: 'deleteIconId'
@@ -143,14 +143,14 @@ const showAllItem = (paramTarget) => {
 };
 
 export const addProject = (paramTarget) => {
-	const subHeadWrapper = document.createElement('div');
+	// const subHeadWrapper = document.createElement('div');
 	const icon = document.createElement('i');
 	const addBtn = document.createElement('button');
 
-	setAttributes(subHeadWrapper, {
-		class: 'sideBarContainer__wrapper',
-		id: 'projectAddBtn'
-	});
+	// setAttributes(subHeadWrapper, {
+	// 	class: 'sideBarContainer__wrapper',
+	// 	id: 'projectAddBtn'
+	// });
 	setAttributes(icon, {
 		class: 'sideBarContainer__wrapper--icon fas fa-plus-square'
 	});
