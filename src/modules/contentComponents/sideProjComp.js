@@ -94,6 +94,12 @@ const getElement = (params1, paramTarget) => {
 
 	projListBtn.textContent = params1.projectTitle;
 
+	/*
+		Problem
+		- After appendchild it won't appear on screen
+		- Maybe wrong appendchild is the problem 
+		- Testing the code itself for running 
+	*/
 	deleteIcon.addEventListener('click', async () => {
 		const currentTask = getProj('storeProj');
 		const newTask = currentTask.filter(
