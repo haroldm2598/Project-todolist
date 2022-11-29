@@ -13,6 +13,11 @@ const removeAddTask = (target) => {
 	});
 };
 
+//	STRING LIMIT
+// const stringLimit = (string = '', limit = 0) => {
+// 	return string.substring(0, limit);
+// };
+
 // GLOBAL VAR
 const subHeadWrapper = document.createElement('div');
 
@@ -82,11 +87,19 @@ const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 	const projListBtn = document.createElement('button');
 	const deleteIcon = document.createElement('i');
 
+	const autoId = () => {
+		const getData = getElemParams.projectTitle;
+		const splitData = getData.split(' ')[0];
+
+		return splitData;
+	};
+
 	setAttributes(projListItem, {
 		class: 'sideBarContainer__projectList--item'
 	});
 	setAttributes(projListBtn, {
-		class: 'sideBarContainer__projectList--item__btn'
+		class: 'sideBarContainer__projectList--item__btn',
+		id: `${autoId()}`
 	});
 
 	projListBtn.textContent = getElemParams.projectTitle;
