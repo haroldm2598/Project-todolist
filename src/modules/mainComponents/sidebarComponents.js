@@ -2,6 +2,17 @@ import '../../styles/main.scss';
 import { addProject } from '../contentComponents/sideProjComp';
 import { setAttributes } from '../helperComponents/setAttributes';
 
+/*
+	AFTERNOON OBJECTIVES: {
+		- Passing id thru pass params and arguments 
+		- From sidebarComponents to sideProjComp
+		- Indicate that sideProjListItem has id therefore
+		- Create a new file where store all the create object
+		- Instead of creating object we want the function component 
+		to become constructor for another page of todolist
+	}
+*/
+
 const objItem = [
 	{ icon: 'fa-inbox', title: 'Inbox', id: 'inboxId' },
 	{ icon: 'fa-calendar-check', title: 'Today', id: 'todayId' },

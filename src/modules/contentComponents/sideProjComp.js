@@ -3,28 +3,25 @@ import { getProj } from '../data/getProj';
 import { setAttributes } from '../helperComponents/setAttributes';
 import { createElem } from '../helperComponents/setElement';
 
-// GLOBAL VAR
-const sidebarContainer = document.createElement('div');
-const subHeadWrapper = document.createElement('div');
-setAttributes(sidebarContainer, {
-	class: 'sideBarContainer'
-});
-setAttributes(subHeadWrapper, {
-	class: 'sideBarContainer__wrapper',
-	id: 'projectAddBtn'
-});
-
 const removeAddTask = (target) => {
 	return new Promise((resolve) => {
 		setTimeout(() => {
 			const targetNode = document.querySelector(target);
 			const result = targetNode.parentNode.removeChild(targetNode);
 			resolve(result);
-		}, 500);
+		}, 100);
 	});
 };
 
-const addProjList = (paramTarget, paramTarget2 = false) => {
+// GLOBAL VAR
+const subHeadWrapper = document.createElement('div');
+
+setAttributes(subHeadWrapper, {
+	class: 'sideBarContainer__wrapper',
+	id: 'projectAddBtn'
+});
+
+const addProjList = (addProjParam, addProjParam2 = false) => {
 	const objProject = [];
 
 	const projWrapper = createElem('div');
@@ -59,8 +56,8 @@ const addProjList = (paramTarget, paramTarget2 = false) => {
 			await removeAddTask('#projIdTask');
 			await removeAddTask('#sbProjectList');
 
-			paramTarget.appendChild(showAllItem(paramTarget));
-			paramTarget.appendChild(paramTarget2);
+			addProjParam.appendChild(showAllItem(addProjParam));
+			addProjParam.appendChild(addProjParam2);
 			// ERROR NODE PLEASE COPY THE INBOXINDEX THE WAY IT LOOP AND ITERATE THE OBJECT
 			// lastArr.forEach((data) => {
 			// 	return projListItem.appendChild(data.projectTitle);
@@ -70,17 +67,17 @@ const addProjList = (paramTarget, paramTarget2 = false) => {
 
 	btnCancel.addEventListener('click', async () => {
 		await removeAddTask('#projIdTask');
-		paramTarget.appendChild(paramTarget2);
+		addProjParam.appendChild(addProjParam2);
 	});
 
 	projWrapper.appendChild(btnInput);
 	projWrapper.appendChild(btnConfirm);
 	projWrapper.appendChild(btnCancel);
 
-	return paramTarget.appendChild(projWrapper);
+	return addProjParam.appendChild(projWrapper);
 };
 
-const getElement = (params1, paramTarget) => {
+const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 	const projListItem = document.createElement('li');
 	const projListBtn = document.createElement('button');
 	const deleteIcon = document.createElement('i');
@@ -92,26 +89,21 @@ const getElement = (params1, paramTarget) => {
 		class: 'sideBarContainer__projectList--item__btn'
 	});
 
-	projListBtn.textContent = params1.projectTitle;
+	projListBtn.textContent = getElemParams.projectTitle;
 
-	/*
-		Problem
-		- After appendchild it won't appear on screen
-		- Maybe wrong appendchild is the problem 
-		- Testing the code itself for running 
-	*/
 	deleteIcon.addEventListener('click', async () => {
 		const currentTask = getProj('storeProj');
 		const newTask = currentTask.filter(
-			(task) => task.projectTitle != params1.projectTitle
+			(task) => task.projectTitle != getElemParams.projectTitle
 		);
 		localStorage.setItem('storeProj', JSON.stringify(newTask));
 
 		await removeAddTask('#sbProjectList');
 		await removeAddTask('#projectAddBtn');
 
-		sidebarContainer.appendChild(showAllItem(sidebarContainer));
-		sidebarContainer.appendChild(subHeadWrapper);
+		// use params instead of using direct
+		getElemParams3.appendChild(showAllItem(getElemParams3));
+		getElemParams3.appendChild(subHeadWrapper);
 	});
 
 	projListItem.addEventListener('mouseover', () => {
@@ -129,10 +121,10 @@ const getElement = (params1, paramTarget) => {
 
 	projListItem.appendChild(projListBtn);
 	projListItem.appendChild(deleteIcon);
-	paramTarget.appendChild(projListItem);
+	getElemParams2.appendChild(projListItem);
 };
 
-const showAllItem = (paramTarget) => {
+const showAllItem = (showAllItemParams) => {
 	const projList = document.createElement('ul');
 	setAttributes(projList, {
 		class: 'sideBarContainer__projectList',
@@ -140,23 +132,18 @@ const showAllItem = (paramTarget) => {
 	});
 
 	for (const data of getProj('storeProj')) {
-		getElement(data, projList);
+		getElement(data, projList, showAllItemParams);
 	}
 
-	paramTarget.appendChild(projList);
+	showAllItemParams.appendChild(projList);
 
 	return projList;
 };
 
 export const addProject = (paramTarget) => {
-	// const subHeadWrapper = document.createElement('div');
 	const icon = document.createElement('i');
 	const addBtn = document.createElement('button');
 
-	// setAttributes(subHeadWrapper, {
-	// 	class: 'sideBarContainer__wrapper',
-	// 	id: 'projectAddBtn'
-	// });
 	setAttributes(icon, {
 		class: 'sideBarContainer__wrapper--icon fas fa-plus-square'
 	});
@@ -180,7 +167,4 @@ export const addProject = (paramTarget) => {
 		paramTarget.appendChild(showAllItem(paramTarget)) &&
 		paramTarget.appendChild(subHeadWrapper)
 	);
-
-	// STATIC RETURN VALUE FOR TESTING PURPOSE
-	// return paramTarget.appendChild(addProjList(paramTarget));
 };
