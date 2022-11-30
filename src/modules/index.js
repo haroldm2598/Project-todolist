@@ -36,11 +36,13 @@ export const mainComponents = () => {
 						await removeAddElement('.contentContainer');
 						divWrapper.appendChild(weekComponents());
 						break;
-					case 'create':
-						await removeAddElement('.contentContainer');
-						divWrapper.appendChild(constructorComponent());
-						break;
+					// case 'create':
+					// 	await removeAddElement('.contentContainer');
+					// 	divWrapper.appendChild(constructorComponent());
+					// 	break;
 				}
+
+				console.log(params);
 			},
 			false
 		);

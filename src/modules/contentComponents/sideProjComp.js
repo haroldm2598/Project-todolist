@@ -104,6 +104,31 @@ const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 
 	projListBtn.textContent = getElemParams.projectTitle;
 
+	projListBtn.addEventListener('click', (e) => {
+		// NOV 30 2022
+		const data = getProj('storeProj');
+		// const result = data.map((task) => {
+		// 	const dataProjectTask = task.projectTask;
+		// 	const dataProjectTaskResult = dataProjectTask.push({ anoName: 'tite' });
+		// 	return dataProjectTaskResult;
+		// });
+
+		// const result = data.forEach((task) => {
+		// 	console.log(task.projectTitle);
+		// 	// const dataProjectTaskResult = dataProjectTask.push({ anoName: 'tite' });
+		// 	// return dataProjectTaskResult;
+		// });
+
+		const result = data.find((task) => {
+			// const targetSpecific = e.target.id;
+			// const result = task.projectTitle === targetSpecific;
+		});
+
+		for (let array of data) {
+			console.log(array.projectTitle);
+		}
+	});
+
 	deleteIcon.addEventListener('click', async () => {
 		const currentTask = getProj('storeProj');
 		const newTask = currentTask.filter(
@@ -124,22 +149,6 @@ const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 			class: 'sideBarContainer__projectList--item__icon fas fa-times',
 			id: 'deleteIconId'
 		});
-		// NOV 30 2022
-		// SAMPLE ONLY FOR PUSHING INSIDE THE ARRAY SPECIFIC
-		/*
-			Try to find the specific data and then edit the other second one
-			Then insert a new update array of an objects.
-		*/
-		const data = getProj('storeProj');
-		const result = data.map((task) => {
-			const dataProjectTask = task.projectTask;
-			const dataProjectTaskResult = dataProjectTask.push({ anoName: 'tite' });
-			return dataProjectTaskResult;
-		});
-		console.log(data);
-		console.log(result);
-		// to target there own ids
-		// console.log(e.target.id);
 	});
 
 	projListItem.addEventListener('mouseout', () => {
