@@ -3,6 +3,7 @@ import { sidebarComponents } from '../modules/mainComponents/sidebarComponents';
 import { inboxComponents } from './contentComponents/inboxIndex';
 import { todayComponents } from './contentComponents/todayIndex';
 import { weekComponents } from './contentComponents/thisWeekIndex';
+import { constructorComponent } from './contentComponents/constructorComp';
 
 export const mainComponents = () => {
 	const divWrapper = document.createElement('div');
@@ -34,6 +35,10 @@ export const mainComponents = () => {
 					case 'weekId':
 						await removeAddElement('.contentContainer');
 						divWrapper.appendChild(weekComponents());
+						break;
+					case 'create':
+						await removeAddElement('.contentContainer');
+						divWrapper.appendChild(constructorComponent());
 						break;
 				}
 			},

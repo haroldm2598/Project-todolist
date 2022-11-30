@@ -50,7 +50,7 @@ const addProjList = (addProjParam, addProjParam2 = false) => {
 		if (selectValue === null || selectValue === '') {
 			alert('Input some text');
 		} else {
-			objProject.push({ projectTitle: selectValue, projectTask: [{}] });
+			objProject.push({ projectTitle: selectValue, projectTask: [] });
 			const lastArr = [objProject.slice(-1).pop()];
 
 			localStorage.setItem(
@@ -89,7 +89,7 @@ const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 
 	const autoId = () => {
 		const getData = getElemParams.projectTitle;
-		const splitData = getData.split(' ')[0];
+		const splitData = getData.toLowerCase().split(' ')[0];
 
 		return splitData;
 	};
@@ -119,11 +119,22 @@ const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 		getElemParams3.appendChild(subHeadWrapper);
 	});
 
-	projListItem.addEventListener('mouseover', () => {
+	projListItem.addEventListener('mouseover', (e) => {
 		setAttributes(deleteIcon, {
 			class: 'sideBarContainer__projectList--item__icon fas fa-times',
 			id: 'deleteIconId'
 		});
+		// SAMPLE ONLY FOR PUSHING INSIDE THE ARRAY SPECIFIC
+		const data = getProj('storeProj');
+		const result = data.map((task) => {
+			const dataProjectTask = task.projectTask;
+			const dataProjectTaskResult = dataProjectTask.push({ anoName: 'tite' });
+			return dataProjectTaskResult;
+		});
+		console.log(data);
+		console.log(result);
+		// to target there own ids
+		// console.log(e.target.id);
 	});
 
 	projListItem.addEventListener('mouseout', () => {

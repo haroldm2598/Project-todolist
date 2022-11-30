@@ -88,7 +88,7 @@ const mainComponents = (paramsTarget) => {
 				const lastArr = [dataArr.slice(-1).pop()];
 
 				localStorage.setItem(
-					'storeWeekTask',
+					'storeProj',
 					JSON.stringify(currentTask.concat(lastArr))
 				);
 				await removeAddTask('#modalTask');
