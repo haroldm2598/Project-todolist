@@ -124,7 +124,12 @@ const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 			class: 'sideBarContainer__projectList--item__icon fas fa-times',
 			id: 'deleteIconId'
 		});
+		// NOV 30 2022
 		// SAMPLE ONLY FOR PUSHING INSIDE THE ARRAY SPECIFIC
+		/*
+			Try to find the specific data and then edit the other second one
+			Then insert a new update array of an objects.
+		*/
 		const data = getProj('storeProj');
 		const result = data.map((task) => {
 			const dataProjectTask = task.projectTask;
