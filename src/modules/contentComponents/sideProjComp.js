@@ -115,18 +115,26 @@ const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 
 		// const result = data.forEach((task) => {
 		// 	console.log(task.projectTitle);
-		// 	// const dataProjectTaskResult = dataProjectTask.push({ anoName: 'tite' });
-		// 	// return dataProjectTaskResult;
+		// const dataProjectTaskResult = dataProjectTask.push({ anoName: 'tite' });
+		// return dataProjectTaskResult;
 		// });
 
-		const result = data.find((task) => {
-			// const targetSpecific = e.target.id;
-			// const result = task.projectTitle === targetSpecific;
-		});
+		// const result = data.find((task) => {
+		// 	const targetSpecific = e.target.id;
+		// 	const result = task.projectTitle === targetSpecific;
+		// });
 
-		for (let array of data) {
-			console.log(array.projectTitle);
-		}
+		const elementId = e.target.id;
+		const elementValue = document.getElementById(elementId).innerHTML;
+
+		const iterate = (data) => {
+			for (let array of data) {
+				const result = array.projectTitle === elementValue;
+				return result;
+			}
+		};
+
+		console.log(iterate(data));
 	});
 
 	deleteIcon.addEventListener('click', async () => {
