@@ -18,6 +18,8 @@ const removeAddTask = (target) => {
 // 	return string.substring(0, limit);
 // };
 
+const objProject = [];
+
 // GLOBAL VAR
 const subHeadWrapper = document.createElement('div');
 
@@ -27,8 +29,6 @@ setAttributes(subHeadWrapper, {
 });
 
 const addProjList = (addProjParam, addProjParam2 = false) => {
-	const objProject = [];
-
 	const projWrapper = createElem('div');
 	const btnInput = createElem('input');
 	const btnConfirm = createElem('button');
@@ -119,22 +119,29 @@ const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 		// return dataProjectTaskResult;
 		// });
 
-		// const result = data.find((task) => {
-		// 	const targetSpecific = e.target.id;
-		// 	const result = task.projectTitle === targetSpecific;
-		// });
+		// ---------------- QUESTIONABLE BUT DEPENDS -------------------
+		// const elementId = e.target.id;
+		// const elementValue = document.getElementById(elementId).innerHTML;
 
-		const elementId = e.target.id;
-		const elementValue = document.getElementById(elementId).innerHTML;
+		// const iterate = (data) => {
+		// 	for (let array of data) {
+		// 		const result = array.projectTitle === elementValue;
+		// 		return result;
+		// 	}
+		// };
 
-		const iterate = (data) => {
-			for (let array of data) {
-				const result = array.projectTitle === elementValue;
-				return result;
-			}
-		};
+		// console.log(iterate(data));
 
-		console.log(iterate(data));
+		// ---------------- MAYBEEEE -------------------
+		// for (let array of data) {
+		// 	const selectArr = data.find((e) => e.projectTitle === array.projectTitle);
+		// 	console.log(selectArr);
+		// }
+		const findArr = data.find(
+			(task) => task.projectTitle === getElemParams.projectTitle
+		);
+
+		console.log(findArr);
 	});
 
 	deleteIcon.addEventListener('click', async () => {
@@ -147,7 +154,6 @@ const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 		await removeAddTask('#sbProjectList');
 		await removeAddTask('#projectAddBtn');
 
-		// use params instead of using direct
 		getElemParams3.appendChild(showAllItem(getElemParams3));
 		getElemParams3.appendChild(subHeadWrapper);
 	});

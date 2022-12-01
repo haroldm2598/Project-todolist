@@ -6,7 +6,7 @@ import { setAttributes } from '../helperComponents/setAttributes';
 	AFTERNOON OBJECTIVES: {
 	- Passing id thru pass params and arguments DONE
 	- From sidebarComponents to sideProjComp DONE
-	- Indicate that sideProjListItem has id therefore
+	- Indicate that sideProjListItem has id therefore DONE
 	- Create a new file where store all the create object
 	- Instead of creating object we want the function component 
 	to become constructor for another page of todolist
