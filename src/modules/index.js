@@ -36,13 +36,18 @@ export const mainComponents = () => {
 						await removeAddElement('.contentContainer');
 						divWrapper.appendChild(weekComponents());
 						break;
-					// case 'create':
-					// 	await removeAddElement('.contentContainer');
-					// 	divWrapper.appendChild(constructorComponent());
-					// 	break;
+
+					case 'create':
+						await removeAddElement('.contentContainer');
+						// divWrapper.appendChild(constructorComponent());
+						console.log('just clicked');
+						break;
+
+					default:
+						console.log(`${params} not found`);
 				}
 
-				console.log(params);
+				// console.log(params);
 			},
 			false
 		);

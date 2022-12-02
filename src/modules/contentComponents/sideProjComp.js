@@ -142,6 +142,7 @@ const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 		);
 
 		console.log(findArr);
+		console.log(e.target.id);
 	});
 
 	deleteIcon.addEventListener('click', async () => {
