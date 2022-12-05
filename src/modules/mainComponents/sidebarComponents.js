@@ -27,11 +27,11 @@ export const sidebarComponents = () => {
 	const titleSubHead = document.createElement('h1');
 
 	setAttributes(sidebarContainer, {
-		class: 'sideBarContainer'
+		class: 'sideBarContainer',
+		id: 'sideBarContainer'
 	});
 	setAttributes(listItem, {
-		class: 'sideBarContainer__list',
-		id: 'sideBarContainer'
+		class: 'sideBarContainer__list'
 	});
 	setAttributes(titleSubHead, {
 		class: 'sideBarContainer__subHeader'

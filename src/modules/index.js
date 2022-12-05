@@ -15,6 +15,7 @@ export const mainComponents = () => {
 
 	document.addEventListener('DOMContentLoaded', (event) => {
 		const body = document.getElementById('sideBarContainer');
+		console.log(body);
 
 		body.addEventListener(
 			'click',
@@ -39,8 +40,7 @@ export const mainComponents = () => {
 
 					case 'create':
 						await removeAddElement('.contentContainer');
-						// divWrapper.appendChild(constructorComponent());
-						console.log('just clicked');
+						divWrapper.appendChild(constructorComponent());
 						break;
 
 					default:
