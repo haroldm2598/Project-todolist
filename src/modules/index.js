@@ -15,7 +15,6 @@ export const mainComponents = () => {
 
 	document.addEventListener('DOMContentLoaded', (event) => {
 		const body = document.getElementById('sideBarContainer');
-		console.log(body);
 
 		body.addEventListener(
 			'click',

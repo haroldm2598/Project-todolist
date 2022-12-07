@@ -74,6 +74,7 @@ const mainComponents = (paramsTarget) => {
 		confirmBtn.addEventListener('click', async () => {
 			const inputVal = document.querySelector('#inputTask').value;
 			const currentTask = getProj('storeProj');
+			let dataMap = currentTask.projectTask;
 
 			if (inputVal === null || inputVal === '') {
 				alert('input some text');
@@ -89,11 +90,11 @@ const mainComponents = (paramsTarget) => {
 
 				localStorage.setItem(
 					'storeProj',
-					JSON.stringify(currentTask.concat(lastArr))
+					JSON.stringify(dataMap.concat(lastArr))
 				);
 				await removeAddTask('#modalTask');
 				await removeAddTask('#contentContainer__main');
-				// paramsTarget.appendChild(getLastItem());
+
 				paramsTarget.appendChild(showAllItem());
 				paramsTarget.appendChild(buttonWrapper);
 			}
@@ -185,7 +186,10 @@ const mainComponents = (paramsTarget) => {
 		});
 
 		for (const data of getProj('storeProj')) {
-			getElement(data, element);
+			let dataMap = data.projectTask;
+			dataMap.map((item) => {
+				getElement(item, element);
+			});
 		}
 
 		return element;
