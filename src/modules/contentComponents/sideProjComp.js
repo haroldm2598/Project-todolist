@@ -141,8 +141,8 @@ const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 			(task) => task.projectTitle === getElemParams.projectTitle
 		);
 
-		console.log(findArr);
-		console.log(e.target.id);
+		// console.log(findArr);
+		// console.log(e.target.id);
 	});
 
 	deleteIcon.addEventListener('click', async () => {
