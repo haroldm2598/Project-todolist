@@ -75,8 +75,6 @@ const mainComponents = (paramsTarget) => {
 			const inputVal = document.querySelector('#inputTask').value;
 			const currentTask = getProj('storeProj');
 			let dataMap = currentTask.projectTask;
-			console.log(currentTask);
-			console.log(dataMap);
 
 			if (inputVal === null || inputVal === '') {
 				alert('input some text');
@@ -92,7 +90,7 @@ const mainComponents = (paramsTarget) => {
 
 				localStorage.setItem(
 					'storeProj',
-					JSON.stringify(dataMap.concat(lastArr))
+					JSON.stringify(currentTask.concat(lastArr))
 				);
 				await removeAddTask('#modalTask');
 				await removeAddTask('#contentContainer__main');
@@ -189,7 +187,6 @@ const mainComponents = (paramsTarget) => {
 
 		for (const data of getProj('storeProj')) {
 			let dataMap = data.projectTask;
-			console.log(dataMap);
 			dataMap.map((item) => {
 				getElement(item, element);
 			});
