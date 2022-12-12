@@ -74,24 +74,26 @@ const mainComponents = (paramsTarget) => {
 		confirmBtn.addEventListener('click', async () => {
 			const inputVal = document.querySelector('#inputTask').value;
 			const currentTask = getProj('storeProj');
-			let dataMap = currentTask.projectTask;
 
 			if (inputVal === null || inputVal === '') {
 				alert('input some text');
 			} else {
-				dataArr.push({
-					inputId: Math.floor(Math.random() * 999),
-					inputName: 'testing',
-					inputContent: inputVal,
-					inputDate: todayDate
-				});
+				for (let dataObj of currentTask) {
+					let dataMap = dataObj.projectTask;
 
-				const lastArr = [dataArr.slice(-1).pop()];
+					dataMap.push({
+						inputId: Math.floor(Math.random() * 999),
+						inputName: 'testing',
+						inputContent: inputVal,
+						inputDate: todayDate
+					});
 
-				localStorage.setItem(
-					'storeProj',
-					JSON.stringify(currentTask.concat(lastArr))
-				);
+					currentTask.concat(dataMap);
+					const lastArr = [currentTask.slice(-1).pop()];
+
+					localStorage.setItem('storeProj', JSON.stringify(lastArr));
+				}
+
 				await removeAddTask('#modalTask');
 				await removeAddTask('#contentContainer__main');
 
