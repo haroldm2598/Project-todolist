@@ -160,11 +160,24 @@ const mainComponents = (paramsTarget) => {
 
 		icon.addEventListener('click', async () => {
 			const currentTask = getProj('storeProj');
-			const newTask = currentTask.filter(
-				(task) => task.inputId != params1.inputId
-			);
 
-			localStorage.setItem('storeWeekTask', JSON.stringify(newTask));
+			/*
+				Must update the currentTask first and push new array of objects in currents 
+				Therefore the new currentTask will be push into localStorage
+				Use slice method if there's any problem or double pushing in localStorage
+			*/
+			const dataObjMap = currentTask.map((item) => {
+				const result = item.projectTask;
+				const newTask = result.filter(
+					(task) => task.inputId !== params1.inputId
+				);
+
+				const resultObj = currentTask.concat(newTask);
+				const lastArr = [resultObj.slice(-1).pop()];
+
+				// localStorage.setItem('storeProj', JSON.stringify(lastArr));
+				console.log(resultObj);
+			});
 
 			await removeAddTask('#contentContainer__main');
 			paramsTarget.appendChild(showAllItem());
