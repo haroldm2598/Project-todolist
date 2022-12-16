@@ -165,19 +165,33 @@ const mainComponents = (paramsTarget) => {
 				Must update the currentTask first and push new array of objects in currents 
 				Therefore the new currentTask will be push into localStorage
 				Use slice method if there's any problem or double pushing in localStorage
+				It's only creating and updating the new array of object not the currentTask
 			*/
-			const dataObjMap = currentTask.map((item) => {
+
+			const dataObj = currentTask.forEach((item) => {
 				const result = item.projectTask;
 				const newTask = result.filter(
 					(task) => task.inputId !== params1.inputId
 				);
-
-				const resultObj = currentTask.concat(newTask);
+				const testing = currentTask.push(newTask);
+				const resultObj = currentTask.concat(testing);
 				const lastArr = [resultObj.slice(-1).pop()];
 
 				// localStorage.setItem('storeProj', JSON.stringify(lastArr));
-				console.log(resultObj);
+				console.log(lastArr);
 			});
+			// const dataObjMap = currentTask.map((item) => {
+			// 	const result = item.projectTask;
+			// 	const newTask = result.filter(
+			// 		(task) => task.inputId !== params1.inputId
+			// 	);
+
+			// 	const resultObj = currentTask.concat(newTask);
+			// 	const lastArr = [resultObj.slice(-1).pop()];
+
+			// 	// localStorage.setItem('storeProj', JSON.stringify(lastArr));
+			// 	// console.log(resultObj);
+			// });
 
 			await removeAddTask('#contentContainer__main');
 			paramsTarget.appendChild(showAllItem());
