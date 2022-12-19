@@ -168,18 +168,34 @@ const mainComponents = (paramsTarget) => {
 				It's only creating and updating the new array of object not the currentTask
 			*/
 
+			// hasOwnProperty is not working
 			const dataObj = currentTask.forEach((item) => {
 				const result = item.projectTask;
-				const newTask = result.filter(
-					(task) => task.inputId !== params1.inputId
-				);
-				const testing = currentTask.push(newTask);
-				const resultObj = currentTask.concat(testing);
-				const lastArr = [resultObj.slice(-1).pop()];
+				const newTask = result.find((task) => task.inputId === params1.inputId);
 
-				// localStorage.setItem('storeProj', JSON.stringify(lastArr));
-				console.log(lastArr);
+				if (result.hasOwnProperty(newTask)) {
+					delete result[newTask];
+					localStorage.setItem('storeProj', JSON.stringify(result));
+				}
 			});
+
+			// ----------------------------------------------------
+
+			// const dataObj = currentTask.forEach((item) => {
+			// 	const result = item.projectTask;
+			// 	const newTask = result.filter(
+			// 		(task) => task.inputId !== params1.inputId
+			// 	);
+			// 	// const testing = currentTask.push(newTask);
+			// 	const resultObj = currentTask.concat(newTask);
+			// 	const lastArr = [resultObj.slice(-1).pop()];
+
+			// 	localStorage.setItem('storeProj', JSON.stringify(lastArr));
+			// 	console.log(lastArr);
+			// });
+
+			// ----------------------------------------------------
+
 			// const dataObjMap = currentTask.map((item) => {
 			// 	const result = item.projectTask;
 			// 	const newTask = result.filter(
