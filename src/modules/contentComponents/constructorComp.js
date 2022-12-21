@@ -166,20 +166,63 @@ const mainComponents = (paramsTarget) => {
 				Therefore the new currentTask will be push into localStorage
 				Use slice method if there's any problem or double pushing in localStorage
 				It's only creating and updating the new array of object not the currentTask
+
+				May find the id therefore use filter in order to delete the array of object
+				Then insert the new array stringify setItem('storeProj'.project, JSON.stringify(value))
 			*/
 
-			// hasOwnProperty is not working
+			// 1st try ----------------------------------------------------
+
+			// hasOwnProperty is not working, Because it's store in array of object
 			const dataObj = currentTask.forEach((item) => {
 				const result = item.projectTask;
 				const newTask = result.find((task) => task.inputId === params1.inputId);
+				result.pop(newTask);
+				console.log(result);
 
-				if (result.hasOwnProperty(newTask)) {
-					delete result[newTask];
-					localStorage.setItem('storeProj', JSON.stringify(result));
-				}
+				// if (result.hasOwnProperty(newTask)) {
+				// 	delete result[newTask];
+				// 	localStorage.setItem('storeProj', JSON.stringify(result));
+				// }
+
+				// result.forEach((obj) => {
+				// 	if (newTask === params1.inputId) {
+				// 		console.log(obj.id);
+				// 	} else {
+				// 		console.log('not found');
+				// 	}
+				// });
+				// EXAMPLE OF ARRAY OF OBJECT
+				// const objNested = {
+				// 	projectTitle: 'VS Code',
+				// 	projectTask: [
+				// 		{
+				// 			inputId: 534,
+				// 			inputName: 'Netlify',
+				// 			inputContent: 'Static server',
+				// 			inputDate: '12/19/2022'
+				// 		},
+				// 		{
+				// 			inputId: 12312,
+				// 			inputName: 'Heroku',
+				// 			inputContent: 'Hosting Server',
+				// 			inputDate: '12/19/2022'
+				// 		}
+				// 	]
+				// };
+
+				// const objStorage = objNested.projectTask;
+
+				// objStorage.forEach((item) => {
+				// 	if (item.hasOwnProperty('inputId')) {
+				// 		console.log(`yes it has property`);
+				// 	} else {
+				// 		console.log(`don't have property`);
+				// 	}
+				// });
 			});
 
-			// ----------------------------------------------------
+			// 2nd try ----------------------------------------------------
 
 			// const dataObj = currentTask.forEach((item) => {
 			// 	const result = item.projectTask;
@@ -194,7 +237,7 @@ const mainComponents = (paramsTarget) => {
 			// 	console.log(lastArr);
 			// });
 
-			// ----------------------------------------------------
+			// 3rd try ----------------------------------------------------
 
 			// const dataObjMap = currentTask.map((item) => {
 			// 	const result = item.projectTask;
@@ -202,12 +245,25 @@ const mainComponents = (paramsTarget) => {
 			// 		(task) => task.inputId !== params1.inputId
 			// 	);
 
-			// 	const resultObj = currentTask.concat(newTask);
-			// 	const lastArr = [resultObj.slice(-1).pop()];
+			// 	// const resultObj = currentTask.concat(newTask);
 
 			// 	// localStorage.setItem('storeProj', JSON.stringify(lastArr));
-			// 	// console.log(resultObj);
+			// 	console.log(result.concat(newTask));
 			// });
+
+			// 4th try ----------------------------------------------------
+
+			// const dataObj = currentTask.forEach((item) => {
+			// 	const result = item.projectTask;
+			// 	const newTask = result.filter(
+			// 		(task) => task.inputId !== params1.inputId
+			// 	);
+
+			// 	// localStorage.setItem('storeProj', JSON.stringify(lastArr));
+			// 	console.log(item.hasOwnProperty('projectTask'));
+			// });
+
+			// ----------------------------------------------------
 
 			await removeAddTask('#contentContainer__main');
 			paramsTarget.appendChild(showAllItem());
