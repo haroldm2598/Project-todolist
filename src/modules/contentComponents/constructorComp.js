@@ -161,74 +161,13 @@ const mainComponents = (paramsTarget) => {
 		icon.addEventListener('click', async () => {
 			const currentTask = getProj('storeProj');
 
-			/*
-				Must update the currentTask first and push new array of objects in currents 
-				Therefore the new currentTask will be push into localStorage
-				Use slice method if there's any problem or double pushing in localStorage
-				It's only creating and updating the new array of object not the currentTask
-
-				May find the id therefore use filter in order to delete the array of object
-				Then insert the new array stringify setItem('storeProj'.project, JSON.stringify(value))
-			*/
-
-			// 1st try ----------------------------------------------------
-
-			const dataObj = currentTask.forEach((item) => {
-				const result = item.projectTask;
-				// const newTask = result.find((task) => task.inputId === params1.inputId);
-				const deleteObj = result.filter(
+			const dataObj = currentTask.map((item) => {
+				const deleteObj = item.projectTask.filter(
 					(task) => task.inputId !== params1.inputId
 				);
-				const objTesting = Object.assign(currentTask, deleteObj);
-				const lastObj = [currentTask.concat(objTesting).slice(-1).pop()];
-				console.log(lastObj);
-				localStorage.setItem('storeProj', JSON.stringify(lastObj));
 
-				// ----------------------------------------------------
-
-				// hasOwnProperty is not working, Because it's store in array of object
-
-				// if (result.hasOwnProperty(newTask)) {
-				// 	delete result[newTask];
-				// 	localStorage.setItem('storeProj', JSON.stringify(result));
-				// }
-
-				// result.forEach((obj) => {
-				// 	if (newTask === params1.inputId) {
-				// 		console.log(obj.id);
-				// 	} else {
-				// 		console.log('not found');
-				// 	}
-				// });
-
-				// EXAMPLE OF ARRAY OF OBJECT
-				// const objNested = {
-				// 	projectTitle: 'VS Code',
-				// 	projectTask: [
-				// 		{
-				// 			inputId: 534,
-				// 			inputName: 'Netlify',
-				// 			inputContent: 'Static server',
-				// 			inputDate: '12/19/2022'
-				// 		},
-				// 		{
-				// 			inputId: 12312,
-				// 			inputName: 'Heroku',
-				// 			inputContent: 'Hosting Server',
-				// 			inputDate: '12/19/2022'
-				// 		}
-				// 	]
-				// };
-
-				// const objStorage = objNested.projectTask;
-
-				// objStorage.forEach((item) => {
-				// 	if (item.hasOwnProperty('inputId')) {
-				// 		console.log(`yes it has property`);
-				// 	} else {
-				// 		console.log(`don't have property`);
-				// 	}
-				// });
+				item.projectTask = deleteObj;
+				localStorage.setItem('storeProj', JSON.stringify(currentTask));
 			});
 
 			await removeAddTask('#contentContainer__main');
