@@ -173,12 +173,20 @@ const mainComponents = (paramsTarget) => {
 
 			// 1st try ----------------------------------------------------
 
-			// hasOwnProperty is not working, Because it's store in array of object
 			const dataObj = currentTask.forEach((item) => {
 				const result = item.projectTask;
-				const newTask = result.find((task) => task.inputId === params1.inputId);
-				result.pop(newTask);
-				console.log(result);
+				// const newTask = result.find((task) => task.inputId === params1.inputId);
+				const deleteObj = result.filter(
+					(task) => task.inputId !== params1.inputId
+				);
+				const objTesting = Object.assign(currentTask, deleteObj);
+				const lastObj = [currentTask.concat(objTesting).slice(-1).pop()];
+				console.log(lastObj);
+				localStorage.setItem('storeProj', JSON.stringify(lastObj));
+
+				// ----------------------------------------------------
+
+				// hasOwnProperty is not working, Because it's store in array of object
 
 				// if (result.hasOwnProperty(newTask)) {
 				// 	delete result[newTask];
@@ -192,6 +200,7 @@ const mainComponents = (paramsTarget) => {
 				// 		console.log('not found');
 				// 	}
 				// });
+
 				// EXAMPLE OF ARRAY OF OBJECT
 				// const objNested = {
 				// 	projectTitle: 'VS Code',
@@ -221,49 +230,6 @@ const mainComponents = (paramsTarget) => {
 				// 	}
 				// });
 			});
-
-			// 2nd try ----------------------------------------------------
-
-			// const dataObj = currentTask.forEach((item) => {
-			// 	const result = item.projectTask;
-			// 	const newTask = result.filter(
-			// 		(task) => task.inputId !== params1.inputId
-			// 	);
-			// 	// const testing = currentTask.push(newTask);
-			// 	const resultObj = currentTask.concat(newTask);
-			// 	const lastArr = [resultObj.slice(-1).pop()];
-
-			// 	localStorage.setItem('storeProj', JSON.stringify(lastArr));
-			// 	console.log(lastArr);
-			// });
-
-			// 3rd try ----------------------------------------------------
-
-			// const dataObjMap = currentTask.map((item) => {
-			// 	const result = item.projectTask;
-			// 	const newTask = result.filter(
-			// 		(task) => task.inputId !== params1.inputId
-			// 	);
-
-			// 	// const resultObj = currentTask.concat(newTask);
-
-			// 	// localStorage.setItem('storeProj', JSON.stringify(lastArr));
-			// 	console.log(result.concat(newTask));
-			// });
-
-			// 4th try ----------------------------------------------------
-
-			// const dataObj = currentTask.forEach((item) => {
-			// 	const result = item.projectTask;
-			// 	const newTask = result.filter(
-			// 		(task) => task.inputId !== params1.inputId
-			// 	);
-
-			// 	// localStorage.setItem('storeProj', JSON.stringify(lastArr));
-			// 	console.log(item.hasOwnProperty('projectTask'));
-			// });
-
-			// ----------------------------------------------------
 
 			await removeAddTask('#contentContainer__main');
 			paramsTarget.appendChild(showAllItem());
