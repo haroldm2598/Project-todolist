@@ -4,6 +4,7 @@ import { inboxComponents } from './contentComponents/inboxIndex';
 import { todayComponents } from './contentComponents/todayIndex';
 import { weekComponents } from './contentComponents/thisWeekIndex';
 import { constructorComponent } from './contentComponents/constructorComp';
+import { getProj } from './data/getProj';
 
 export const mainComponents = () => {
 	const divWrapper = document.createElement('div');
@@ -12,6 +13,16 @@ export const mainComponents = () => {
 
 	divWrapper.appendChild(sidebarComponents());
 	divWrapper.appendChild(inboxComponents());
+
+	const data = getProj('storeProj');
+
+	const mapTable = data.map((getElemParams) => {
+		const findTable = data.find(
+			(task) => task.projectTitle === getElemParams.projectTitle
+		);
+
+		return findTable;
+	});
 
 	document.addEventListener('DOMContentLoaded', (event) => {
 		const body = document.getElementById('sideBarContainer');
@@ -40,13 +51,12 @@ export const mainComponents = () => {
 					case 'create':
 						await removeAddElement('.contentContainer');
 						divWrapper.appendChild(constructorComponent());
+						console.log(mapTable);
 						break;
 
 					default:
 						console.log(`${params} not found`);
 				}
-
-				// console.log(params);
 			},
 			false
 		);

@@ -63,10 +63,6 @@ const addProjList = (addProjParam, addProjParam2 = false) => {
 
 			addProjParam.appendChild(showAllItem(addProjParam));
 			addProjParam.appendChild(addProjParam2);
-			// ERROR NODE PLEASE COPY THE INBOXINDEX THE WAY IT LOOP AND ITERATE THE OBJECT
-			// lastArr.forEach((data) => {
-			// 	return projListItem.appendChild(data.projectTitle);
-			// });
 		}
 	});
 
@@ -140,9 +136,6 @@ const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 		const findArr = data.find(
 			(task) => task.projectTitle === getElemParams.projectTitle
 		);
-
-		// console.log(findArr);
-		// console.log(e.target.id);
 	});
 
 	deleteIcon.addEventListener('click', async () => {
