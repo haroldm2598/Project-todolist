@@ -101,38 +101,8 @@ const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 	projListBtn.textContent = getElemParams.projectTitle;
 
 	projListBtn.addEventListener('click', (e) => {
-		// NOV 30 2022
 		const data = getProj('storeProj');
-		// const result = data.map((task) => {
-		// 	const dataProjectTask = task.projectTask;
-		// 	const dataProjectTaskResult = dataProjectTask.push({ anoName: 'tite' });
-		// 	return dataProjectTaskResult;
-		// });
 
-		// const result = data.forEach((task) => {
-		// 	console.log(task.projectTitle);
-		// const dataProjectTaskResult = dataProjectTask.push({ anoName: 'tite' });
-		// return dataProjectTaskResult;
-		// });
-
-		// ---------------- QUESTIONABLE BUT DEPENDS -------------------
-		// const elementId = e.target.id;
-		// const elementValue = document.getElementById(elementId).innerHTML;
-
-		// const iterate = (data) => {
-		// 	for (let array of data) {
-		// 		const result = array.projectTitle === elementValue;
-		// 		return result;
-		// 	}
-		// };
-
-		// console.log(iterate(data));
-
-		// ---------------- MAYBEEEE -------------------
-		// for (let array of data) {
-		// 	const selectArr = data.find((e) => e.projectTitle === array.projectTitle);
-		// 	console.log(selectArr);
-		// }
 		const findArr = data.find(
 			(task) => task.projectTitle === getElemParams.projectTitle
 		);

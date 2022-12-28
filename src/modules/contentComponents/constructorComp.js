@@ -211,6 +211,18 @@ const mainComponents = (paramsTarget) => {
 export const constructorComponent = () => {
 	const element = document.createElement('div');
 
+	const autoId = () => {
+		const currentTask = getProj('storeProj');
+		const testData = currentTask.map((getKeys) => {
+			return getKeys.projectTitle.toLowerCase().split(' ');
+		});
+		const splitData = testData[0];
+		console.log(currentTask);
+		console.log(splitData);
+		// return splitData;
+	};
+	autoId();
+
 	setAttributes(element, {
 		class: 'contentContainer',
 		id: 'inboxIndex'
