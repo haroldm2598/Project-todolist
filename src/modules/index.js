@@ -50,13 +50,13 @@ export const mainComponents = () => {
 						break;
 					case 'create':
 						await removeAddElement('.contentContainer');
+						// await removeAddElement('#gege');
 						divWrapper.appendChild(constructorComponent());
-						// console.log(`${params} has found`);
 						break;
 					case 'gege':
 						await removeAddElement('.contentContainer');
+						// await removeAddElement('#create');
 						divWrapper.appendChild(constructorComponent());
-						// console.log(`${params} has found`);
 						break;
 					default:
 						console.log(`${params} not found`);

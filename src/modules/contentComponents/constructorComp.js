@@ -211,21 +211,31 @@ const mainComponents = (paramsTarget) => {
 export const constructorComponent = () => {
 	const element = document.createElement('div');
 
+	// const autoId = () => {
+	// 	const currentTask = getProj('storeProj');
+	// 	const [testData] = currentTask.map((getKeys) => getKeys.projectTitle);
+	// 	const splitData = testData.toLowerCase().split(' ')[0];
+	// 	console.log(currentTask);
+	// 	console.log(splitData);
+	// 	return splitData;
+	// };
+	const currentTask = getProj('storeProj');
 	const autoId = () => {
-		const currentTask = getProj('storeProj');
-		const testData = currentTask.map((getKeys) => {
-			return getKeys.projectTitle.toLowerCase().split(' ');
-		});
-		const splitData = testData[0];
-		console.log(currentTask);
-		console.log(splitData);
-		// return splitData;
-	};
-	autoId();
+		let storage;
 
+		for (const data of currentTask) {
+			const dataSelected = data.projectTitle;
+			const splitData = dataSelected.toLowerCase().split(' ')[0];
+
+			storage = splitData;
+			return storage;
+		}
+	};
+
+	console.log(autoId());
 	setAttributes(element, {
 		class: 'contentContainer',
-		id: 'inboxIndex'
+		id: `${autoId()}`
 	});
 
 	mainComponents(element);
