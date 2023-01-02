@@ -20,7 +20,6 @@ const removeAddTask = (target) => {
 
 const objProject = [];
 
-// GLOBAL VAR
 const subHeadWrapper = document.createElement('div');
 
 setAttributes(subHeadWrapper, {

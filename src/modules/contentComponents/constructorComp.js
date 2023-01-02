@@ -6,7 +6,6 @@ import { setAttributes } from '../helperComponents/setAttributes';
 const mainComponents = (paramsTarget) => {
 	const dataArr = [];
 	const todayDate = format(endOfDay(new Date()), 'MM/dd/yyyy');
-
 	const buttonWrapper = document.createElement('div');
 	const h1 = document.createElement('h1');
 	const buttonTask = document.createElement('button');
@@ -209,36 +208,35 @@ const mainComponents = (paramsTarget) => {
 };
 
 export const constructorComponent = () => {
-	const element = document.createElement('div');
+	const elementMain = document.createElement('div');
 
-	// const autoId = () => {
-	// 	const currentTask = getProj('storeProj');
-	// 	const [testData] = currentTask.map((getKeys) => getKeys.projectTitle);
-	// 	const splitData = testData.toLowerCase().split(' ')[0];
-	// 	console.log(currentTask);
-	// 	console.log(splitData);
-	// 	return splitData;
-	// };
-	const currentTask = getProj('storeProj');
 	const autoId = () => {
-		let storage;
+		// for (const data of getProj('storeProj')) {
+		// 	const dataSelected = data.projectTitle;
+		// 	const splitData = dataSelected.toLowerCase().split(' ')[0];
 
-		for (const data of currentTask) {
-			const dataSelected = data.projectTitle;
+		// 	console.log(splitData);
+		// }
+
+		// const currentTask = getProj('storeProj');
+		// const mapObj = currentTask.map((item) => {
+		// 	return item.projectTitle.toLowerCase().split(' ')[0];
+		// });
+
+		for (let i = 0; i < currentTask.length; i++) {
+			const dataSelected = currentTask[i].projectTitle;
 			const splitData = dataSelected.toLowerCase().split(' ')[0];
 
-			storage = splitData;
-			return storage;
+			return splitData;
 		}
 	};
 
-	console.log(autoId());
-	setAttributes(element, {
+	setAttributes(elementMain, {
 		class: 'contentContainer',
 		id: `${autoId()}`
 	});
 
-	mainComponents(element);
+	mainComponents(elementMain);
 
-	return element;
+	return elementMain;
 };

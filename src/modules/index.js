@@ -50,16 +50,15 @@ export const mainComponents = () => {
 						break;
 					case 'create':
 						await removeAddElement('.contentContainer');
-						// await removeAddElement('#gege');
 						divWrapper.appendChild(constructorComponent());
 						break;
-					case 'gege':
+					case params:
 						await removeAddElement('.contentContainer');
-						// await removeAddElement('#create');
+						console.log(params);
 						divWrapper.appendChild(constructorComponent());
 						break;
-					default:
-						console.log(`${params} not found`);
+					// default:
+					// 	'projValue' === params ? null : console.log(`${params} not found`);
 				}
 			},
 			false
