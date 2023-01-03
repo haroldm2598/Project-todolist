@@ -210,31 +210,19 @@ const mainComponents = (paramsTarget) => {
 export const constructorComponent = () => {
 	const elementMain = document.createElement('div');
 
-	const autoId = () => {
-		// for (const data of getProj('storeProj')) {
-		// 	const dataSelected = data.projectTitle;
-		// 	const splitData = dataSelected.toLowerCase().split(' ')[0];
-
-		// 	console.log(splitData);
-		// }
-
-		// const currentTask = getProj('storeProj');
-		// const mapObj = currentTask.map((item) => {
-		// 	return item.projectTitle.toLowerCase().split(' ')[0];
-		// });
-
-		for (let i = 0; i < currentTask.length; i++) {
-			const dataSelected = currentTask[i].projectTitle;
+	for (const data of getProj('storeProj')) {
+		const autoId = () => {
+			const dataSelected = data.projectTitle;
 			const splitData = dataSelected.toLowerCase().split(' ')[0];
 
 			return splitData;
-		}
-	};
+		};
 
-	setAttributes(elementMain, {
-		class: 'contentContainer',
-		id: `${autoId()}`
-	});
+		setAttributes(elementMain, {
+			class: 'contentContainer',
+			id: `${autoId()}Container`
+		});
+	}
 
 	mainComponents(elementMain);
 

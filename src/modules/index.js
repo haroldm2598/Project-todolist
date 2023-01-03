@@ -48,17 +48,23 @@ export const mainComponents = () => {
 						await removeAddElement('.contentContainer');
 						divWrapper.appendChild(weekComponents());
 						break;
-					case 'create':
-						await removeAddElement('.contentContainer');
-						divWrapper.appendChild(constructorComponent());
-						break;
+
+					/*
+							if the element is null or nothing return nothing for container
+							if the element is true and has item therefore go for paramsContainer
+							make else remove only previous element not the `paramsContainer`
+						*/
 					case params:
-						await removeAddElement('.contentContainer');
-						console.log(params);
-						divWrapper.appendChild(constructorComponent());
+						const targetId = `#${params}Container`;
+						if (!targetId) {
+							await removeAddElement(targetId);
+							divWrapper.appendChild(constructorComponent());
+						} else {
+							console.log(targetId);
+							console.log(`nothing`);
+						}
+
 						break;
-					// default:
-					// 	'projValue' === params ? null : console.log(`${params} not found`);
 				}
 			},
 			false
