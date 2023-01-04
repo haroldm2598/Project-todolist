@@ -28,47 +28,51 @@ export const mainComponents = () => {
 	document.addEventListener('DOMContentLoaded', (event) => {
 		const body = document.getElementById('sideBarContainer');
 
-		body.addEventListener(
-			'click',
-			async (e) => {
-				let params = e.target.id;
+		body.addEventListener('click', async (e) => {
+			let params = e.target.id;
 
-				switch (params) {
-					case 'inboxId':
+			switch (params) {
+				case 'inboxId':
+					await removeAddElement('.contentContainer');
+					divWrapper.appendChild(inboxComponents());
+					break;
+
+				case 'todayId':
+					await removeAddElement('.contentContainer');
+					divWrapper.appendChild(todayComponents());
+					break;
+
+				case 'weekId':
+					await removeAddElement('.contentContainer');
+					divWrapper.appendChild(weekComponents());
+					break;
+				/*
+						if the element is null or nothing return nothing for container
+						if the element is true and has item therefore go for paramsContainer
+						make else remove only previous element not the `paramsContainer`
+							
+						if the element exist therefore removeIdContainer else do default removeContainer
+						maybe select element therefore show the ID of it and not the way getElementById
+					*/
+				case params:
+					const targetId = `#${params}Container`;
+					const elementTarget = document.getElementById('wahaContainer');
+					for (let i = 0; i < elementTarget.length; i++) {
+						console.log(elementTarget[i].id);
+					}
+
+					if (elementTarget) {
+						// await removeAddElement(targetId);
 						await removeAddElement('.contentContainer');
-						divWrapper.appendChild(inboxComponents());
-						break;
-
-					case 'todayId':
+						divWrapper.appendChild(constructorComponent());
+					} else {
 						await removeAddElement('.contentContainer');
-						divWrapper.appendChild(todayComponents());
-						break;
+						divWrapper.appendChild(constructorComponent());
+					}
 
-					case 'weekId':
-						await removeAddElement('.contentContainer');
-						divWrapper.appendChild(weekComponents());
-						break;
-
-					/*
-							if the element is null or nothing return nothing for container
-							if the element is true and has item therefore go for paramsContainer
-							make else remove only previous element not the `paramsContainer`
-						*/
-					case params:
-						const targetId = `#${params}Container`;
-						if (!targetId) {
-							await removeAddElement(targetId);
-							divWrapper.appendChild(constructorComponent());
-						} else {
-							console.log(targetId);
-							console.log(`nothing`);
-						}
-
-						break;
-				}
-			},
-			false
-		);
+					break;
+			}
+		});
 	});
 
 	const removeAddElement = (target) => {
