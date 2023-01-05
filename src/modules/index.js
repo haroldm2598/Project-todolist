@@ -14,16 +14,8 @@ export const mainComponents = () => {
 	divWrapper.appendChild(sidebarComponents());
 	divWrapper.appendChild(inboxComponents());
 
-	// TESTING PURPOSE
-	const data = getProj('storeProj');
-	const mapTable = data.map((getElemParams) => {
-		const findTable = data.find(
-			(task) => task.projectTitle === getElemParams.projectTitle
-		);
-
-		return findTable;
-	});
 	// -------------------------------
+	// ROUTERS
 
 	document.addEventListener('DOMContentLoaded', (event) => {
 		const body = document.getElementById('sideBarContainer');

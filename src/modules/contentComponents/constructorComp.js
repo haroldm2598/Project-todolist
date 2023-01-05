@@ -77,6 +77,12 @@ const mainComponents = (paramsTarget) => {
 			if (inputVal === null || inputVal === '') {
 				alert('input some text');
 			} else {
+				/*
+					NOTE FOR JAN 06 2022
+					make use of oop the 'this' keyword in object keys before pushing it to the localStorage
+					handling error for not getting others object values.
+					The problem is if we keep using 'this' word onto push method it will error
+				*/
 				for (let dataObj of currentTask) {
 					let dataMap = dataObj.projectTask;
 
