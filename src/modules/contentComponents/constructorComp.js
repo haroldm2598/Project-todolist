@@ -3,9 +3,9 @@ import { format, endOfDay } from 'date-fns';
 import { getProj } from '../data/getProj';
 import { setAttributes } from '../helperComponents/setAttributes';
 
-const mainComponents = (paramsTarget) => {
+function mainComponents(paramsTarget) {
 	const dataArr = [];
-	const todayDate = format(endOfDay(new Date()), 'MM/dd/yyyy');
+
 	const buttonWrapper = document.createElement('div');
 	const h1 = document.createElement('h1');
 	const buttonTask = document.createElement('button');
@@ -34,7 +34,7 @@ const mainComponents = (paramsTarget) => {
 		targetElement.parentElement.removeChild(targetElement);
 	});
 
-	const removeAddTask = (target) => {
+	function removeAddTask(target) {
 		return new Promise((resolve) => {
 			setTimeout(() => {
 				const targetNode = document.querySelector(target);
@@ -42,13 +42,13 @@ const mainComponents = (paramsTarget) => {
 				resolve(result);
 			}, 500);
 		});
-	};
+	}
 
 	const truncateResult = (data, size) => {
 		return data.length > size ? `${data.slice(0, size - 1)} ...` : data;
 	};
 
-	const modalTask = () => {
+	function modalTask() {
 		const elementTask = document.createElement('div');
 		const inputTask = document.createElement('input');
 		const confirmBtn = document.createElement('button');
@@ -67,32 +67,48 @@ const mainComponents = (paramsTarget) => {
 		setAttributes(confirmBtn, { class: 'contentContainer__task--confirm' });
 		setAttributes(cancelBtn, { class: 'contentContainer__task--cancel' });
 
+		/*
+			NOTE FOR JAN 06 2022
+		make use of oop the 'this' keyword in object keys before pushing it to the localStorage
+		handling error for not getting others object values.
+		The problem is if we keep using 'this' word onto push method it will error
+		*/
+		function ProjectTodoList(id, name, content, date) {
+			this.inputId = id;
+			this.inputName = name;
+			this.inputContent = content;
+			this.inputDate = date;
+		}
+
 		confirmBtn.textContent = 'Confirm';
 		cancelBtn.textContent = 'Cancel';
 
 		confirmBtn.addEventListener('click', async () => {
-			const inputVal = document.querySelector('#inputTask').value;
 			const currentTask = getProj('storeProj');
+			const objectId = Math.floor(Math.random() * 999);
+			const objectVal = document.querySelector('#inputTask').value;
+			const objectDate = format(endOfDay(new Date()), 'MM/dd/yyyy');
+			const objCollected = new ProjectTodoList(
+				objectId,
+				objectVal,
+				objectVal,
+				objectDate
+			);
 
-			if (inputVal === null || inputVal === '') {
+			if (objectVal === null || objectVal === '') {
 				alert('input some text');
 			} else {
-				/*
-					NOTE FOR JAN 06 2022
-					make use of oop the 'this' keyword in object keys before pushing it to the localStorage
-					handling error for not getting others object values.
-					The problem is if we keep using 'this' word onto push method it will error
-				*/
 				for (let dataObj of currentTask) {
 					let dataMap = dataObj.projectTask;
+					// ORIGINAL PUSH METHOD
+					// dataMap.push({
+					// 	inputId: objectId,
+					// 	inputName: `${objectVal}Name`,
+					// 	inputContent: objectVal,
+					// 	inputDate: objectDate
+					// });
 
-					dataMap.push({
-						inputId: Math.floor(Math.random() * 999),
-						inputName: 'testing',
-						inputContent: inputVal,
-						inputDate: todayDate
-					});
-
+					dataMap.push(objCollected);
 					currentTask.concat(dataMap);
 					const lastArr = [currentTask.slice(-1).pop()];
 
@@ -117,9 +133,9 @@ const mainComponents = (paramsTarget) => {
 		elementTask.appendChild(cancelBtn);
 
 		return elementTask;
-	};
+	}
 
-	const getElement = (params1, params2) => {
+	function getElement(params1, params2) {
 		const elementWrapper = document.createElement('div');
 		const firstDiv = document.createElement('div');
 		const secondDiv = document.createElement('div');
@@ -188,9 +204,9 @@ const mainComponents = (paramsTarget) => {
 		secondDiv.appendChild(icon);
 
 		params2.appendChild(elementWrapper);
-	};
+	}
 
-	const showAllItem = () => {
+	function showAllItem() {
 		const element = document.createElement('div');
 		setAttributes(element, {
 			id: 'contentContainer__main'
@@ -204,16 +220,16 @@ const mainComponents = (paramsTarget) => {
 		}
 
 		return element;
-	};
+	}
 
 	paramsTarget.appendChild(h1);
 	paramsTarget.appendChild(showAllItem());
 	buttonWrapper.appendChild(icon);
 	buttonWrapper.appendChild(buttonTask);
 	paramsTarget.appendChild(buttonWrapper);
-};
+}
 
-export const constructorComponent = () => {
+export function constructorComponent() {
 	const elementMain = document.createElement('div');
 
 	for (const data of getProj('storeProj')) {
@@ -233,4 +249,4 @@ export const constructorComponent = () => {
 	mainComponents(elementMain);
 
 	return elementMain;
-};
+}

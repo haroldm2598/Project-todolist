@@ -39,30 +39,40 @@ export const mainComponents = () => {
 					divWrapper.appendChild(weekComponents());
 					break;
 				/*
-						if the element is null or nothing return nothing for container
-						if the element is true and has item therefore go for paramsContainer
-						make else remove only previous element not the `paramsContainer`
+					if the element is null or nothing return nothing for container
+					if the element is true and has item therefore go for paramsContainer
+					make else remove only previous element not the `paramsContainer`
 							
-						if the element exist therefore removeIdContainer else do default removeContainer
-						maybe select element therefore show the ID of it and not the way getElementById
-					*/
-				case params:
-					const targetId = `#${params}Container`;
-					const elementTarget = document.getElementById('wahaContainer');
-					for (let i = 0; i < elementTarget.length; i++) {
-						console.log(elementTarget[i].id);
-					}
+					if the element exist therefore removeIdContainer else do default removeContainer
+					maybe select element therefore show the ID of it and not the way getElementById
+				*/
 
-					if (elementTarget) {
-						// await removeAddElement(targetId);
-						await removeAddElement('.contentContainer');
-						divWrapper.appendChild(constructorComponent());
-					} else {
-						await removeAddElement('.contentContainer');
-						divWrapper.appendChild(constructorComponent());
-					}
-
+				case 'create':
+					await removeAddElement('.contentContainer');
+					divWrapper.appendChild(constructorComponent());
 					break;
+
+				case 'gege':
+					await removeAddElement('.contentContainer');
+					divWrapper.appendChild(constructorComponent());
+					break;
+				// case params:
+				// 	const targetId = `#${params}Container`;
+				// 	const elementTarget = document.getElementById('wahaContainer');
+				// 	for (let i = 0; i < elementTarget.length; i++) {
+				// 		console.log(elementTarget[i].id);
+				// 	}
+
+				// 	if (elementTarget) {
+				// 		// await removeAddElement(targetId);
+				// 		await removeAddElement('.contentContainer');
+				// 		divWrapper.appendChild(constructorComponent());
+				// 	} else {
+				// 		await removeAddElement('.contentContainer');
+				// 		divWrapper.appendChild(constructorComponent());
+				// 	}
+
+				// 	break;
 			}
 		});
 	});
