@@ -68,10 +68,15 @@ function mainComponents(paramsTarget) {
 		setAttributes(cancelBtn, { class: 'contentContainer__task--cancel' });
 
 		/*
-			NOTE FOR JAN 06 2022
+			NOTE FOR JAN 06 2023
 		make use of oop the 'this' keyword in object keys before pushing it to the localStorage
 		handling error for not getting others object values.
 		The problem is if we keep using 'this' word onto push method it will error
+
+			NOTE FOR JAN 11 2023
+		make use of the OOP the function way where the getElement will be implement the oop not the old 
+		of straight to the obj insuring not copying the other objects values rather than making them new
+		and unique keys and value for itself. (codeSandBox refference)
 		*/
 		function ProjectTodoList(id, name, content, date) {
 			this.inputId = id;
