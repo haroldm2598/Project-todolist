@@ -34,6 +34,26 @@ function mainComponents(paramsTarget) {
 		targetElement.parentElement.removeChild(targetElement);
 	});
 
+	/*
+			NOTE FOR JAN 06 2023
+		make use of oop the 'this' keyword in object keys before pushing it to the localStorage
+		handling error for not getting others object values.
+		The problem is if we keep using 'this' word onto push method it will error
+
+			NOTE FOR JAN 11 2023
+		make use of the OOP the function way where the getElement will be implement the oop not the old 
+		of straight to the obj insuring not copying the other objects values rather than making them new
+		and unique keys and value for itself. (codeSandBox refference)
+		*/
+	function ProjectTodoList(id, name, content, date) {
+		this.inputId = id;
+		this.inputName = name;
+		this.inputContent = content;
+		this.inputDate = date;
+	}
+
+	// * helper components should be in export mode not internal coded make sure of extra space.
+	// ------------- HELPER COMPONENTS -------------
 	function removeAddTask(target) {
 		return new Promise((resolve) => {
 			setTimeout(() => {
@@ -44,10 +64,11 @@ function mainComponents(paramsTarget) {
 		});
 	}
 
-	const truncateResult = (data, size) => {
+	function truncateResult(data, size) {
 		return data.length > size ? `${data.slice(0, size - 1)} ...` : data;
-	};
+	}
 
+	// ------------- MAIN COMPONENTS -------------
 	function modalTask() {
 		const elementTask = document.createElement('div');
 		const inputTask = document.createElement('input');
@@ -66,24 +87,6 @@ function mainComponents(paramsTarget) {
 		});
 		setAttributes(confirmBtn, { class: 'contentContainer__task--confirm' });
 		setAttributes(cancelBtn, { class: 'contentContainer__task--cancel' });
-
-		/*
-			NOTE FOR JAN 06 2023
-		make use of oop the 'this' keyword in object keys before pushing it to the localStorage
-		handling error for not getting others object values.
-		The problem is if we keep using 'this' word onto push method it will error
-
-			NOTE FOR JAN 11 2023
-		make use of the OOP the function way where the getElement will be implement the oop not the old 
-		of straight to the obj insuring not copying the other objects values rather than making them new
-		and unique keys and value for itself. (codeSandBox refference)
-		*/
-		function ProjectTodoList(id, name, content, date) {
-			this.inputId = id;
-			this.inputName = name;
-			this.inputContent = content;
-			this.inputDate = date;
-		}
 
 		confirmBtn.textContent = 'Confirm';
 		cancelBtn.textContent = 'Cancel';

@@ -3,7 +3,7 @@ import { getProj } from '../data/getProj';
 import { setAttributes } from '../helperComponents/setAttributes';
 import { createElem } from '../helperComponents/setElement';
 
-const removeAddTask = (target) => {
+function removeAddTask(target) {
 	return new Promise((resolve) => {
 		setTimeout(() => {
 			const targetNode = document.querySelector(target);
@@ -11,7 +11,7 @@ const removeAddTask = (target) => {
 			resolve(result);
 		}, 100);
 	});
-};
+}
 
 //	STRING LIMIT
 // const stringLimit = (string = '', limit = 0) => {
@@ -27,7 +27,7 @@ setAttributes(subHeadWrapper, {
 	id: 'projectAddBtn'
 });
 
-const addProjList = (addProjParam, addProjParam2 = false) => {
+function addProjList(addProjParam, addProjParam2 = false) {
 	const projWrapper = createElem('div');
 	const btnInput = createElem('input');
 	const btnConfirm = createElem('button');
@@ -75,9 +75,9 @@ const addProjList = (addProjParam, addProjParam2 = false) => {
 	projWrapper.appendChild(btnCancel);
 
 	return addProjParam.appendChild(projWrapper);
-};
+}
 
-const getElement = (getElemParams, getElemParams2, getElemParams3) => {
+function getElement(getElemParams, getElemParams2, getElemParams3) {
 	const projListItem = document.createElement('li');
 	const projListBtn = document.createElement('button');
 	const deleteIcon = document.createElement('i');
@@ -137,9 +137,9 @@ const getElement = (getElemParams, getElemParams2, getElemParams3) => {
 	projListItem.appendChild(projListBtn);
 	projListItem.appendChild(deleteIcon);
 	getElemParams2.appendChild(projListItem);
-};
+}
 
-const showAllItem = (showAllItemParams) => {
+function showAllItem(showAllItemParams) {
 	const projList = document.createElement('ul');
 	setAttributes(projList, {
 		class: 'sideBarContainer__projectList',
@@ -153,9 +153,9 @@ const showAllItem = (showAllItemParams) => {
 	showAllItemParams.appendChild(projList);
 
 	return projList;
-};
+}
 
-export const addProject = (paramTarget) => {
+export function addProject(paramTarget) {
 	const icon = document.createElement('i');
 	const addBtn = document.createElement('button');
 
@@ -182,4 +182,4 @@ export const addProject = (paramTarget) => {
 		paramTarget.appendChild(showAllItem(paramTarget)) &&
 		paramTarget.appendChild(subHeadWrapper)
 	);
-};
+}

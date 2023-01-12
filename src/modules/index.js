@@ -6,7 +6,7 @@ import { weekComponents } from './contentComponents/thisWeekIndex';
 import { constructorComponent } from './contentComponents/constructorComp';
 import { getProj } from './data/getProj';
 
-export const mainComponents = () => {
+export function mainComponents() {
 	const divWrapper = document.createElement('div');
 
 	divWrapper.classList.add('wrapper');
@@ -77,7 +77,7 @@ export const mainComponents = () => {
 		});
 	});
 
-	const removeAddElement = (target) => {
+	function removeAddElement(target) {
 		return new Promise((resolve) => {
 			setTimeout(() => {
 				const targetNode = document.querySelector(target);
@@ -85,11 +85,11 @@ export const mainComponents = () => {
 				resolve(result);
 			}, 500);
 		});
-	};
+	}
 
 	document.body.appendChild(headerComponents());
 	document.body.appendChild(divWrapper);
-};
+}
 
 /*
 	- Get the dynamic id of the constructor of selected sideproj sidebar (constructorComp)
