@@ -45,14 +45,22 @@ export function mainComponents() {
 							
 					if the element exist therefore removeIdContainer else do default removeContainer
 					maybe select element therefore show the ID of it and not the way getElementById
+				
+					console their ID container inside the 'case create' to check 
+					if the unique id is working.
 				*/
 
 				case 'create':
 					await removeAddElement('.contentContainer');
 					divWrapper.appendChild(constructorComponent());
+					console.log(constructorComponent());
 					break;
 
 				case 'gege':
+					await removeAddElement('.contentContainer');
+					divWrapper.appendChild(constructorComponent());
+					break;
+				case 'sige':
 					await removeAddElement('.contentContainer');
 					divWrapper.appendChild(constructorComponent());
 					break;

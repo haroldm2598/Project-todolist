@@ -2,6 +2,8 @@ import '../../styles/main.scss';
 import { format, endOfDay } from 'date-fns';
 import { getProj } from '../data/getProj';
 import { setAttributes } from '../helperComponents/setAttributes';
+import { truncateResult } from '../helperComponents/setRemoveTask';
+import { removeAddTask } from '../helperComponents/setTruncate';
 
 function mainComponents(paramsTarget) {
 	const dataArr = [];
@@ -40,7 +42,7 @@ function mainComponents(paramsTarget) {
 		handling error for not getting others object values.
 		The problem is if we keep using 'this' word onto push method it will error
 
-			NOTE FOR JAN 11 2023
+			NOTE FOR JAN 13 2023
 		make use of the OOP the function way where the getElement will be implement the oop not the old 
 		of straight to the obj insuring not copying the other objects values rather than making them new
 		and unique keys and value for itself. (codeSandBox refference)
@@ -50,22 +52,6 @@ function mainComponents(paramsTarget) {
 		this.inputName = name;
 		this.inputContent = content;
 		this.inputDate = date;
-	}
-
-	// * helper components should be in export mode not internal coded make sure of extra space.
-	// ------------- HELPER COMPONENTS -------------
-	function removeAddTask(target) {
-		return new Promise((resolve) => {
-			setTimeout(() => {
-				const targetNode = document.querySelector(target);
-				const result = targetNode.parentNode.removeChild(targetNode);
-				resolve(result);
-			}, 500);
-		});
-	}
-
-	function truncateResult(data, size) {
-		return data.length > size ? `${data.slice(0, size - 1)} ...` : data;
 	}
 
 	// ------------- MAIN COMPONENTS -------------
@@ -247,6 +233,8 @@ export function constructorComponent() {
 
 			return splitData;
 		};
+
+		console.log(autoId());
 
 		setAttributes(elementMain, {
 			class: 'contentContainer',
