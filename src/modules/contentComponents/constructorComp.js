@@ -227,22 +227,21 @@ export function constructorComponent() {
 	const elementMain = document.createElement('div');
 
 	for (const data of getProj('storeProj')) {
-		const autoId = () => {
-			const dataSelected = data.projectTitle;
-			const splitData = dataSelected.toLowerCase().split(' ')[0];
-
-			return splitData;
-		};
-
-		console.log(autoId());
+		// function autoId() {
+		const dataSelected = data.projectTitle;
+		const splitData = dataSelected.toLowerCase().split(' ')[0];
+		// 	return splitData;
+		// }
 
 		setAttributes(elementMain, {
 			class: 'contentContainer',
-			id: `${autoId()}Container`
+			id: `${splitData}Container`
 		});
-	}
 
-	mainComponents(elementMain);
+		mainComponents(elementMain);
+	}
 
 	return elementMain;
 }
+
+console.log(constructorComponent());

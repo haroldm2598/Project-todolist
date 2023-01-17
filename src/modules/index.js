@@ -45,15 +45,22 @@ export function mainComponents() {
 							
 					if the element exist therefore removeIdContainer else do default removeContainer
 					maybe select element therefore show the ID of it and not the way getElementById
-				
+
+					JAN 17 2023
 					console their ID container inside the 'case create' to check 
 					if the unique id is working.
-				*/
+
+					PROBLEM  :::
+					- only the last id is getting the value but the rest is equal to null
+					- Maybe only the constructor is the problem
+					- It isn't append to their parent the elementMain doesn't have children
+					- Try foreach or map to the autoId instead of FOR OF 		
+					
+					*/
 
 				case 'create':
 					await removeAddElement('.contentContainer');
 					divWrapper.appendChild(constructorComponent());
-					console.log(constructorComponent());
 					break;
 
 				case 'gege':
