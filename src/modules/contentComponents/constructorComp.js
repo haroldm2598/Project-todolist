@@ -46,7 +46,12 @@ function mainComponents(paramsTarget) {
 		make use of the OOP the function way where the getElement will be implement the oop not the old 
 		of straight to the obj insuring not copying the other objects values rather than making them new
 		and unique keys and value for itself. (codeSandBox refference)
-		*/
+
+		`NOTE FOR JAN 18 2023
+		having an error push inside the localStorage if will push new array object and it will delete existed array object 
+		maybe the impletation of the OOP the projectTodoList requiring a prototype where 'this' keyword required using the OOP 
+		method
+	*/
 	function ProjectTodoList(id, name, content, date) {
 		this.inputId = id;
 		this.inputName = name;
@@ -237,11 +242,9 @@ export function constructorComponent() {
 			class: 'contentContainer',
 			id: `${splitData}Container`
 		});
-
-		mainComponents(elementMain);
 	}
+
+	mainComponents(elementMain);
 
 	return elementMain;
 }
-
-console.log(constructorComponent());

@@ -46,26 +46,35 @@ export function mainComponents() {
 					if the element exist therefore removeIdContainer else do default removeContainer
 					maybe select element therefore show the ID of it and not the way getElementById
 
-					JAN 17 2023
+					JAN 17 2023 ------------------------------------------------------------------
 					console their ID container inside the 'case create' to check 
 					if the unique id is working.
 
 					PROBLEM  :::
-					- only the last id is getting the value but the rest is equal to null
+					- only the last id or First id are getting the value but the rest is equal to null
 					- Maybe only the constructor is the problem
 					- It isn't append to their parent the elementMain doesn't have children
-					- Try foreach or map to the autoId instead of FOR OF 		
+					- Try foreach or map to the autoId instead of FOR OF 
 					
-					*/
+					REMOVING DYNAMICALLY PREVIOUS ID
+					https://stackoverflow.com/questions/71142972/how-to-delete-dynamic-created-li-by-id
+
+					- Search how to get the previous id or element that selected before
+					
+				*/
 
 				case 'create':
 					await removeAddElement('.contentContainer');
 					divWrapper.appendChild(constructorComponent());
+					const getId = document.querySelector(`#${params}Container`);
+					console.log(getId);
 					break;
 
 				case 'gege':
 					await removeAddElement('.contentContainer');
 					divWrapper.appendChild(constructorComponent());
+					const getId2 = document.querySelector(`#${params}Container`);
+					console.log(getId2);
 					break;
 				case 'sige':
 					await removeAddElement('.contentContainer');
