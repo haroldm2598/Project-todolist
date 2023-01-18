@@ -63,6 +63,11 @@ function mainComponents(paramsTarget) {
 		this.inputDate = date;
 	}
 
+	// ProjectTodoList.prototype.pushTodoList = function (array, object) {
+	// 	array.push(object);
+	// 	console.log(`success`);
+	// };
+
 	// ------------- MAIN COMPONENTS -------------
 	function modalTask() {
 		const elementTask = document.createElement('div');
@@ -91,12 +96,12 @@ function mainComponents(paramsTarget) {
 			const objectId = Math.floor(Math.random() * 999);
 			const objectVal = document.querySelector('#inputTask').value;
 			const objectDate = format(endOfDay(new Date()), 'MM/dd/yyyy');
-			const objCollected = new ProjectTodoList(
-				objectId,
-				objectVal,
-				objectVal,
-				objectDate
-			);
+			// const objCollected = new ProjectTodoList(
+			// 	objectId,
+			// 	objectVal,
+			// 	objectVal,
+			// 	objectDate
+			// );
 
 			if (objectVal === null || objectVal === '') {
 				alert('input some text');
@@ -112,10 +117,18 @@ function mainComponents(paramsTarget) {
 					// });
 
 					// IF USING OOP METHOD
-					dataMap.push(objCollected);
-					currentTask.concat(dataMap);
-					// const lastArr = [currentTask.slice(-1).pop()];
-					localStorage.setItem('storeProj', JSON.stringify(currentTask));
+					// dataMap.push(objCollected);
+					dataMap.push(
+						new ProjectTodoList(objectId, objectVal, objectVal, objectDate)
+					);
+
+					const lastArr = [dataMap.slice(-1).pop()];
+
+					console.log(currentTask.concat(lastArr));
+					// const testingMoma = JSON.stringify(lastArr);
+					// console.log(JSON.parse(testingMoma));
+
+					// localStorage.setItem('storeProj', JSON.stringify(currentTask));
 				}
 
 				await removeAddTask('#modalTask');
@@ -236,11 +249,8 @@ export function constructorComponent() {
 	const elementMain = document.createElement('div');
 
 	for (const data of getProj('storeProj')) {
-		// function autoId() {
 		const dataSelected = data.projectTitle;
 		const splitData = dataSelected.toLowerCase().split(' ')[0];
-		// 	return splitData;
-		// }
 
 		setAttributes(elementMain, {
 			class: 'contentContainer',
