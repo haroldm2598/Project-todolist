@@ -51,6 +51,10 @@ function mainComponents(paramsTarget) {
 		having an error push inside the localStorage if will push new array object and it will delete existed array object 
 		maybe the impletation of the OOP the projectTodoList requiring a prototype where 'this' keyword required using the OOP 
 		method
+
+		Possible problem :: 
+			Due to changing the concat situation it will became only one push
+			Create a prototype where with using 'this' keyword in order to push unique keys & values 
 	*/
 	function ProjectTodoList(id, name, content, date) {
 		this.inputId = id;
@@ -107,11 +111,11 @@ function mainComponents(paramsTarget) {
 					// 	inputDate: objectDate
 					// });
 
+					// IF USING OOP METHOD
 					dataMap.push(objCollected);
 					currentTask.concat(dataMap);
-					const lastArr = [currentTask.slice(-1).pop()];
-
-					localStorage.setItem('storeProj', JSON.stringify(lastArr));
+					// const lastArr = [currentTask.slice(-1).pop()];
+					localStorage.setItem('storeProj', JSON.stringify(currentTask));
 				}
 
 				await removeAddTask('#modalTask');
