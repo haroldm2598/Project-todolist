@@ -6,6 +6,7 @@ import { truncateResult } from '../helperComponents/setRemoveTask';
 import { removeAddTask } from '../helperComponents/setTruncate';
 
 function mainComponents(paramsTarget) {
+	'use strict';
 	const dataArr = [];
 
 	const buttonWrapper = document.createElement('div');
@@ -51,6 +52,9 @@ function mainComponents(paramsTarget) {
 		having an error push inside the localStorage if will push new array object and it will delete existed array object 
 		maybe the impletation of the OOP the projectTodoList requiring a prototype where 'this' keyword required using the OOP 
 		method
+
+		NOTE FOR JAN 23 2023 testing only
+		it shouldn't for constructor components the assign id of components it should be in sidebar proj.
 
 		Possible problem :: 
 			Due to changing the concat situation it will became only one push
@@ -109,25 +113,22 @@ function mainComponents(paramsTarget) {
 				for (let dataObj of currentTask) {
 					let dataMap = dataObj.projectTask;
 					// ORIGINAL PUSH METHOD
-					// dataMap.push({
-					// 	inputId: objectId,
-					// 	inputName: `${objectVal}Name`,
-					// 	inputContent: objectVal,
-					// 	inputDate: objectDate
-					// });
+					dataMap.push({
+						inputId: objectId,
+						inputName: `${objectVal}Name`,
+						inputContent: objectVal,
+						inputDate: objectDate
+					});
 
 					// IF USING OOP METHOD
 					// dataMap.push(objCollected);
-					dataMap.push(
-						new ProjectTodoList(objectId, objectVal, objectVal, objectDate)
-					);
+					// dataMap.push(
+					// 	new ProjectTodoList(objectId, objectVal, objectVal, objectDate)
+					// );
 
 					const lastArr = [dataMap.slice(-1).pop()];
 
 					console.log(currentTask.concat(lastArr));
-					// const testingMoma = JSON.stringify(lastArr);
-					// console.log(JSON.parse(testingMoma));
-
 					// localStorage.setItem('storeProj', JSON.stringify(currentTask));
 				}
 
@@ -247,16 +248,21 @@ function mainComponents(paramsTarget) {
 
 export function constructorComponent() {
 	const elementMain = document.createElement('div');
+	function autoId() {
+		for (const data of getProj('storeProj')) {
+			const dataSelected = data.projectTitle;
+			const splitData = dataSelected.toLowerCase().split(' ')[0];
 
-	for (const data of getProj('storeProj')) {
-		const dataSelected = data.projectTitle;
-		const splitData = dataSelected.toLowerCase().split(' ')[0];
-
-		setAttributes(elementMain, {
-			class: 'contentContainer',
-			id: `${splitData}Container`
-		});
+			return splitData;
+		}
 	}
+
+	setAttributes(elementMain, {
+		class: 'contentContainer',
+		id: `${autoId()}Container`
+	});
+
+	console.log(autoId());
 
 	mainComponents(elementMain);
 
