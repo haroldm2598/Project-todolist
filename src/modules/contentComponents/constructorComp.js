@@ -101,12 +101,12 @@ function mainComponents(paramsTarget) {
 			const objectId = Math.floor(Math.random() * 999);
 			const objectVal = document.querySelector('#inputTask').value;
 			const objectDate = format(endOfDay(new Date()), 'MM/dd/yyyy');
-			// const objCollected = new ProjectTodoList(
-			// 	objectId,
-			// 	objectVal,
-			// 	objectVal,
-			// 	objectDate
-			// );
+			const objCollected = new ProjectTodoList(
+				objectId,
+				objectVal,
+				objectVal,
+				objectDate
+			);
 
 			if (objectVal === null || objectVal === '') {
 				alert('input some text');
@@ -114,24 +114,22 @@ function mainComponents(paramsTarget) {
 				for (let dataObj of currentTask) {
 					let dataMap = dataObj.projectTask;
 					// ORIGINAL PUSH METHOD
-					dataMap.push({
-						inputId: objectId,
-						inputName: `${objectVal}Name`,
-						inputContent: objectVal,
-						inputDate: objectDate
-					});
+					// dataMap.push({
+					// 	inputId: objectId,
+					// 	inputName: `${objectVal}Name`,
+					// 	inputContent: objectVal,
+					// 	inputDate: objectDate
+					// });
 
 					// IF USING OOP METHOD
-					// dataMap.push(objCollected);
+					dataMap.push(objCollected);
 					// dataMap.push(
 					// 	new ProjectTodoList(objectId, objectVal, objectVal, objectDate)
 					// );
 
-					const lastArr = [dataMap.slice(-1).pop()];
-
-					// console.log(dataMap.concat(lastArr));
-					// console.log(currentTask);
-					// localStorage.setItem('storeProj', JSON.stringify(lastArr));
+					currentTask.concat(dataMap);
+					const lastArr = [currentTask.slice(-1).pop()];
+					localStorage.setItem('storeProj', JSON.stringify(lastArr));
 				}
 
 				await removeAddTask('#modalTask');

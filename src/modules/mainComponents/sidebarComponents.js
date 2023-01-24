@@ -58,7 +58,7 @@ export const sidebarComponents = () => {
 
 	sidebarContainer.appendChild(listItem);
 	sidebarContainer.appendChild(titleSubHead);
-	// sidebarContainer.appendChild(addProject(sidebarContainer));
+	sidebarContainer.appendChild(addProject(sidebarContainer));
 
 	return sidebarContainer;
 };
