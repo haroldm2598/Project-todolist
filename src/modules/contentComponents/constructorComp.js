@@ -55,6 +55,7 @@ function mainComponents(paramsTarget) {
 
 		NOTE FOR JAN 23 2023 testing only
 		it shouldn't for constructor components the assign id of components it should be in sidebar proj.
+		what does concat do again?
 
 		Possible problem :: 
 			Due to changing the concat situation it will became only one push
@@ -128,8 +129,9 @@ function mainComponents(paramsTarget) {
 
 					const lastArr = [dataMap.slice(-1).pop()];
 
-					console.log(currentTask.concat(lastArr));
-					// localStorage.setItem('storeProj', JSON.stringify(currentTask));
+					// console.log(dataMap.concat(lastArr));
+					// console.log(currentTask);
+					// localStorage.setItem('storeProj', JSON.stringify(lastArr));
 				}
 
 				await removeAddTask('#modalTask');
