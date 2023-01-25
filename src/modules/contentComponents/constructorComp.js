@@ -8,6 +8,7 @@ import { removeAddTask } from '../helperComponents/setTruncate';
 function mainComponents(paramsTarget) {
 	'use strict';
 	const dataArr = [];
+	const currentTask = getProj('storeProj');
 
 	const buttonWrapper = document.createElement('div');
 	const h1 = document.createElement('h1');
@@ -57,6 +58,11 @@ function mainComponents(paramsTarget) {
 		it shouldn't for constructor components the assign id of components it should be in sidebar proj.
 		what does concat do again?
 
+		NOTE FOR JAN 25 2023
+		- First test if the prototype of OOP is working * turns out to spaghetti coding
+		- Second test if the outside array is working pushing unique values not reset the process of setting Object
+		- Third test make the basic of the main.js of 16_project
+
 		Possible problem :: 
 			Due to changing the concat situation it will became only one push
 			Create a prototype where with using 'this' keyword in order to push unique keys & values 
@@ -68,10 +74,16 @@ function mainComponents(paramsTarget) {
 		this.inputDate = date;
 	}
 
-	// ProjectTodoList.prototype.pushTodoList = function (array, object) {
-	// 	array.push(object);
-	// 	console.log(`success`);
-	// };
+	ProjectTodoList.prototype.pushTodoList = function (arrayName) {
+		const inputId = this.inputId;
+		const inputName = this.inputName;
+		const inputContent = this.inputContent;
+		const inputDate = this.inputDate;
+
+		arrayName.push({ inputId, inputName, inputContent, inputDate });
+
+		currentTask.concat(arrayName);
+	};
 
 	// ------------- MAIN COMPONENTS -------------
 	function modalTask() {
@@ -97,7 +109,6 @@ function mainComponents(paramsTarget) {
 		cancelBtn.textContent = 'Cancel';
 
 		confirmBtn.addEventListener('click', async () => {
-			const currentTask = getProj('storeProj');
 			const objectId = Math.floor(Math.random() * 999);
 			const objectVal = document.querySelector('#inputTask').value;
 			const objectDate = format(endOfDay(new Date()), 'MM/dd/yyyy');
@@ -122,12 +133,18 @@ function mainComponents(paramsTarget) {
 					// });
 
 					// IF USING OOP METHOD
-					dataMap.push(objCollected);
+					//G dataMap.push(objCollected);
 					// dataMap.push(
 					// 	new ProjectTodoList(objectId, objectVal, objectVal, objectDate)
 					// );
 
-					currentTask.concat(dataMap);
+					//G currentTask.concat(dataMap);
+					//G const lastArr = [currentTask.slice(-1).pop()];
+					//G localStorage.setItem('storeProj', JSON.stringify(lastArr));
+
+					// USING PROTOYPE OOP
+					objCollected.pushTodoList(dataMap);
+
 					const lastArr = [currentTask.slice(-1).pop()];
 					localStorage.setItem('storeProj', JSON.stringify(lastArr));
 				}
