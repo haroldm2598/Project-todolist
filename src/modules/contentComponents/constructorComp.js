@@ -58,12 +58,17 @@ function mainComponents(paramsTarget) {
 		it shouldn't for constructor components the assign id of components it should be in sidebar proj.
 		what does concat do again?
 
-		NOTE FOR JAN 25 2023
+		NOTE FOR JAN 27 2023
 		- First test if the prototype of OOP is working * turns out to spaghetti coding
-		- Second test if the outside array is working pushing unique values not reset the process of setting Object
+		- Second test if the outside array(dataArr) is working pushing unique values not reset the process of setting Object
 		- Third test make the basic of the main.js of 16_project
+			- Possible proble :: because of var lastArr only pushing that's why all of the remaining array that already insert
+			will be erase by the new Var lastArr.  
+			- Who will be stringify to the localStorage???
+			- If 3 is the sideProj therefore all of them is inserted in localStorage that's why it has double.
 
-		Possible problem :: 
+
+		MAIN Possible problem :: 
 			Due to changing the concat situation it will became only one push
 			Create a prototype where with using 'this' keyword in order to push unique keys & values 
 	*/
@@ -80,9 +85,9 @@ function mainComponents(paramsTarget) {
 		const inputContent = this.inputContent;
 		const inputDate = this.inputDate;
 
-		arrayName.push({ inputId, inputName, inputContent, inputDate });
+		return arrayName.push({ inputId, inputName, inputContent, inputDate });
 
-		currentTask.concat(arrayName);
+		// return currentTask.concat(arrayName);
 	};
 
 	// ------------- MAIN COMPONENTS -------------
@@ -145,8 +150,9 @@ function mainComponents(paramsTarget) {
 					// USING PROTOYPE OOP
 					objCollected.pushTodoList(dataMap);
 
-					const lastArr = [currentTask.slice(-1).pop()];
-					localStorage.setItem('storeProj', JSON.stringify(lastArr));
+					// const lastArr = [currentTask.slice(-1).pop()];
+					console.log(currentTask);
+					localStorage.setItem('storeProj', JSON.stringify(currentTask));
 				}
 
 				await removeAddTask('#modalTask');
@@ -265,6 +271,7 @@ function mainComponents(paramsTarget) {
 
 export function constructorComponent() {
 	const elementMain = document.createElement('div');
+
 	function autoId() {
 		for (const data of getProj('storeProj')) {
 			const dataSelected = data.projectTitle;
@@ -278,8 +285,6 @@ export function constructorComponent() {
 		class: 'contentContainer',
 		id: `${autoId()}Container`
 	});
-
-	console.log(autoId());
 
 	mainComponents(elementMain);
 
