@@ -58,7 +58,7 @@ function mainComponents(paramsTarget) {
 		it shouldn't for constructor components the assign id of components it should be in sidebar proj.
 		what does concat do again?
 
-		NOTE FOR JAN 27 2023
+		NOTE FOR JAN 31 2023
 		- First test if the prototype of OOP is working * turns out to spaghetti coding
 		- Second test if the outside array(dataArr) is working pushing unique values not reset the process of setting Object
 		- Third test make the basic of the main.js of 16_project
@@ -66,6 +66,11 @@ function mainComponents(paramsTarget) {
 			will be erase by the new Var lastArr.  
 			- Who will be stringify to the localStorage???
 			- If 3 is the sideProj therefore all of them is inserted in localStorage that's why it has double.
+		- Fourth it because same array of object not finding it's specific ID to push an new array of it.
+			- 1st) find it's ID of array of object
+			- 2nd) implement the find method and push new Object inside the array of object
+			- 3rd) check the localStorage if proper storing and console for checking
+		
 
 
 		MAIN Possible problem :: 
@@ -128,31 +133,32 @@ function mainComponents(paramsTarget) {
 				alert('input some text');
 			} else {
 				for (let dataObj of currentTask) {
-					let dataMap = dataObj.projectTask;
-					// ORIGINAL PUSH METHOD
-					// dataMap.push({
-					// 	inputId: objectId,
-					// 	inputName: `${objectVal}Name`,
-					// 	inputContent: objectVal,
-					// 	inputDate: objectDate
-					// });
+					if (dataObj.projectTitle === 'gege') {
+						let dataMap = dataObj.projectTask;
+						// ORIGINAL PUSH METHOD
+						// dataMap.push({
+						// 	inputId: objectId,
+						// 	inputName: `${objectVal}Name`,
+						// 	inputContent: objectVal,
+						// 	inputDate: objectDate
+						// });
 
-					// IF USING OOP METHOD
-					//G dataMap.push(objCollected);
-					// dataMap.push(
-					// 	new ProjectTodoList(objectId, objectVal, objectVal, objectDate)
-					// );
+						// IF USING OOP METHOD
+						//G dataMap.push(objCollected);
+						// dataMap.push(
+						// 	new ProjectTodoList(objectId, objectVal, objectVal, objectDate)
+						// );
 
-					//G currentTask.concat(dataMap);
-					//G const lastArr = [currentTask.slice(-1).pop()];
-					//G localStorage.setItem('storeProj', JSON.stringify(lastArr));
+						//G currentTask.concat(dataMap);
+						//G const lastArr = [currentTask.slice(-1).pop()];
+						//G localStorage.setItem('storeProj', JSON.stringify(lastArr));
 
-					// USING PROTOYPE OOP
-					objCollected.pushTodoList(dataMap);
+						// USING PROTOYPE OOP
+						objCollected.pushTodoList(dataMap);
 
-					// const lastArr = [currentTask.slice(-1).pop()];
-					console.log(currentTask);
-					localStorage.setItem('storeProj', JSON.stringify(currentTask));
+						// const lastArr = [currentTask.slice(-1).pop()];
+						localStorage.setItem('storeProj', JSON.stringify(currentTask));
+					}
 				}
 
 				await removeAddTask('#modalTask');
