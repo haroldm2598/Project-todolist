@@ -67,15 +67,15 @@ export function mainComponents() {
 				case 'create':
 					await removeAddElement('.contentContainer');
 					divWrapper.appendChild(constructorComponent());
-					const getId = document.querySelector(`#${params}Container`);
-					console.log(getId);
+					// const getId = document.querySelector(`#${params}Container`);
+					// console.log(getId);
 					break;
 
 				case 'gege':
 					await removeAddElement('.contentContainer');
 					divWrapper.appendChild(constructorComponent());
-					const getId2 = document.querySelector(`#${params}Container`);
-					console.log(getId2);
+					// const getId2 = document.querySelector(`#${params}Container`);
+					// console.log(getId2);
 					break;
 				case 'sige':
 					await removeAddElement('.contentContainer');

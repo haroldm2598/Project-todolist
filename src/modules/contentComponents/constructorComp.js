@@ -71,6 +71,12 @@ function mainComponents(paramsTarget) {
 			- 2nd) implement the find method and push new Object inside the array of object
 			- 3rd) check the localStorage if proper storing and console for checking
 		
+		NOTE FOR FEB 1 2023
+		- it's either Array.forEach() || Array.Map() both working replacement for(var name of Array){...} // DONE
+		- make guarantee working of the fourth problem for last note. // ON GOING 
+		- instead of using if operator use Array.find() // DIDN'T APPLY
+			* to hassle a lot of spaghetti coding happening
+		- statement for the if() should dynamic everytime selected Array.projectTitle
 
 
 		MAIN Possible problem :: 
@@ -132,34 +138,46 @@ function mainComponents(paramsTarget) {
 			if (objectVal === null || objectVal === '') {
 				alert('input some text');
 			} else {
-				for (let dataObj of currentTask) {
-					if (dataObj.projectTitle === 'gege') {
+				currentTask.forEach((dataObj) => {
+					if (dataObj.projectTitle === 'create') {
 						let dataMap = dataObj.projectTask;
-						// ORIGINAL PUSH METHOD
-						// dataMap.push({
-						// 	inputId: objectId,
-						// 	inputName: `${objectVal}Name`,
-						// 	inputContent: objectVal,
-						// 	inputDate: objectDate
-						// });
-
-						// IF USING OOP METHOD
-						//G dataMap.push(objCollected);
-						// dataMap.push(
-						// 	new ProjectTodoList(objectId, objectVal, objectVal, objectDate)
-						// );
-
-						//G currentTask.concat(dataMap);
-						//G const lastArr = [currentTask.slice(-1).pop()];
-						//G localStorage.setItem('storeProj', JSON.stringify(lastArr));
-
-						// USING PROTOYPE OOP
 						objCollected.pushTodoList(dataMap);
 
-						// const lastArr = [currentTask.slice(-1).pop()];
-						localStorage.setItem('storeProj', JSON.stringify(currentTask));
+						return localStorage.setItem(
+							'storeProj',
+							JSON.stringify(currentTask)
+						);
 					}
-				}
+				});
+
+				// for (let dataObj of currentTask) {
+				// 	if (dataObj.projectTitle === 'gege') {
+				// 		let dataMap = dataObj.projectTask;
+				// 		// -------- ORIGINAL PUSH METHOD --------
+				// 		// dataMap.push({
+				// 		// 	inputId: objectId,
+				// 		// 	inputName: `${objectVal}Name`,
+				// 		// 	inputContent: objectVal,
+				// 		// 	inputDate: objectDate
+				// 		// });
+
+				// 		// -------- IF USING OOP METHOD --------
+				// 		//G dataMap.push(objCollected);
+				// 		// dataMap.push(
+				// 		// 	new ProjectTodoList(objectId, objectVal, objectVal, objectDate)
+				// 		// );
+
+				// 		//G currentTask.concat(dataMap);
+				// 		//G const lastArr = [currentTask.slice(-1).pop()];
+				// 		//G localStorage.setItem('storeProj', JSON.stringify(lastArr));
+
+				// 		// -------- USING PROTOYPE OOP --------
+				// 		objCollected.pushTodoList(dataMap);
+
+				// 		// const lastArr = [currentTask.slice(-1).pop()];
+				// 		localStorage.setItem('storeProj', JSON.stringify(currentTask));
+				// 	}
+				// }
 
 				await removeAddTask('#modalTask');
 				await removeAddTask('#contentContainer__main');
