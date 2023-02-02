@@ -2,13 +2,15 @@ import '../../styles/main.scss';
 import { format, endOfDay } from 'date-fns';
 import { getProj } from '../data/getProj';
 import { setAttributes } from '../helperComponents/setAttributes';
+import { autoId } from '../helperComponents/setID';
 import { truncateResult } from '../helperComponents/setRemoveTask';
 import { removeAddTask } from '../helperComponents/setTruncate';
+
+const currentTask = getProj('storeProj');
 
 function mainComponents(paramsTarget) {
 	'use strict';
 	const dataArr = [];
-	const currentTask = getProj('storeProj');
 
 	const buttonWrapper = document.createElement('div');
 	const h1 = document.createElement('h1');
@@ -71,12 +73,17 @@ function mainComponents(paramsTarget) {
 			- 2nd) implement the find method and push new Object inside the array of object
 			- 3rd) check the localStorage if proper storing and console for checking
 		
-		NOTE FOR FEB 1 2023
+		NOTE FOR FEB 1-2 2023
 		- it's either Array.forEach() || Array.Map() both working replacement for(var name of Array){...} // DONE
 		- make guarantee working of the fourth problem for last note. // ON GOING 
-		- instead of using if operator use Array.find() // DIDN'T APPLY
+		- instead of using if operator use Array.find() // 
+			DIDN'T APPLY
 			* to hassle a lot of spaghetti coding happening
 		- statement for the if() should dynamic everytime selected Array.projectTitle
+			* try implement of getting of sideProj IDS and insert statement in IF
+				- it will lead to blank because target their id is on index that imported of sidebar
+			* try autoID if will work on finding id to implement
+			* focus on set id first for container
 
 
 		MAIN Possible problem :: 
@@ -124,7 +131,7 @@ function mainComponents(paramsTarget) {
 		confirmBtn.textContent = 'Confirm';
 		cancelBtn.textContent = 'Cancel';
 
-		confirmBtn.addEventListener('click', async () => {
+		confirmBtn.addEventListener('click', async (e) => {
 			const objectId = Math.floor(Math.random() * 999);
 			const objectVal = document.querySelector('#inputTask').value;
 			const objectDate = format(endOfDay(new Date()), 'MM/dd/yyyy');
@@ -296,18 +303,24 @@ function mainComponents(paramsTarget) {
 export function constructorComponent() {
 	const elementMain = document.createElement('div');
 
-	function autoId() {
-		for (const data of getProj('storeProj')) {
-			const dataSelected = data.projectTitle;
-			const splitData = dataSelected.toLowerCase().split(' ')[0];
+	// function autoId() {
+	// 	for (const data of getProj('storeProj')) {
+	// 		const dataSelected = data.projectTitle;
+	// 		const splitData = dataSelected.toLowerCase().split(' ')[0];
 
-			return splitData;
-		}
-	}
+	// 		return splitData;
+	// 	}
+	// }
+
+	const setIdContainer = currentTask.map((item) => {
+		return autoId(item);
+	});
+
+	console.log(`set ids for ${setIdContainer}`);
 
 	setAttributes(elementMain, {
 		class: 'contentContainer',
-		id: `${autoId()}Container`
+		id: `${setIdContainer}Container`
 	});
 
 	mainComponents(elementMain);

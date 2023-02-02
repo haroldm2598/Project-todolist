@@ -2,6 +2,7 @@ import '../../styles/main.scss';
 import { getProj } from '../data/getProj';
 import { setAttributes } from '../helperComponents/setAttributes';
 import { createElem } from '../helperComponents/setElement';
+import { autoId } from '../helperComponents/setID';
 
 function removeAddTask(target) {
 	return new Promise((resolve) => {
@@ -82,19 +83,12 @@ function getElement(getElemParams, getElemParams2, getElemParams3) {
 	const projListBtn = document.createElement('button');
 	const deleteIcon = document.createElement('i');
 
-	const autoId = () => {
-		const getData = getElemParams.projectTitle;
-		const splitData = getData.toLowerCase().split(' ')[0];
-
-		return splitData;
-	};
-
 	setAttributes(projListItem, {
 		class: 'sideBarContainer__projectList--item'
 	});
 	setAttributes(projListBtn, {
 		class: 'sideBarContainer__projectList--item__btn',
-		id: `${autoId()}`
+		id: `${autoId(getElemParams)}`
 	});
 
 	projListBtn.textContent = getElemParams.projectTitle;
