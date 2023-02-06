@@ -66,18 +66,26 @@ export function mainComponents() {
 
 				case 'create':
 					await removeAddElement('.contentContainer');
-					divWrapper.appendChild(constructorComponent());
-					// [constructorComponent()].map((item) => {
-					// 	console.log(item);
-					// });
+					// divWrapper.appendChild(constructorComponent());
 
 					// ERROR BUT POSSIBLE SOLUTION
-					const getId2 = document.querySelector(`#${params}Container`);
-					divWrapper.appendChild(getId2);
-					console.log(getId2);
-					if (getId2 === constructorComponent().id) {
-						console.log('YES');
+
+					// [constructorComponent().children].map((item) => {
+					// 	let result = item;
+					// 	return console.log(result);
+					// });
+
+					// FOCUS FEB 07 2023
+					for (const componentChildren of constructorComponent().children) {
+						const result = componentChildren.id;
+						if (result === `${params}Container`) {
+							divWrapper.appendChild(constructorComponent());
+						}
 					}
+
+					// const getId2 = document.querySelector(`#${params}Container`);
+					// divWrapper.appendChild(getId2);
+					// console.log(getId2);
 					break;
 
 				case 'gege':

@@ -86,9 +86,13 @@ function mainComponents(paramsTarget) {
 			* focus on set id first for container
 
 
-		MAIN Possible problem :: 
+		MAIN Possible problem :: DONE
 			Due to changing the concat situation it will became only one push
-			Create a prototype where with using 'this' keyword in order to push unique keys & values 
+			Create a prototype where with using 'this' keyword in order to push unique keys & values
+			
+		NOTE FOR FEB 7 2023
+		- return specific element with id in contructorComponent in order to build index.js
+		- add parameter in constructorComponents and then ask for arguments for no.1 question
 	*/
 	function ProjectTodoList(id, name, content, date) {
 		this.inputId = id;
@@ -327,6 +331,7 @@ export function constructorComponent() {
 	// 	return elementMain;
 	// }
 
+	// FOCUS FEB 07 2023
 	// ---------- USING MAP ITERATOR ----------
 	const elementMain = document.createElement('div');
 
@@ -344,10 +349,10 @@ export function constructorComponent() {
 
 		mainComponents(elementStoreId);
 
-		elementMain.appendChild(elementStoreId);
+		return elementMain.appendChild(elementStoreId);
 	});
 
 	return elementMain;
 }
 
-// console.log(constructorComponent());
+console.log(constructorComponent());
