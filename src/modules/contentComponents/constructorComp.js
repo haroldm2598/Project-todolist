@@ -301,29 +301,53 @@ function mainComponents(paramsTarget) {
 }
 
 export function constructorComponent() {
-	const elementMain = document.createElement('div');
-
 	// function autoId() {
 	// 	for (const data of getProj('storeProj')) {
 	// 		const dataSelected = data.projectTitle;
 	// 		const splitData = dataSelected.toLowerCase().split(' ')[0];
-
 	// 		return splitData;
 	// 	}
 	// }
+	// const setIdContainer = currentTask.forEach((item) => {
+	// 	return autoId(item);
+	// });
+	// console.log(`set ids for ${setIdContainer}`);
+	// ---------- USING FOR OF LOOP ----------
 
-	const setIdContainer = currentTask.map((item) => {
-		return autoId(item);
-	});
+	// for (const data of getProj('storeProj')) {
+	// 	const elementMain = document.createElement('div');
 
-	console.log(`set ids for ${setIdContainer}`);
+	// 	setAttributes(elementMain, {
+	// 		class: 'contentContainer',
+	// 		id: `${autoId(data)}Container`
+	// 	});
+
+	// 	mainComponents(elementMain);
+
+	// 	return elementMain;
+	// }
+
+	// ---------- USING MAP ITERATOR ----------
+	const elementMain = document.createElement('div');
 
 	setAttributes(elementMain, {
-		class: 'contentContainer',
-		id: `${setIdContainer}Container`
+		class: 'contentContainer'
 	});
 
-	mainComponents(elementMain);
+	const arrObjMap = getProj('storeProj').map((item) => {
+		const elementStoreId = document.createElement('div');
+
+		setAttributes(elementStoreId, {
+			class: 'contentContainer',
+			id: `${autoId(item)}Container`
+		});
+
+		mainComponents(elementStoreId);
+
+		elementMain.appendChild(elementStoreId);
+	});
 
 	return elementMain;
 }
+
+// console.log(constructorComponent());

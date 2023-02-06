@@ -67,8 +67,17 @@ export function mainComponents() {
 				case 'create':
 					await removeAddElement('.contentContainer');
 					divWrapper.appendChild(constructorComponent());
-					// const getId = document.querySelector(`#${params}Container`);
-					// console.log(getId);
+					// [constructorComponent()].map((item) => {
+					// 	console.log(item);
+					// });
+
+					// ERROR BUT POSSIBLE SOLUTION
+					const getId2 = document.querySelector(`#${params}Container`);
+					divWrapper.appendChild(getId2);
+					console.log(getId2);
+					if (getId2 === constructorComponent().id) {
+						console.log('YES');
+					}
 					break;
 
 				case 'gege':
