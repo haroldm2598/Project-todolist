@@ -8,7 +8,7 @@ import { removeAddTask } from '../helperComponents/setTruncate';
 
 const currentTask = getProj('storeProj');
 
-function mainComponents(paramsTarget) {
+function mainComponents(paramsTarget, titleTarget) {
 	'use strict';
 	const dataArr = [];
 
@@ -36,7 +36,7 @@ function mainComponents(paramsTarget) {
 	buttonTask.addEventListener('click', () => {
 		const targetElement = document.querySelector('#addBtnWrapper');
 
-		paramsTarget.appendChild(modalTask());
+		paramsTarget.appendChild(modalTask(titleTarget));
 		targetElement.parentElement.removeChild(targetElement);
 	});
 
@@ -113,7 +113,7 @@ function mainComponents(paramsTarget) {
 	};
 
 	// ------------- MAIN COMPONENTS -------------
-	function modalTask() {
+	function modalTask(titleTarget) {
 		const elementTask = document.createElement('div');
 		const inputTask = document.createElement('input');
 		const confirmBtn = document.createElement('button');
@@ -150,7 +150,7 @@ function mainComponents(paramsTarget) {
 				alert('input some text');
 			} else {
 				currentTask.forEach((dataObj) => {
-					if (dataObj.projectTitle === 'create') {
+					if (dataObj.projectTitle === `${titleTarget}`) {
 						let dataMap = dataObj.projectTask;
 						objCollected.pushTodoList(dataMap);
 
@@ -158,6 +158,8 @@ function mainComponents(paramsTarget) {
 							'storeProj',
 							JSON.stringify(currentTask)
 						);
+					} else {
+						console.log('mali po yun nilagay mo');
 					}
 				});
 
@@ -304,33 +306,7 @@ function mainComponents(paramsTarget) {
 	paramsTarget.appendChild(buttonWrapper);
 }
 
-export function constructorComponent() {
-	// function autoId() {
-	// 	for (const data of getProj('storeProj')) {
-	// 		const dataSelected = data.projectTitle;
-	// 		const splitData = dataSelected.toLowerCase().split(' ')[0];
-	// 		return splitData;
-	// 	}
-	// }
-	// const setIdContainer = currentTask.forEach((item) => {
-	// 	return autoId(item);
-	// });
-	// console.log(`set ids for ${setIdContainer}`);
-	// ---------- USING FOR OF LOOP ----------
-
-	// for (const data of getProj('storeProj')) {
-	// 	const elementMain = document.createElement('div');
-
-	// 	setAttributes(elementMain, {
-	// 		class: 'contentContainer',
-	// 		id: `${autoId(data)}Container`
-	// 	});
-
-	// 	mainComponents(elementMain);
-
-	// 	return elementMain;
-	// }
-
+export function constructorComponent(titleTarget) {
 	// FOCUS FEB 07 2023
 	// ---------- USING MAP ITERATOR ----------
 	const elementMain = document.createElement('div');
@@ -347,7 +323,7 @@ export function constructorComponent() {
 			id: `${autoId(item)}Container`
 		});
 
-		mainComponents(elementStoreId);
+		mainComponents(elementStoreId, titleTarget);
 
 		return elementMain.appendChild(elementStoreId);
 	});
@@ -355,4 +331,32 @@ export function constructorComponent() {
 	return elementMain;
 }
 
-console.log(constructorComponent());
+setTimeout(() => {
+	console.log(constructorComponent());
+}, 500);
+
+// function autoId() {
+// 	for (const data of getProj('storeProj')) {
+// 		const dataSelected = data.projectTitle;
+// 		const splitData = dataSelected.toLowerCase().split(' ')[0];
+// 		return splitData;
+// 	}
+// }
+// const setIdContainer = currentTask.forEach((item) => {
+// 	return autoId(item);
+// });
+// console.log(`set ids for ${setIdContainer}`);
+// ---------- USING FOR OF LOOP ----------
+
+// for (const data of getProj('storeProj')) {
+// 	const elementMain = document.createElement('div');
+
+// 	setAttributes(elementMain, {
+// 		class: 'contentContainer',
+// 		id: `${autoId(data)}Container`
+// 	});
+
+// 	mainComponents(elementMain);
+
+// 	return elementMain;
+// }

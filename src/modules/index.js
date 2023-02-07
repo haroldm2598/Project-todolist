@@ -64,39 +64,18 @@ export function mainComponents() {
 					divWrapper.appendChild(weekComponents());
 					break;
 
-				case 'create':
+				case params:
 					await removeAddElement('.contentContainer');
 					// divWrapper.appendChild(constructorComponent());
-
-					// ERROR BUT POSSIBLE SOLUTION
-
-					// [constructorComponent().children].map((item) => {
-					// 	let result = item;
-					// 	return console.log(result);
-					// });
 
 					// FOCUS FEB 07 2023
 					for (const componentChildren of constructorComponent().children) {
 						const result = componentChildren.id;
 						if (result === `${params}Container`) {
-							divWrapper.appendChild(constructorComponent());
+							divWrapper.appendChild(constructorComponent(params));
 						}
 					}
 
-					// const getId2 = document.querySelector(`#${params}Container`);
-					// divWrapper.appendChild(getId2);
-					// console.log(getId2);
-					break;
-
-				case 'gege':
-					await removeAddElement('.contentContainer');
-					divWrapper.appendChild(constructorComponent());
-					// const getId2 = document.querySelector(`#${params}Container`);
-					// console.log(getId2);
-					break;
-				case 'sige':
-					await removeAddElement('.contentContainer');
-					divWrapper.appendChild(constructorComponent());
 					break;
 
 				// case params:
