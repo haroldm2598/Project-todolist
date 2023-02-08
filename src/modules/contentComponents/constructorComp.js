@@ -307,26 +307,25 @@ function mainComponents(paramsTarget, titleTarget) {
 }
 
 export function constructorComponent(titleTarget) {
-	// FOCUS FEB 07 2023
-	// ---------- USING MAP ITERATOR ----------
 	const elementMain = document.createElement('div');
+	const elementStoreId = document.createElement('div');
 
 	setAttributes(elementMain, {
 		class: 'contentContainer'
 	});
 
-	const arrObjMap = getProj('storeProj').map((item) => {
-		const elementStoreId = document.createElement('div');
-
-		setAttributes(elementStoreId, {
-			class: 'contentContainer',
-			id: `${autoId(item)}Container`
-		});
-
-		mainComponents(elementStoreId, titleTarget);
-
-		return elementMain.appendChild(elementStoreId);
+	const arrObjFind = getProj('storeProj').find((item) => {
+		if (item.projectTitle === `${titleTarget}`) {
+			setAttributes(elementStoreId, {
+				class: 'contentContainer',
+				id: `${autoId(item)}Container`
+			});
+		}
 	});
+
+	mainComponents(elementStoreId, titleTarget);
+
+	elementMain.appendChild(elementStoreId);
 
 	return elementMain;
 }
