@@ -6,41 +6,7 @@ import { autoId } from '../helperComponents/setID';
 import { truncateResult } from '../helperComponents/setRemoveTask';
 import { removeAddTask } from '../helperComponents/setTruncate';
 
-const currentTask = getProj('storeProj');
-
-function mainComponents(paramsTarget, titleTarget) {
-	'use strict';
-	const dataArr = [];
-
-	const buttonWrapper = document.createElement('div');
-	const h1 = document.createElement('h1');
-	const buttonTask = document.createElement('button');
-	const icon = document.createElement('i');
-
-	setAttributes(h1, {
-		class: 'contentContainer__header'
-	});
-	setAttributes(buttonTask, {
-		class: 'contentContainer__addButton--button'
-	});
-	setAttributes(icon, {
-		class: 'contentContainer__addButton--icon fas fa-plus-square'
-	});
-	setAttributes(buttonWrapper, {
-		class: 'contentContainer__addButton',
-		id: 'addBtnWrapper'
-	});
-
-	h1.textContent = 'Projects !!';
-	buttonTask.textContent = 'Add Task';
-	buttonTask.addEventListener('click', () => {
-		const targetElement = document.querySelector('#addBtnWrapper');
-
-		paramsTarget.appendChild(modalTask(titleTarget));
-		targetElement.parentElement.removeChild(targetElement);
-	});
-
-	/*
+/*
 			NOTE FOR JAN 06 2023
 		make use of oop the 'this' keyword in object keys before pushing it to the localStorage
 		handling error for not getting others object values.
@@ -94,6 +60,41 @@ function mainComponents(paramsTarget, titleTarget) {
 		- return specific element with id in contructorComponent in order to build index.js
 		- add parameter in constructorComponents and then ask for arguments for no.1 question
 	*/
+
+const currentTask = getProj('storeProj');
+
+function mainComponents(paramsTarget, titleTarget) {
+	'use strict';
+	const dataArr = [];
+
+	const buttonWrapper = document.createElement('div');
+	const h1 = document.createElement('h1');
+	const buttonTask = document.createElement('button');
+	const icon = document.createElement('i');
+
+	setAttributes(h1, {
+		class: 'contentContainer__header'
+	});
+	setAttributes(buttonTask, {
+		class: 'contentContainer__addButton--button'
+	});
+	setAttributes(icon, {
+		class: 'contentContainer__addButton--icon fas fa-plus-square'
+	});
+	setAttributes(buttonWrapper, {
+		class: 'contentContainer__addButton',
+		id: 'addBtnWrapper'
+	});
+
+	h1.textContent = 'Projects !!';
+	buttonTask.textContent = 'Add Task';
+	buttonTask.addEventListener('click', () => {
+		const targetElement = document.querySelector('#addBtnWrapper');
+
+		paramsTarget.appendChild(modalTask(titleTarget));
+		targetElement.parentElement.removeChild(targetElement);
+	});
+
 	function ProjectTodoList(id, name, content, date) {
 		this.inputId = id;
 		this.inputName = name;
@@ -112,7 +113,6 @@ function mainComponents(paramsTarget, titleTarget) {
 		// return currentTask.concat(arrayName);
 	};
 
-	// ------------- MAIN COMPONENTS -------------
 	function modalTask(titleTarget) {
 		const elementTask = document.createElement('div');
 		const inputTask = document.createElement('input');
@@ -149,55 +149,52 @@ function mainComponents(paramsTarget, titleTarget) {
 			if (objectVal === null || objectVal === '') {
 				alert('input some text');
 			} else {
-				currentTask.forEach((dataObj) => {
+				currentTask.forEach(async (dataObj) => {
 					if (dataObj.projectTitle === `${titleTarget}`) {
 						let dataMap = dataObj.projectTask;
 						objCollected.pushTodoList(dataMap);
 
-						return localStorage.setItem(
-							'storeProj',
-							JSON.stringify(currentTask)
-						);
+						localStorage.setItem('storeProj', JSON.stringify(currentTask));
+
+						await removeAddTask('#modalTask');
+						await removeAddTask('#contentContainer__main');
+
+						paramsTarget.appendChild(showAllItem());
+						paramsTarget.appendChild(buttonWrapper);
 					} else {
 						console.log('mali po yun nilagay mo');
 					}
 				});
-
-				// for (let dataObj of currentTask) {
-				// 	if (dataObj.projectTitle === 'gege') {
-				// 		let dataMap = dataObj.projectTask;
-				// 		// -------- ORIGINAL PUSH METHOD --------
-				// 		// dataMap.push({
-				// 		// 	inputId: objectId,
-				// 		// 	inputName: `${objectVal}Name`,
-				// 		// 	inputContent: objectVal,
-				// 		// 	inputDate: objectDate
-				// 		// });
-
-				// 		// -------- IF USING OOP METHOD --------
-				// 		//G dataMap.push(objCollected);
-				// 		// dataMap.push(
-				// 		// 	new ProjectTodoList(objectId, objectVal, objectVal, objectDate)
-				// 		// );
-
-				// 		//G currentTask.concat(dataMap);
-				// 		//G const lastArr = [currentTask.slice(-1).pop()];
-				// 		//G localStorage.setItem('storeProj', JSON.stringify(lastArr));
-
-				// 		// -------- USING PROTOYPE OOP --------
-				// 		objCollected.pushTodoList(dataMap);
-
-				// 		// const lastArr = [currentTask.slice(-1).pop()];
-				// 		localStorage.setItem('storeProj', JSON.stringify(currentTask));
-				// 	}
-				// }
-
-				await removeAddTask('#modalTask');
-				await removeAddTask('#contentContainer__main');
-
-				paramsTarget.appendChild(showAllItem());
-				paramsTarget.appendChild(buttonWrapper);
 			}
+			// BACK UP ONLY WORKING BUT NOT THE ONE WHO I LOOKING AT IT
+			// for (let dataObj of currentTask) {
+			// 	if (dataObj.projectTitle === 'gege') {
+			// 		let dataMap = dataObj.projectTask;
+			// 		// -------- ORIGINAL PUSH METHOD --------
+			// 		// dataMap.push({
+			// 		// 	inputId: objectId,
+			// 		// 	inputName: `${objectVal}Name`,
+			// 		// 	inputContent: objectVal,
+			// 		// 	inputDate: objectDate
+			// 		// });
+
+			// 		// -------- IF USING OOP METHOD --------
+			// 		//G dataMap.push(objCollected);
+			// 		// dataMap.push(
+			// 		// 	new ProjectTodoList(objectId, objectVal, objectVal, objectDate)
+			// 		// );
+
+			// 		//G currentTask.concat(dataMap);
+			// 		//G const lastArr = [currentTask.slice(-1).pop()];
+			// 		//G localStorage.setItem('storeProj', JSON.stringify(lastArr));
+
+			// 		// -------- USING PROTOYPE OOP --------
+			// 		objCollected.pushTodoList(dataMap);
+
+			// 		// const lastArr = [currentTask.slice(-1).pop()];
+			// 		localStorage.setItem('storeProj', JSON.stringify(currentTask));
+			// 	}
+			// }
 		});
 
 		cancelBtn.addEventListener('click', async () => {
@@ -283,18 +280,24 @@ function mainComponents(paramsTarget, titleTarget) {
 		params2.appendChild(elementWrapper);
 	}
 
+	// ------------------- REWORK FEB 10 2023 -------------------
 	function showAllItem() {
 		const element = document.createElement('div');
 		setAttributes(element, {
 			id: 'contentContainer__main'
 		});
 
-		for (const data of getProj('storeProj')) {
+		const tryFind = getProj('storeProj').find((data) => {
 			let dataMap = data.projectTask;
-			dataMap.map((item) => {
-				getElement(item, element);
-			});
-		}
+			dataMap.map((item) => getElement(item, element));
+		});
+
+		// for (const data of getProj('storeProj')) {
+		// 	let dataMap = data.projectTask;
+		// 	dataMap.map((item) => {
+		// 		getElement(item, element);
+		// 	});
+		// }
 
 		return element;
 	}
@@ -307,6 +310,23 @@ function mainComponents(paramsTarget, titleTarget) {
 }
 
 export function constructorComponent(titleTarget) {
+	const elementMain = document.createElement('div');
+
+	const arrObjFind = getProj('storeProj').find((item) => {
+		if (item.projectTitle === `${titleTarget}`) {
+			setAttributes(elementMain, {
+				class: 'contentContainer',
+				id: `${autoId(item)}Container`
+			});
+		}
+	});
+
+	mainComponents(elementMain, titleTarget);
+
+	return elementMain;
+}
+
+/* ------------- constructorComponent BACKUP ------------- 
 	const elementMain = document.createElement('div');
 	const elementStoreId = document.createElement('div');
 
@@ -328,12 +348,7 @@ export function constructorComponent(titleTarget) {
 	elementMain.appendChild(elementStoreId);
 
 	return elementMain;
-}
-
-setTimeout(() => {
-	console.log(constructorComponent());
-}, 500);
-
+*/
 // function autoId() {
 // 	for (const data of getProj('storeProj')) {
 // 		const dataSelected = data.projectTitle;
