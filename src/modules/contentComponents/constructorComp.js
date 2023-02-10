@@ -65,8 +65,6 @@ const currentTask = getProj('storeProj');
 
 function mainComponents(paramsTarget, titleTarget) {
 	'use strict';
-	const dataArr = [];
-
 	const buttonWrapper = document.createElement('div');
 	const h1 = document.createElement('h1');
 	const buttonTask = document.createElement('button');
@@ -302,11 +300,11 @@ function mainComponents(paramsTarget, titleTarget) {
 		return element;
 	}
 
-	paramsTarget.appendChild(h1);
-	paramsTarget.appendChild(showAllItem());
-	buttonWrapper.appendChild(icon);
-	buttonWrapper.appendChild(buttonTask);
-	paramsTarget.appendChild(buttonWrapper);
+	paramsTarget.appendChild(h1); // elementMain.appendChild(h1)
+	paramsTarget.appendChild(showAllItem()); // elementMain.appendChild(showAllItem())
+	buttonWrapper.appendChild(icon); // comes with button Parents
+	buttonWrapper.appendChild(buttonTask); // comes with button Parents
+	paramsTarget.appendChild(buttonWrapper); // elementMain.appendChild(buttonWrapper)
 }
 
 export function constructorComponent(titleTarget) {
