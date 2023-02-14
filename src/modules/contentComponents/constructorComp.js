@@ -84,7 +84,7 @@ function mainComponents(paramsTarget, titleTarget) {
 		id: 'addBtnWrapper'
 	});
 
-	h1.textContent = 'Projects !!';
+	h1.textContent = `${titleTarget} inbox`;
 	buttonTask.textContent = 'Add Task';
 	buttonTask.addEventListener('click', () => {
 		const targetElement = document.querySelector('#addBtnWrapper');
@@ -107,10 +107,9 @@ function mainComponents(paramsTarget, titleTarget) {
 		const inputDate = this.inputDate;
 
 		return arrayName.push({ inputId, inputName, inputContent, inputDate });
-
-		// return currentTask.concat(arrayName);
 	};
 
+	// ----------- FOR PUSHING NEW ARRAY OF OBJECT AND CANCEL METHOD -----------
 	function modalTask(titleTarget) {
 		const elementTask = document.createElement('div');
 		const inputTask = document.createElement('input');
@@ -133,6 +132,7 @@ function mainComponents(paramsTarget, titleTarget) {
 		confirmBtn.textContent = 'Confirm';
 		cancelBtn.textContent = 'Cancel';
 
+		// ----------- PUSH NEW ARRAY OF OBJECT IN SPECIFIC TITLE -----------
 		confirmBtn.addEventListener('click', async (e) => {
 			const objectId = Math.floor(Math.random() * 999);
 			const objectVal = document.querySelector('#inputTask').value;
@@ -159,8 +159,6 @@ function mainComponents(paramsTarget, titleTarget) {
 
 						paramsTarget.appendChild(showAllItem());
 						paramsTarget.appendChild(buttonWrapper);
-					} else {
-						console.log('mali po yun nilagay mo');
 					}
 				});
 			}
@@ -195,6 +193,7 @@ function mainComponents(paramsTarget, titleTarget) {
 			// }
 		});
 
+		// ----------- CANCEL OF PUSH NEW ARRAY OF OBJECT IN SPECIFIC TITLE -----------
 		cancelBtn.addEventListener('click', async () => {
 			await removeAddTask('#modalTask');
 			paramsTarget.appendChild(buttonWrapper);
@@ -207,6 +206,7 @@ function mainComponents(paramsTarget, titleTarget) {
 		return elementTask;
 	}
 
+	// ----------- FOR GET AND SHOW THE ARRAY OF OBJECT DATA -----------
 	function getElement(params1, params2) {
 		const elementWrapper = document.createElement('div');
 		const firstDiv = document.createElement('div');
@@ -278,7 +278,7 @@ function mainComponents(paramsTarget, titleTarget) {
 		params2.appendChild(elementWrapper);
 	}
 
-	// ------------------- REWORK FEB 10 2023 -------------------
+	// ----------- FOR IMPLEMENT SHOW AND WITH ARRAY OF OBJECT VALUES -----------
 	function showAllItem() {
 		const element = document.createElement('div');
 		setAttributes(element, {
@@ -287,24 +287,19 @@ function mainComponents(paramsTarget, titleTarget) {
 
 		const tryFind = getProj('storeProj').find((data) => {
 			let dataMap = data.projectTask;
-			dataMap.map((item) => getElement(item, element));
+			if (data.projectTitle === titleTarget) {
+				dataMap.map((item) => getElement(item, element));
+			}
 		});
-
-		// for (const data of getProj('storeProj')) {
-		// 	let dataMap = data.projectTask;
-		// 	dataMap.map((item) => {
-		// 		getElement(item, element);
-		// 	});
-		// }
 
 		return element;
 	}
 
-	paramsTarget.appendChild(h1); // elementMain.appendChild(h1)
-	paramsTarget.appendChild(showAllItem()); // elementMain.appendChild(showAllItem())
-	buttonWrapper.appendChild(icon); // comes with button Parents
-	buttonWrapper.appendChild(buttonTask); // comes with button Parents
-	paramsTarget.appendChild(buttonWrapper); // elementMain.appendChild(buttonWrapper)
+	paramsTarget.appendChild(h1);
+	paramsTarget.appendChild(showAllItem());
+	buttonWrapper.appendChild(icon);
+	buttonWrapper.appendChild(buttonTask);
+	paramsTarget.appendChild(buttonWrapper);
 }
 
 export function constructorComponent(titleTarget) {
