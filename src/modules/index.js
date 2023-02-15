@@ -13,11 +13,13 @@ export function mainComponents() {
 	divWrapper.appendChild(sidebarComponents());
 	divWrapper.appendChild(inboxComponents());
 
-	// -------------------------------
-	// ROUTERS
+	// ------------- ROUTERS ------------------
 
 	document.addEventListener('DOMContentLoaded', (event) => {
 		const body = document.getElementById('sideBarContainer');
+		const targetSideProject = document.getElementsByClassName(
+			'sideBarContainer__projectList--item__btn'
+		);
 
 		body.addEventListener('click', async (e) => {
 			let params = e.target.id;
@@ -39,35 +41,17 @@ export function mainComponents() {
 					break;
 
 				case params:
-					await removeAddElement('.contentContainer');
-					divWrapper.appendChild(constructorComponent(params));
-
-					// // FOCUS FEB 09 2023
-					// for (const componentChildren of constructorComponent().children) {
-					// 	const result = componentChildren.id;
-					// 	if (result === `${params}Container`) {
-					// 		divWrapper.appendChild(constructorComponent(params));
-					// 	}
-					// }
+					for (const componentChildren of targetSideProject) {
+						if (params === componentChildren.id) {
+							await removeAddElement('.contentContainer');
+							divWrapper.appendChild(constructorComponent(params));
+						}
+					}
 					break;
 
-				// case params:
-				// 	const targetId = `#${params}Container`;
-				// 	const elementTarget = document.getElementById('wahaContainer');
-				// 	for (let i = 0; i < elementTarget.length; i++) {
-				// 		console.log(elementTarget[i].id);
-				// 	}
-
-				// 	if (elementTarget) {
-				// 		// await removeAddElement(targetId);
-				// 		await removeAddElement('.contentContainer');
-				// 		divWrapper.appendChild(constructorComponent());
-				// 	} else {
-				// 		await removeAddElement('.contentContainer');
-				// 		divWrapper.appendChild(constructorComponent());
-				// 	}
-
-				// 	break;
+				default:
+					console.log('not found');
+					break;
 			}
 		});
 	});
