@@ -49,6 +49,22 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	}
 }
 
+// ------------------------ MENUBAR ------------------------
+.menuBarWrapper {
+	display: none;
+
+	@include mobile-allSize {
+		display: flex;
+		justify-content: flex-end;
+		padding: 0.5em;
+		background-color: $mainBG2;
+
+		.fa-bars {
+			font-size: 2rem;
+		}
+	}
+}
+
 // ------------------------ SIDEBAR ------------------------
 
 .sideBarContainer {
@@ -65,9 +81,8 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	}
 
 	@include mobile-allSize {
-		height: 100%;
-		width: 100%;
-		display: flex;
+		transform: translateX(-500px);
+		transition: 0.5s;
 	}
 
 	@include tablet {
@@ -207,6 +222,15 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 				}
 			}
 		}
+	}
+}
+
+.menuBarShow {
+	@include mobile-allSize {
+		height: 100%;
+		width: 100%;
+		display: flex;
+		transform: translateX(0);
 	}
 }
 

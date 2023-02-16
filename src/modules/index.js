@@ -4,6 +4,29 @@ import { inboxComponents } from './contentComponents/inboxIndex';
 import { todayComponents } from './contentComponents/todayIndex';
 import { weekComponents } from './contentComponents/thisWeekIndex';
 import { constructorComponent } from './contentComponents/constructorComp';
+import { setAttributes } from './helperComponents/setAttributes';
+
+function menuBarComponents() {
+	const menuWrapper = document.createElement('div');
+	const menuBar = document.createElement('i');
+
+	setAttributes(menuWrapper, {
+		class: 'menuBarWrapper',
+		id: 'menuBarWrapper'
+	});
+	setAttributes(menuBar, {
+		class: 'fas fa-bars'
+	});
+
+	menuBar.addEventListener('click', () => {
+		const selectElem = document.querySelector('#sideBarContainer');
+		selectElem.classList.toggle('menuBarShow');
+	});
+
+	menuWrapper.appendChild(menuBar);
+
+	return menuWrapper;
+}
 
 export function mainComponents() {
 	const divWrapper = document.createElement('div');
@@ -67,5 +90,6 @@ export function mainComponents() {
 	}
 
 	document.body.appendChild(headerComponents());
+	document.body.appendChild(menuBarComponents());
 	document.body.appendChild(divWrapper);
 }

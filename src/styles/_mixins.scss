@@ -16,7 +16,7 @@ $breakpoints: (
 }
 
 @mixin mobile-allSize {
-	@media (min-width: 20em) and (max-width: 27em) {
+	@media (min-width: 20em) and (max-width: 27.5em) {
 		@content;
 	}
 }
