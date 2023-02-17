@@ -5,7 +5,7 @@ import { todayComponents } from './contentComponents/todayIndex';
 import { weekComponents } from './contentComponents/thisWeekIndex';
 import { constructorComponent } from './contentComponents/constructorComp';
 import { setAttributes } from './helperComponents/setAttributes';
-
+// testOnly
 function menuBarComponents() {
 	const menuWrapper = document.createElement('div');
 	const menuBar = document.createElement('i');
